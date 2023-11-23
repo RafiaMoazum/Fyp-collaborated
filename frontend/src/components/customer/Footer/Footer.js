@@ -1,0 +1,91 @@
+import React from 'react';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import { FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
+import {BrowserRouter as Router,Link} from "react-router-dom";
+
+const Footer = () => {
+    const s_footerstyle =
+    {
+        color: "Black",
+        backgroundColor: "#EEAD4B",
+        fontFamily: "Sans-Serif",
+        height:"100%",
+        alignItems: "center",
+        justifyContent: "center"
+    };
+  return (
+    <div className="pt-4">
+      <div className="text-center py-5" style={s_footerstyle}>
+        <h1 className="mb-4">
+          <b>Stay tuned with updates</b>
+        </h1>
+        <Form className="d-flex justify-content-center" style={{backgroundColor: "#EEAD4B", border: "none"}}>
+          <div className="row">
+            <div className="col-lg-5 col-md-12">
+              <Form.Control
+                placeholder="Enter your Email Address"
+                size="lg"
+                style={{ width: '380px' }}
+              />
+            </div>
+            <div className="col-lg-3 col-md-12 mt-3 mt-lg-0" style={{paddingLeft:'100px'}}>
+              <Button size="lg" style={{ width: '230px', backgroundColor: '#3C6B97' }}>
+                Subscribe
+              </Button>
+            </div>
+          </div>
+        </Form>
+      </div>
+      <div className="bg-white text-center py-5" >
+        <div>
+          <Row>
+            <Col xs={12} sm={4} className="mb-4 mb-sm-0">
+              <img
+                alt=""
+                src="./images/H-logo2.png"
+                className="img-fluid"
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+            </Col>
+            <Col xs={12} sm={2} className="mb-4 mb-sm-0">
+              <p> <b>Quick Links</b></p>
+              <Link to="/about">About us</Link>
+              <p>FAQ's</p>
+              <p>Privacy Policy</p>
+              <p>Terms and Conditions</p> 
+            </Col>
+            <Col xs={12} sm={3} className="mb-4 mb-sm-0">
+              <p> <b>Contact us</b></p>
+              <p>hostelexplorer@gmail.com</p>
+            </Col>
+            <Col xs={12} sm={3}>
+              <p> <b>Follow us </b></p>
+              <p>
+                <FaFacebook  style={{width:"8%", height: "auto"}}/>
+              </p>
+              <p>
+              <FaInstagramSquare style={{width:"8%", height: "auto"}} />
+              </p>
+              <p>
+              <FaTwitter style={{width:"8%", height: "auto"}}/>
+              </p>
+            </Col>
+          </Row>
+          <Row className="justify-content-center mt-4">
+            <Col xs={12} sm="auto">
+              <p className="text-muted">
+                All material herein © 2023 HostelExplorer.com. All rights reserved.
+              </p>
+            </Col>
+          </Row>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;

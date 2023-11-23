@@ -1,0 +1,46 @@
+.style-stats{
+    border-radius: 50%;
+    background-color: #3C6B97;
+    width: 150px;
+    height: 150px;
+}
+.stats-heading{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45%;
+}
+.popular-hostel-btn{
+    width: auto;
+    background-color: #3C6B97;
+    color: white;
+    border: 1px solid white;
+}
+.img-city{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+.text1{
+    color: gray;
+    padding-bottom: 50px;
+    text-align: left;
+}
+.text2{
+    text-align: left;
+}
+.row-border {
+    border-top: 20px solid transparent; /* Adjust the border size as needed */
+  }
+  .slider{
+    margin-top: 80px;
+    background-color: #3C6B97;
+    padding: 10%;
+    color: white;
+  }
+  .general{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

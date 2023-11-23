@@ -1,0 +1,10 @@
+.headerstyle
+{
+  color: "white";
+  background-color: "#3C6B97";
+  padding: "20px";
+  font-family: "Sans-Serif";
+  display: "flex";
+  align-items: "center";
+  justify-content: "center"
+}

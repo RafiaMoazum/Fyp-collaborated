@@ -1,0 +1,43 @@
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-row label {
+  font-weight: bold;
+}
+
+.input-row input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.forget-password {
+  margin: 10px 0;
+  text-align: right;
+  color: blue;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .input-row {
+    margin-bottom: 10px;
+  }
+  
+  .input-row input {
+    padding: 8px;
+  }
+  
+  .forget-password {
+    margin: 8px 0;
+  }
+}

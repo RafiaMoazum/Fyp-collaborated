@@ -1,0 +1,63 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  padding: 60px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(0, 0, 0);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  width: 80%; /* Set a fixed width for the form */
+  max-width: 500px; /* Set a maximum width for the form */
+  margin-top: 50px; /* Add some space above the form */
+  margin-bottom: 50px; /* Add some space below the form */
+  /* Set left and right margins to "auto" to center the form */
+
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-label {
+  font-size: 16px;font-weight: bold;
+  margin-right: 1rem;
+  color:black;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.form-input {
+  border: none;
+  border-bottom: 1px solid #000000;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.form-register {
+  background-color: rgb(19, 23, 233);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-register:hover {
+  background-color: rgb(34, 193, 233);
+}
+
+button[type='submit'] {
+  background-color: #3C6B97;
+  color: #ffffff;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  border-color: black;
+  
+}

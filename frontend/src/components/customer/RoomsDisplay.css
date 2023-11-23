@@ -1,0 +1,45 @@
+/* RoomsDisplay.css */
+.mainSec {
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .room-selector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-decoration: none;
+
+  }
+  
+  .roomDisplay {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    width: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .roomDisplay:hover {
+    transform: translateY(-5px);
+  }
+  
+  .roomDisplay p {
+    margin: 5px 0;
+  }
+  
+  
+  .nameSec {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: black;
+  }
+  

@@ -1,0 +1,83 @@
+  .side {
+    height: 100vh; /* 100% of the viewport height */
+    top: 0;
+    left: 0;
+    background-color: #3C6B97;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav li {
+    padding: 15px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  nav li:hover {
+    background-color: #87B5E0;
+  }
+
+  .form-container {
+    max-width: auto;
+    margin: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .radio_btn{
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .input_box {
+    width: 50%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .image-container {
+
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+  
+  .rounded-image {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } 
+  .btn_sub{
+    
+    background-color: #3C6B97;
+    color: #fff;
+    border: none ;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+  }
