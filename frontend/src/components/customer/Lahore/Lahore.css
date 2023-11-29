@@ -4,3 +4,39 @@
     justify-content: center;
     align-items: center;
   }
+  .h_style{
+    color: black;
+    background-color: white;
+    padding: 50px;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .star1{
+    color: #FFD600;
+    width: 8%;
+    height: 8%;
+  }
+  .add_style{
+    background-color: white;
+    font-family: sans-serif;
+    padding: 20px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: 1px solid black;
+  }
+  .align_style{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .top_style{
+    display: flex;
+    background-color: #3C6B97;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+  }

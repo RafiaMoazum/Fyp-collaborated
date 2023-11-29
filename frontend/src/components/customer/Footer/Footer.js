@@ -41,7 +41,7 @@ const Footer = () => {
         </Form>
       </div>
       <div className="bg-white text-center py-5" >
-        <div>
+        <Container fluid>
           <Row>
             <Col xs={12} sm={4} className="mb-4 mb-sm-0">
               <img
@@ -53,7 +53,7 @@ const Footer = () => {
             </Col>
             <Col xs={12} sm={2} className="mb-4 mb-sm-0">
               <p> <b>Quick Links</b></p>
-              <Link to="/about">About us</Link>
+              <Link to="/About">About us</Link>
               <p>FAQ's</p>
               <p>Privacy Policy</p>
               <p>Terms and Conditions</p> 
@@ -82,7 +82,7 @@ const Footer = () => {
               </p>
             </Col>
           </Row>
-        </div>
+        </Container>
       </div>
     </div>
   );

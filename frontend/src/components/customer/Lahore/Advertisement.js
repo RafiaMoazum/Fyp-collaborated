@@ -4,6 +4,8 @@ import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import './Lahore.css';
+
 
 const  Advertisement= () => {
   const [hostelData, setHostelData] = useState([]);
@@ -79,29 +81,14 @@ const  Advertisement= () => {
   //   },
   // ];
 
-  const star1 = {
-    color: "#FFD600",
-    width: "8%",
-    height: "8%"
-  };
-  const add_style =
-    {
-        backgroundColor: "white",
-        fontFamily: "Sans-Serif",
-        padding: "20px",
-        alignItems: "center",
-        justifyContent: "center",
-        display: "flex",
-        border: "1px solid black",
-    };
-
   return (
     <div style={{paddingTop:'20px'}}>
       {/* <Link to={`/HostelProfile/${hostelData._id}`} style={{textDecoration:'none', color:'black'}}> */}
      
       {/* {divArray.map((item, index) => ( */}
       {hostelData.map((hostel, index) => (
-        <div key={index} style={add_style}>
+        <>
+        <div key={index} className='add_style'>
           <NavLink to={`/HostelDetails/${hostel._id}`} key={hostel._id}className='hostelNameLink'>
           <Row>
             <Col>
@@ -111,7 +98,7 @@ const  Advertisement= () => {
             {/* <h2><NavLink to={`/HostelDetails/${hostel._id}`} key={hostel._id}className='hostelNameLink'>{hostel.name}</NavLink></h2> */}
               <h2><b>{hostel.name}</b></h2>
               {/* {Array.from({ length: item.stars }, (_, index) => (
-                <FaStar key={index} style={star1} />
+                <FaStar key={index} className = 'star1' />
               ))} */}
               <Row style={{ paddingTop: "15px" }}>
                 {/* {hostel.features.map((feature, index) => (
@@ -131,6 +118,8 @@ const  Advertisement= () => {
           </Row>
           </NavLink>
         </div>
+        <br></br>
+      </>
       ))}  
     </div>
   );

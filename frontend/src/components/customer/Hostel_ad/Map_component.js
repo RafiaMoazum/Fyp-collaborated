@@ -1,31 +1,52 @@
-import React from "react";
-import GoogleMapReact from 'google-map-react';
+import React, { useEffect } from "react";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+export default function SimpleMap() {
+  useEffect(() => {
+    // Check if the Google Maps API is available
+    if (window.google) {
+      // Get the user's location using the Geolocation API
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            console.log(position.coords)
+            const userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
 
-export default function SimpleMap(){
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627
-    },
-    zoom: 11
-  };
+            // Create a new map centered at the user's location
+            const map = new window.google.maps.Map(document.getElementById("map"), {
+              center: userLocation,
+              zoom: 15, // Adjust the zoom level as needed
+            });
+
+            // Add a marker at the user's location
+            new window.google.maps.Marker({
+              position: userLocation,
+              map: map,
+              title: "Your Location",
+              icon: {
+                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                scaledSize: new window.google.maps.Size(24, 24),
+              },
+            });
+          },
+          (error) => {
+            console.error("Error getting user's location:", error);
+          }
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser");
+      }
+    } else {
+      console.error("Google Maps API is not available");
+    }
+  }, []); // Run once on component mount
 
   return (
-    // Important! Always set the container height explicitly
-    <div style={{ height: '50vh', width: '100%' }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
-        />
-      </GoogleMapReact>
-    </div>
+    <div
+      id="map"
+      style={{ height: "50vh", width: "100%", backgroundColor: "skyblue" }}
+    ></div>
   );
 }

@@ -1,0 +1,22 @@
+.ad_style {
+
+    background-color: white;
+    font-family: Sans-Serif;
+    padding: 20px;
+    width: 65%;
+    border: 1px solid black;
+}
+.icon_style{
+
+    color: #3C6B97;
+    width: 40px;
+    height : 40px;
+    padding-inline: 5px;
+}
+.star{
+
+    color: #FFD600;
+    width: 40%;
+    height: 40%;
+
+}

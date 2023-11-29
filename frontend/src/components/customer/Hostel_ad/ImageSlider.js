@@ -15,7 +15,7 @@ const ImageSlider = ({ images }) => {
       <Carousel>
       {images.map((image, index) => (
         <div key={index}>
-          <img src={image} alt={`Image ${index}`} />
+          <img className="d-block w-100" src={image} alt={`Image ${index}`} />
         </div>
       ))}
     </Carousel>

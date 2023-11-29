@@ -32,8 +32,7 @@ function App() {
       <RoomProvider>
       <Routes>
         <Route path="/" element={<Mainpage />} />
-        <Route path="/about" element={<About/>}/>
-       <Route path="/loginPageC" element={<LoginPageC />} /> 
+        <Route path="/about" element={<About/>}/> 
         {/* <Route path="/contact_us" element={<Contact_us/>} /> */}
         <Route path="/hostel_ad" exact element={<Hostel_ad />} /> 
         <Route path="/lahore" element={<Lahore />} /> 
@@ -47,8 +46,6 @@ function App() {
         <Route path='/hostelDetails/:hostelId' element={<HostelDetails/>} />
         <Route path='/RoomsDisplay/:hostelId' element={<RoomsDisplay/>} />
         <Route path='/RoomDetail/:roomId' element={<RoomDetail/>} />
-      
-        <Route path='/userSignupPage' element={<UserSignupPage/>} />
         <Route path='/BookingPage/:roomId' element={<BookingPage/>} />
         <Route path='/allHostels' element={<AllHostels/>} />
         <Route path='/allHostels' element={<AllHostels/>} />

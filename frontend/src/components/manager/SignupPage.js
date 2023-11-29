@@ -47,6 +47,7 @@ export default function SignupPage() {
       transform: "translateY(-50%)", // Adjust to center vertically
       border: "1px solid black"
     };
+    
       const features = [
         {
           text: "Post your hostels to thousands of potential customers."
@@ -83,16 +84,16 @@ export default function SignupPage() {
             <Row style={{height:"50vh"}}></Row>
             {features.map((feature, index) => (
               <Row key={index}>
-                <Col xs={4} sm={4} md={4} lg={4}></Col>
-                <Col xs={1} sm={1} md={1} lg={1} style={{ textAlign: "center" }}>
+                <Col xs={0} sm={4} md={4} lg={4}></Col>
+                <Col xs={2} sm={1} md={1} lg={1} style={{ textAlign: "center" }}>
                   <FaCheck />
                 </Col>
-                <Col xs={5} sm={5} md={5} lg={5}>
+                <Col xs={10} sm={5} md={5} lg={5}>
                   <p style={{ textAlign: "left"}}>
                     <b>{feature.text}</b>
                   </p>
                 </Col>
-                <Col xs={2} sm={2} md={2} lg={2}></Col>
+                <Col xs={0} sm={2} md={2} lg={2}></Col>
               </Row>
             ))}
           </div> 

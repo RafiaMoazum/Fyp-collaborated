@@ -17,3 +17,24 @@
 h1{
   color: white;
 }
+@media (max-width: 768px) {
+  .overlay {
+    width: 80%;
+  }
+}
+
+@media (max-width: 576px) {
+  .heading {
+    font-size: 25px;
+  }
+}
+@media (max-width: 576px) {
+  .overlay {
+  top: 50%;   
+  position: absolute;
+  width: 40%;
+  border: 1px solid black;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  }
+}
