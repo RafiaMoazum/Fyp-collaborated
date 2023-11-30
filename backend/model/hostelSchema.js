@@ -38,6 +38,18 @@ const hostelSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    facilities: {
+        convenience_store: { type: Boolean, default: false },
+        parking: { type: Boolean, default: false },
+        express_checkinCheckout: { type: Boolean, default: false },
+        dinningArea: { type: Boolean, default: false },
+        Elevator: { type: Boolean, default: false },
+        mess:{ type: Boolean, default: false },
+        commonRoom:{ type: Boolean, default: false },
+        sportsArea:{ type: Boolean, default: false },
+        guestArea:{ type: Boolean, default: false }
+        
+    },
     rooms:{
         type: [String]
     },

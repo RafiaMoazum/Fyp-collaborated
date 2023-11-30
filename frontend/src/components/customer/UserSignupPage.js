@@ -24,8 +24,8 @@ export default function SignupPage() {
         <div className="outer">
         <img src="./images/SignUPimg.png" alt="img" width="1400" height="550"></img> 
         <div className="text">
-          <h1 style={headingStyle}>Welcome on Becoming a member</h1>
-          <h1 style={headingStyle}> of our Hostel family</h1>
+          {/* <h1 style={headingStyle}>Welcome on Becoming a member</h1>
+          <h1 style={headingStyle}> of our Hostel family</h1> */}
           <UserSignupForm/>
           </div>
         </div>

@@ -3,6 +3,8 @@ import './Hostel_AddForm.css'; // Create a corresponding CSS file
 import Navbar from "./Navbar"
 import BlueHeader from "./BlueHeader"
 import SideMenu from "./SideMenu"
+import Col from 'react-bootstrap/esm/Col';
+import Row from 'react-bootstrap/esm/Row';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -19,64 +21,78 @@ function Hostel_AddForm() {
         customersGender:'',
         NoOfFloors:'',
         NoOfRooms:'',
+        convenience_store: false,
+        parking: false,
+        express_checkinCheckout: false,
+        dinningArea:false,
+        Elevator:false,
+        mess:false,
+        commonRoom:false,
+        sportsArea:false,
+        guestArea:false,
         hostelImages: [], // Array to store selected image files
     });
 
     let name, value;
     const handleInputChange = (event) => {
-        name = event.target.name;
-        value = event.target.value;
-        setHostelData({ ...hostelData, [name]: value });
-    }
+      const { name, value, type, checked } = event.target;
+        const newValue = type === 'checkbox' ? checked : value;
+        setHostelData({ ...hostelData, [name]: newValue });
+        // name = event.target.name;
+        // value = event.target.value;
+        // setHostelData({ ...hostelData, [name]: value });
+      }
 
-    const handleImageChange = (event) => {
-      const selectedImages = event.target.files;
-      // Convert the FileList to an array
-      const selectedImagesArray = Array.from(selectedImages);
-      setHostelData({ ...hostelData, hostelImages: selectedImagesArray });
+      const handleImageChange = (event) => {
+        const selectedImages = event.target.files;
+        // Convert the FileList to an array
+        const selectedImagesArray = Array.from(selectedImages);
+        // Concatenate the new images to the existing array
+        setHostelData({ ...hostelData, hostelImages: [...hostelData.hostelImages, ...selectedImagesArray] });
     };
     
 
     
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-
-
-    // Append managerId to formData
-    //formData.append("managerId", userData._id);
-
-
-    Object.entries(hostelData).forEach(([key, value]) => {
-        if (key !== 'hostelImages') {
-            formData.append(key, value);
-        }
-    });
-
-    hostelData.hostelImages.forEach((image, index) => {
-        formData.append(`image${index}`, image);
-    });
-
-    try {
-        const response = await fetch("/addHostel", {
-            method: "POST",
-            credentials: "include",
-            body: formData
-        });
-
-        if (response.ok) {
-            window.alert("Hostel added successfully✌");
-            console.log("Hostel added successfully✌");
-            navigate("/hostelsPage");
-        } else {
-            const errorData = await response.json();
-            window.alert(`Hostel couldn't be added: ${errorData.error}`);
-            console.log(`Hostel couldn't be added: ${errorData.error}`);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const formData = new FormData();
+  
+      // Append managerId to formData
+      // formData.append("managerId", userData._id);
+  
+      Object.entries(hostelData).forEach(([key, value]) => {
+          if (key !== 'hostelImages') {
+              formData.append(key, value);
+          }
+      });
+  
+      hostelData.hostelImages.forEach((image, index) => {
+          formData.append('hostelImages', image);
+      });
+  
+      try {
+          const response = await fetch("/addHostel", {
+              method: "POST",
+              credentials: "include",
+              body: formData
+          });
+  
+          const responseData = await response.json();
+          console.log(responseData);
+  
+          if (response.ok) {
+              window.alert("Hostel added successfully✌");
+              console.log("Hostel added successfully✌");
+              navigate("/hostelsPage");
+          } else {
+              const errorData = await response.json();
+              window.alert(`Hostel couldn't be added: ${errorData.error}`);
+              console.log(`Hostel couldn't be added: ${errorData.error}`);
+          }
+      } catch (error) {
+          console.error('Error:', error);
+      }
+  };
     
 
 
@@ -92,7 +108,7 @@ function Hostel_AddForm() {
     <SideMenu opt1={"Home"} link1={"/hostelsPage"} opt2={"Add Hostel"} link2={"/hostel_AddForm"} opt3={"Messages"} link3={""} opt4={"Log Out"} link4={""}/>
     
     <section className="mainSec"></section>
-        <form method="POST" className="form" onSubmit={handleSubmit}>
+        <form method="POST" className="form" enctype="multipart/form-data" onSubmit={handleSubmit}>
              <div className="form-group">
         <label className="form-label">
           Name:
@@ -222,6 +238,124 @@ function Hostel_AddForm() {
           />
         </label>
       </div>
+      <div className="form-group">
+        <label className="form-label">
+          Facilities:
+          <Row>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="convenience_store"
+                                                            checked={hostelData.convenience_store}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Convinience Store on site
+                                                    </label>
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="parking"
+                                                            checked={hostelData.parking}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Parking
+                                                    </label>
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="express_checkinCheckout"
+                                                            checked={hostelData.express_checkinCheckout}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Express Checkin/ CheckOut
+                                                    </label>
+                                        
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="dinningArea"
+                                                            checked={hostelData.dinningArea}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Dinning Area
+                                                    </label>
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="Elevator"
+                                                            checked={hostelData.Elevator}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Elevator
+                                                    </label>
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="mess"
+                                                            checked={hostelData.mess}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Mess
+                                                    </label>
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="commonRoom"
+                                                            checked={hostelData.commonRoom}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Common Room
+                                                    </label>
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="sportsArea"
+                                                            checked={hostelData.sportsArea}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Sports Area
+                                                    </label>
+                                                </Col>
+                                                <Col>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="guestArea"
+                                                            checked={hostelData.guestArea}
+                                                            onChange={handleInputChange}
+                                                            style={{marginRight: "8px"}}
+                                                        />
+                                                        Guests Area
+                                                    </label>
+                                                </Col>
+                                            </Row>
+        </label>
+      </div>
+      
+
       <div className="form-group">
                 <label className="form-label">
                     Images:

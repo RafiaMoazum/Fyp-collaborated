@@ -108,9 +108,9 @@ function RegisterForm() {
           <div className="input-row">
             <input
             type="password"
-            name="confirmpassword"
+            name="confirmPassword"
             placeholder="Confirm Password"
-            value={ManagerData.password}
+            value={ManagerData.confirmPassword }
             onChange={(handleInputChange)}/>
           </div>
           <div className="forget-password">

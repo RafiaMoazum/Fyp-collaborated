@@ -53,7 +53,7 @@ function BookingForm() {
     } else {
         // Handle the success case
         const data = await res.json();
-    
+        window.alert("Room registered successfully✌");
         console.log("Room registered successfully✌");
         console.log(`RoomId from BookingForm.js= ${roomId}`)
         //navigate(`/RoomsDisplay/${hostelId}`);

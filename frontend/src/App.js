@@ -38,12 +38,15 @@ function App() {
         <Route path="/lahore" element={<Lahore />} /> 
         <Route path="/signupPage" exact element={<SignupPage />} />
         <Route path="/loginPage" element={<LoginPage />} />
+        <Route path="/userSignupPage" exact element={<UserSignupPage />} />
+        <Route path="/loginPageC" exact element={<LoginPageC />} />
         <Route path="/hostelsPage" element={<HostelsPage />} />
         <Route path='hostelProfile/:hostelId' element={<HostelProfile/>} />
         <Route path='customerInfo/:hostelId' element={<CustomerInfo/>} />
         <Route path='roomStatus/:hostelId' element={<RoomStatus/>} />
         <Route path='hostel_AddForm' element={<Hostel_AddForm/>} />
         <Route path='/hostelDetails/:hostelId' element={<HostelDetails/>} />
+        <Route path='/Hostel_ad/:hostelId' element={<Hostel_ad/>} />
         <Route path='/RoomsDisplay/:hostelId' element={<RoomsDisplay/>} />
         <Route path='/RoomDetail/:roomId' element={<RoomDetail/>} />
         <Route path='/BookingPage/:roomId' element={<BookingPage/>} />

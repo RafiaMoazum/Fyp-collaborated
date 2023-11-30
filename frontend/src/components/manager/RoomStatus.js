@@ -298,7 +298,7 @@ export default function RoomStatus() {
                                 <Row>
                                     <Col>
                                         <div className="form-group">
-                                            <label htmlFor="field4"><b>Current Capacity:</b></label>
+                                            <label htmlFor="field4"><b>Remaining Capacity:</b></label>
                                             <input
                                                 className="input_box"
                                                 type="text"

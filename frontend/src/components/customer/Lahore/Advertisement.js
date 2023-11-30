@@ -89,7 +89,7 @@ const  Advertisement= () => {
       {hostelData.map((hostel, index) => (
         <>
         <div key={index} className='add_style'>
-          <NavLink to={`/HostelDetails/${hostel._id}`} key={hostel._id}className='hostelNameLink'>
+          <NavLink to={`/Hostel_ad/${hostel._id}`} key={hostel._id}className='hostelNameLink'>
           <Row>
             <Col>
               <img alt="" src='./images/242009851.jpg' width="100%" height="100%" />

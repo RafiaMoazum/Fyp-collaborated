@@ -98,18 +98,20 @@ const Popular = () => {
   return (
     <>
       <h1 style={h_style}>Popular Hostels in Lahore</h1>
-      {/* <Slider {...settings}> */}
-        {/* {hostelData.map((hostel, index) => (
+      <Slider {...settings}> 
+        {hostelData.map((hostel, index) => (
           <div key={index}>
             <CardComponent title={hostel.name} content={hostel.description} />
           </div>
-        ))} */}
-        {/* {cardData.map((card, index) => (
+        ))}
+        {cardData.map((card, index) => (
           <div key={index}>
             <CardComponent title={card.title} content={card.content} />
           </div>
-        ))} */}
-        {hostelData.map((hostel, index) => (
+        ))}
+       
+       </Slider>
+       {/* {hostelData.map((hostel, index) => (
           <div key={index} style={hostelInfo}>
             <h2>{hostel.name}</h2> 
             <p>Address:{hostel.address}</p>
@@ -117,8 +119,7 @@ const Popular = () => {
             <p>City:{hostel.city}</p>
             <p>Description:{hostel.description}</p>
           </div>
-        ))}
-      {/* </Slider> */}
+        ))} */}
     </>
   );
 };

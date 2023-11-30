@@ -127,11 +127,14 @@ export default function HostelProfile() {
                   </button>
                 </div>
 
-                <div className="image-row">
-                  <div className="image-container2">
-                    <img src="/InHostel1.jpg" alt="Image 1" />
-                    
-                  </div>
+          <div className="image-row">
+            <div className="image-container2">
+              {hostelData.hostelImages && hostelData.hostelImages.length > 0? (
+                hostelData.hostelImages.map((image, index) => (
+                     <img key={index} src={image} alt={`Image ${index + 1}`} />
+                ))
+               ) : (
+                 <>
                   <div className="image-container2">
                     <img src="/InHostel2.jpg" alt="Image 2" />
                     
@@ -140,7 +143,10 @@ export default function HostelProfile() {
                     <img src="/InHostel3.jpg" alt="Image 3" />
                     
                   </div>
-                </div>
+                 </>
+              )}
+            </div>       
+          </div>
 
                 <div className="text-container">
                   <p>{hostelData.description}</p>
@@ -167,6 +173,11 @@ export default function HostelProfile() {
                     <img src="/email.png" alt="Image 3" />
                     <p>{hostelData.email}</p>
                   </div>
+                  <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+                       {hostelData.facilities && Object.keys(hostelData.facilities).length > 0 && Object.entries(hostelData.facilities).map(([facility, value]) => (
+                        value && <li key={facility}>{facility}</li>
+                      ))}
+                </ul>
                 </section>
             </Col>
           </Row>

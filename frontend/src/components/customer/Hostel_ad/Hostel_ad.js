@@ -1,4 +1,5 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import Container from 'react-bootstrap/Container';
 import ImageSlider from "./ImageSlider";
 import Button from 'react-bootstrap/Button';
@@ -6,10 +7,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Map_component from "./Map_component";
 import Popular from "../Popular/Popular";
-import Reviews from '../Reviews/Reviews';
 import Features from './Features';
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
+import Reviews from '../Reviews/Reviews';
+import ReviewForm from '../Reviews/ReviewForm';
+import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import {FaMapMarkerAlt,FaStar} from 'react-icons/fa';
 import "./Hostel_ad.css";
 
@@ -17,12 +21,47 @@ import "./Hostel_ad.css";
 const Hostel_ad = () => {
 
     const images = [
-    './images/242009851.jpg',
-    './images/242009851.jpg',
-    './images/242009851.jpg',
-    './images/242009851.jpg',
-    './images/242009851.jpg',
+    '/hostel2.jpg',
+    // '/images/242009851.jpg',
+    // '/images/242009851.jpg',
+    // '/images/242009851.jpg',
+    // '/images/242009851.jpg',
+    '/InHostel1.jpg',
+    '/InHostel2.jpg',
+    '/InHostel3.jpg',
+    '/images/242009851.jpg',
   ];
+  const{hostelId}= useParams();
+  const [hostelData, setHostelData] = useState([]);
+
+  const HostelDetails = async () => {
+    try {
+      const res = await fetch(`/hostelDetails/${hostelId}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(`hostelsProfile✌: ${data}`);
+        setHostelData(data);
+       
+      }else {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.error(err);
+      //navigate('/loginPage');
+    }
+  };
+  useEffect(() =>{
+    HostelDetails();
+},[]);
  
     
     return (
@@ -50,7 +89,7 @@ const Hostel_ad = () => {
                     <Row className="flex-row">
                         <Col sm style = {{alignItems: "left",justifyContent: "left",display: "flex", paddingTop : "8px" }}>
                             <h5>
-                                <b>Pkr Price</b>
+                                <b>{hostelData.name}</b>
                             </h5>
                         </Col>
                         <Col sm style = {{alignItems: "right",justifyContent: "right",display: "flex"}}>
@@ -70,7 +109,7 @@ const Hostel_ad = () => {
                     </Row>
                     <Row>
                     <Col>
-                        <p style = {{textAlign: "left"}}><FaMapMarkerAlt/> DHA phase 6, Block A, Lahore</p>
+                        <p style = {{textAlign: "left"}}><FaMapMarkerAlt/> {hostelData.address}</p>
                     </Col>
                     </Row>
                     <Row>
@@ -80,9 +119,13 @@ const Hostel_ad = () => {
                         </Button>
                         </Col>
                         <Col sm style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', paddingBottom: '5px' }}>
+                        <Link to={`/RoomsDisplay/${hostelId}`}>
                         <Button size="lg" style={{ width: '100%', backgroundColor: '#3C6B97' }}>
                             Book A Room
                         </Button>
+                        </Link>
+
+                        
                         </Col>
                     </Row>
                 </Container>
@@ -95,20 +138,13 @@ const Hostel_ad = () => {
                             <b>Description</b>
                             </h2>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-                                do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                                laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit, sed aliquip ex ea commodo consequat. 
-                                do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                                laboris nisi ut aliquip ex ea commodo consequat. 
+                            {hostelData.description}
                             </p>
-                            <div style={{ border: "1px solid gray", margin: "20px 0" }}></div>
+                            {/* <div style={{ border: "1px solid gray", margin: "20px 0" }}></div>
                             <h2 style={{ padding: "15px" }}>
                                 <b>Room Amenties</b>
                             </h2>
-                            <Features />
+                            <Features /> */}
                             <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
                             <h2 style = {{padding:"15px"}}>
                                 <b>Facilities</b> 
@@ -126,10 +162,29 @@ const Hostel_ad = () => {
                             <Map_component />
                         </Col>
                     </Row>
+                    {/* <Row>
+                        <Col>
+                    <Link to={`/RoomsDisplay/${hostelId}`}>
+                   <button className='button-link'>See Rooms</button>
+                  </Link>
+                  <br/>
+                   <br/>
+                   </Col>
+                    </Row> */}
                     <Popular />
+                    
                 </Container>
         </div>
         </div>
+        <br/>
+    <br/>
+    
+    
+    
+    <Reviews/>
+    <br/>
+    <br/>
+    <ReviewForm/>
     </>
     );
 }

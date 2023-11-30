@@ -10,7 +10,7 @@ const navbar = ({ isAuthenticated, userProfilePic }) => {  {/*  pass values for 
     <div>
       <Navbar collapseOnSelect expand="lg" style = {{backgroundColor: "white"}}>
         <Container fluid>
-          <img alt="" src="./images//H-logo.png" width="90" height="90" className="d-inline-block align-top"/>
+          <img alt="" src="/images//H-logo.png" width="90" height="90" className="d-inline-block align-top"/>
           <Navbar.Brand href="#home"> <b>Hostel Explorer</b></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
