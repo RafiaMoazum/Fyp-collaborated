@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import './HostelsPage.css'
-import Navbar from '../customer/Navbar/Navbar';
+import Navbar from './Navbar';
 import BlueHeader2 from './BlueHeader2';
 import SideMenu from './SideMenu'
 import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
+import { FaPlusCircle } from 'react-icons/fa'
 
 export default function HostelsPage() {
 
@@ -96,7 +97,7 @@ export default function HostelsPage() {
               <nav>
                 <ul>
                   {userData && <h2>{userData.name}</h2>}
-                  <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
+                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Profile</Link></li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
                   <li><Link to="" style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
@@ -113,19 +114,11 @@ export default function HostelsPage() {
           <section>
             <div>
               <Row>
-                <Col xs={2} sm={3} md={4} lg={4}>
-                  <div className="image-container">
-                    <img src="add_hostel.webp" alt="hostel" className="rounded-image" />
-                  </div>
-                </Col>
-                <Col xs={10} sm={9} md={8} lg={8}>
-                  <h2 className='title'>
+              <h2 className='title'>
                     <Link to="/hostel_AddForm" style={{textDecoration: "none", color: "Black"}} >
-                      Add Hostel
+                    <FaPlusCircle/>  Add Hostel
                     </Link>
                   </h2>
-                </Col>
-                <div style={{ border: "1px solid black"}}></div>
               </Row>
             </div>
             {hostelData.map((hostel, index) => (

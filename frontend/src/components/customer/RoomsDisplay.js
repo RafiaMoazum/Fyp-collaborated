@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../manager/Navbar';
+import Navbar from './Navbar/Navbar';
+import BlueHeader2 from '../manager/BlueHeader2';
 import { NavLink } from 'react-router-dom';
 import './RoomsDisplay.css';
 
@@ -32,6 +33,7 @@ export default function RoomsDisplay() {
       console.error(err);
     }
   };
+  
 
   useEffect(() => {
     DisplayRoomData();
@@ -39,12 +41,11 @@ export default function RoomsDisplay() {
 
   return (
     <>
-      <Navbar option1="About Us" option2="Contact Us" option3="" />
-
-      <section className="nameSec"></section>
+      <Navbar/>
+      <BlueHeader2/>
       
-      <section className="mainSec">
-      <h1 style={{ color: 'black' }}>Rooms</h1>
+      <section >
+      <h1 style={{padding: '30px' ,color: 'black' }}>Rooms</h1>
 
 
         <div className="room-selector">

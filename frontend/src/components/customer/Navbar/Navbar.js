@@ -26,8 +26,9 @@ const navbar = ({ isAuthenticated, userProfilePic }) => {  {/*  pass values for 
                 </div>
               ) : (
                 <>
-                <Link to="./userSignupPage" style={{textDecoration:'none', color:'black'}}><b>Sign Up </b></Link>
-                <Link to="./loginPageC" style={{textDecoration:'none', color:'black'}}><b> | Login</b></Link>
+                <Link to="/" style={{textDecoration:'none', color:'black', marginRight: '10px'}}><b> Home </b></Link>
+                <Link to="./userSignupPage" style={{textDecoration:'none', color:'black', marginRight: '10px'}}><b>Sign Up </b></Link>
+                <Link to="./loginPageC" style={{textDecoration:'none', color:'black', marginRight: '10px'}}><b> | Login</b></Link>
                
                 </>
               )}

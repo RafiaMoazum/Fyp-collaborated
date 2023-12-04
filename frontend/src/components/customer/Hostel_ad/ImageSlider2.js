@@ -9,7 +9,7 @@ const ImageSlider = ({ images }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        width: "100%",
+        width: "80%",
     };
   return (
     <div style={style1}>

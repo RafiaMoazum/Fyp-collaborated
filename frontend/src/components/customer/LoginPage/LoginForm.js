@@ -39,7 +39,7 @@ export default function LoginForm() {
   } else{
     console.log("Login Successful")
     console.log(`RoomId from LoginForm.js= ${roomId}`)
-    navigate(`/BookingPage/${roomId}`)
+    navigate(`/RoomDetail2/${roomId}`)
   }
 }
 

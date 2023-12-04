@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import Col from 'react-bootstrap/Col';

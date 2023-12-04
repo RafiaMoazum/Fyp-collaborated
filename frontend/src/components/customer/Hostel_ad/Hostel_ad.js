@@ -16,9 +16,11 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import {FaMapMarkerAlt,FaStar} from 'react-icons/fa';
 import "./Hostel_ad.css";
-
-
+import { NavLink } from 'react-router-dom';
+import '../RoomsDisplay.css';
+    
 const Hostel_ad = () => {
+
 
     const images = [
     '/hostel2.jpg',
@@ -31,8 +33,46 @@ const Hostel_ad = () => {
     '/InHostel3.jpg',
     '/images/242009851.jpg',
   ];
-  const{hostelId}= useParams();
-  const [hostelData, setHostelData] = useState([]);
+
+    const [isDivVisible, setDivVisible] = useState(false);
+    const handleButtonClick = () => 
+    {
+        setDivVisible(!isDivVisible);
+    };
+
+        const{hostelId}= useParams();
+        const [hostelData, setHostelData] = useState([]);
+        const [displayrooms, setDisplayRooms] = useState([]);
+
+        const DisplayRoomData = async () => {
+            try {
+            const res = await fetch(`/showRooms/${hostelId}`, {
+                method: 'GET',
+                headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+            console.log('Response:', res);
+
+            if (res.status === 200) {
+                const data = await res.json();
+                console.log(`Room✌: ${data}`);
+                setDisplayRooms(data);
+            } else {
+                const error = new Error(res.error);
+                throw error;
+            }
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        
+
+        useEffect(() => {
+            DisplayRoomData();
+        }, []);
 
   const HostelDetails = async () => {
     try {
@@ -118,18 +158,41 @@ const Hostel_ad = () => {
                             Book A Visit
                         </Button>
                         </Col>
-                        <Col sm style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', paddingBottom: '5px' }}>
-                        <Link to={`/RoomsDisplay/${hostelId}`}>
-                        <Button size="lg" style={{ width: '100%', backgroundColor: '#3C6B97' }}>
-                            Book A Room
+                        <Col sm style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: '5px' }}>
+                        <Button onClick={handleButtonClick}
+                            size="lg" style={{ width: '100%', backgroundColor: '#3C6B97' }}
+                        >
+                            See Rooms
                         </Button>
-                        </Link>
-
                         
                         </Col>
                     </Row>
                 </Container>
             </div>
+            <div>
+                {isDivVisible && (
+                    <div>
+                        <h1 style={{padding: '30px' ,color: 'black' }}>Rooms</h1>
+                        <div className="room-selector">
+                            {displayrooms.map((room) => (
+                                <NavLink to={`/RoomDetail/${room._id}`} className='hostelNameLink'>
+                                <div key={room._id} className="roomDisplay">
+                                <div>
+                                    <p>Room No. {room.roomNumber}</p>
+                                    <p>Room Type. {room.type}</p>
+                                    <p>Total Capacity. {room.capacity}</p>
+                                    <p>Current Capacity. {room.currentCapacity}</p>
+                                    <p>Price. {room.price}</p>
+                                
+                                </div>
+                                </div>
+                                </NavLink>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+
             <div style={{ paddingTop: "40px" }}>
                 <Container fluid>
                     <Row>
@@ -162,29 +225,14 @@ const Hostel_ad = () => {
                             <Map_component />
                         </Col>
                     </Row>
-                    {/* <Row>
-                        <Col>
-                    <Link to={`/RoomsDisplay/${hostelId}`}>
-                   <button className='button-link'>See Rooms</button>
-                  </Link>
-                  <br/>
-                   <br/>
-                   </Col>
-                    </Row> */}
+                    <br></br><br></br>
+                    <ReviewForm/>
+                    <br></br><br></br>
                     <Popular />
                     
                 </Container>
         </div>
         </div>
-        <br/>
-    <br/>
-    
-    
-    
-    <Reviews/>
-    <br/>
-    <br/>
-    <ReviewForm/>
     </>
     );
 }

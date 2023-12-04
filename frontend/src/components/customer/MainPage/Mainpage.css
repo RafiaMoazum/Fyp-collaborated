@@ -35,7 +35,7 @@
   }
   .slider{
     margin-top: 80px;
-    background-color: #3e4347;
+    background-color: #3C6B97;
     padding: 10%;
     color: white;
   }
@@ -47,7 +47,7 @@
   .overlay{
     position: absolute;
     top: 100%;
-    left: 32%;
+   left: 32%;
     width: 40%;
     transform: rotateY('-50%');
   };

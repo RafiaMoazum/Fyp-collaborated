@@ -90,7 +90,7 @@ function BookingForm() {
         </label>
       </div>
      
-      <input className="form-register" type="submit" value="Book Room" onClick={BookRoom} />
+      <input className="form-register" type="submit" value="Submit" onClick={BookRoom} />
       
     </form>
     

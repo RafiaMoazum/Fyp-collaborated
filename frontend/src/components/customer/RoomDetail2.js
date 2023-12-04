@@ -23,13 +23,16 @@ export default function RoomDetail() {
     '/images/242009851.jpg',
   ];
 
+  const [isDivVisible, setDivVisible] = useState(false);
   const { roomId: contextRoomId, setRoomId } = useRoomContext();
   const { roomId } = useParams();
   const [roomData, setRoomData] = useState({});
 
   const handleBookNowClick = () => {
     // Update the roomId using setRoomId from the context
-    
+    {
+      setDivVisible(!isDivVisible);
+    };
     setRoomId(roomId);
   };
 
@@ -94,14 +97,21 @@ export default function RoomDetail() {
                                   value && <li key={facility}> <FaCheck/> {facility} </li> 
                                 ))}
                           </ul>
-                          <Link to='/LoginPageC'>
+                          <Link to=''>
                             <button onClick={handleBookNowClick} className='btn_link'>Book Now</button>
                           </Link>
                         </>
                       ) : (
                         <p>Loading room details...</p>
                       )}
-                      </div>
+                      <div>
+                        {isDivVisible && (
+                            <div>
+                              <BookingForm/>
+                            </div>
+                        )}
+                    </div>
+                    </div>
                     </Col>
                     </Row>
                 </Container>

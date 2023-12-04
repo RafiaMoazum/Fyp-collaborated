@@ -25,7 +25,7 @@ const CardComponent = ({ title, content }) => {
         <Card.Text>
             {content}
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button >See Details</Button>
       </Card.Body>
     </Card>
   );

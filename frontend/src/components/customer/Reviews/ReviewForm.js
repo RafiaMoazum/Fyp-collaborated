@@ -54,7 +54,7 @@ const{hostelId}= useParams();
       <div className="review-form">
        
         <div className="rating">
-          <label htmlFor="rating">Rating:</label>
+          <label htmlFor="rating">Rate the hostel: </label>
           <input
             type="number"
             id="rating"
@@ -68,7 +68,7 @@ const{hostelId}= useParams();
         </div>
         <div className="review-text">
           <textarea
-            placeholder="Write your review here"
+            placeholder="Leave a review"
             name="comment"
             value={formData.comment}
             onChange={handleChange}
@@ -76,7 +76,8 @@ const{hostelId}= useParams();
             required
           ></textarea>
         </div>
-        <button type="button" onClick={AddReview}>Submit</button>
+        <br></br>
+        <button className ="btn_style" type="button" onClick={AddReview}>Submit</button>
       </div>
     </div>
   );

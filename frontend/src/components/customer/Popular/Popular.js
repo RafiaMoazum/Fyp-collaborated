@@ -1,7 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import CardComponent from './CardComponent';
 import { useEffect } from 'react'
 import {useState} from 'react';
@@ -57,7 +55,7 @@ const Popular = () => {
       fontFamily: "Sans-Serif",
       display: "flex",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
   };
 
   const settings = {
@@ -65,7 +63,7 @@ const Popular = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     responsive: [
       {
         breakpoint: 1200,
@@ -97,7 +95,7 @@ const Popular = () => {
 
   return (
     <>
-      <h1 style={h_style}>Popular Hostels in Lahore</h1>
+      <h1 style={h_style}><b>Popular Hostels in Lahore</b></h1>
       <Slider {...settings}> 
         {hostelData.map((hostel, index) => (
           <div key={index}>
