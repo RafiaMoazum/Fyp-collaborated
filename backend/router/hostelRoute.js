@@ -7,8 +7,7 @@ const Hostel = require("../model/hostelSchema"); // Hostel Schema
 const authenticate = require("../middleware/authenticate");
 
 const storage = multer.diskStorage({
-    destination: 'public/userImages',
-    //destination:'../../frontend/public/userImages',
+    destination: 'publi/userImages',
     filename: (req, file, cb) => {
         cb(null, file.originalname);
     }
@@ -22,17 +21,13 @@ const upload = multer({
 // Create Hostel
 router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req, res) => {
 
-    const { name, address, city, phone, email, 
-        description, customersGender, NoOfFloors, NoOfRooms,
-        convenience_store,
+    const { name, address, city, phone, email, description, customersGender, NoOfFloors, NoOfRooms,
         parking,
-        express_checkinCheckout,
-        dinningArea,
+        wifi,
+        laundry,
         Elevator,
         mess,
-        commonRoom,
-        sportsArea,
-        guestArea} = req.body;
+        livingArea} = req.body;
 
     try {
         const hostelImages = req.files.map(file => file.path);
@@ -41,25 +36,15 @@ router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req
 
         // Create a new hostel document based on Hostel schema
         const hostel = new Hostel({
-            name,
-            address,
-            city,
-            phone,
-            email,
-            description,
-            customersGender,
-            NoOfFloors,
-            NoOfRooms,
+            name,address,city,phone,email,description,customersGender,NoOfFloors,NoOfRooms,
             facilities: {
-                convenience_store,
                 parking,
-                express_checkinCheckout,
-                dinningArea,
+                wifi,
+                laundry,
                 Elevator,
                 mess,
-                commonRoom,
-                sportsArea,
-                guestArea
+                livingArea,
+                
             },
             hostelImages
         });

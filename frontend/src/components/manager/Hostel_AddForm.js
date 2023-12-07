@@ -21,15 +21,12 @@ function Hostel_AddForm() {
         customersGender:'',
         NoOfFloors:'',
         NoOfRooms:'',
-        convenience_store: false,
         parking: false,
-        express_checkinCheckout: false,
-        dinningArea:false,
+        wifi: false,
+        laundry:false,
         Elevator:false,
         mess:false,
-        commonRoom:false,
-        sportsArea:false,
-        guestArea:false,
+        livingArea:false,
         hostelImages: [], // Array to store selected image files
     });
 
@@ -242,18 +239,7 @@ function Hostel_AddForm() {
         <label className="form-label">
           Facilities:
           <Row>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="convenience_store"
-                                                            checked={hostelData.convenience_store}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Convinience Store on site
-                                                    </label>
-                                                </Col>
+                                                
                                                 <Col>
                                                     <label>
                                                         <input
@@ -270,12 +256,12 @@ function Hostel_AddForm() {
                                                     <label>
                                                         <input
                                                             type="checkbox"
-                                                            name="express_checkinCheckout"
-                                                            checked={hostelData.express_checkinCheckout}
+                                                            name="wifi"
+                                                            checked={hostelData.wifi}
                                                             onChange={handleInputChange}
                                                             style={{marginRight: "8px"}}
                                                         />
-                                                        Express Checkin/ CheckOut
+                                                        Wifi
                                                     </label>
                                         
                                                 </Col>
@@ -283,12 +269,12 @@ function Hostel_AddForm() {
                                                     <label>
                                                         <input
                                                             type="checkbox"
-                                                            name="dinningArea"
-                                                            checked={hostelData.dinningArea}
+                                                            name="laundry"
+                                                            checked={hostelData.laundry}
                                                             onChange={handleInputChange}
                                                             style={{marginRight: "8px"}}
                                                         />
-                                                        Dinning Area
+                                                        Laundry
                                                     </label>
                                                 </Col>
                                                 <Col>
@@ -315,42 +301,20 @@ function Hostel_AddForm() {
                                                         Mess
                                                     </label>
                                                 </Col>
+                                                
                                                 <Col>
                                                     <label>
                                                         <input
                                                             type="checkbox"
-                                                            name="commonRoom"
-                                                            checked={hostelData.commonRoom}
+                                                            name="livingArea"
+                                                            checked={hostelData.livingAreaArea}
                                                             onChange={handleInputChange}
                                                             style={{marginRight: "8px"}}
                                                         />
-                                                        Common Room
+                                                        Living Area
                                                     </label>
                                                 </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="sportsArea"
-                                                            checked={hostelData.sportsArea}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Sports Area
-                                                    </label>
-                                                </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="guestArea"
-                                                            checked={hostelData.guestArea}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Guests Area
-                                                    </label>
-                                                </Col>
+                                               
                                             </Row>
         </label>
       </div>
