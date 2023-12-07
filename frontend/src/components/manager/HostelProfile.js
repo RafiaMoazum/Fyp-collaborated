@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import SideMenu from './SideMenu';
 
+const BackendUrl = 'http://localhost:8000';
 
 export default function HostelProfile() {
   const[userData, setUserData]=useState({ name: 'Manager' });
@@ -129,11 +130,11 @@ export default function HostelProfile() {
 
           <div className="image-row">
             <div className="image-container2">
-              {hostelData.hostelImages && hostelData.hostelImages.length > 0? (
-                hostelData.hostelImages.map((image, index) => (
-                     <img key={index} src={image} alt={`Image ${index + 1}`} />
-                ))
-               ) : (
+            {hostelData.hostelImages && hostelData.hostelImages.length > 0 ? (
+        hostelData.hostelImages.map((image, index) => (
+          <img key={index} src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} />
+        ))
+      ) : (
                  <>
                   <div className="image-container2">
                     <img src="/InHostel2.jpg" alt="Image 2" />
