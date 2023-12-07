@@ -84,7 +84,7 @@ export default function RoomStatus() {
 
     const AddRoom = async (e) => {
     e.preventDefault();
-    const { roomNumber,type,capacity,currentCapacity,price,
+    const { roomNumber,capacity,currentCapacity,price,
     ac,
     workingDesk,
     attachedBath,
@@ -103,7 +103,7 @@ export default function RoomStatus() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          roomNumber,type,capacity,currentCapacity,price,
+          roomNumber,capacity,currentCapacity,price,
           ac,
           workingDesk,
           attachedBath,
@@ -267,24 +267,10 @@ export default function RoomStatus() {
                                             />
                                         </div>
                                     </Col>
+                                   
                                     <Col>
                                         <div className="form-group">
-                                            <label htmlFor="field2"><b>Type</b></label>
-                                                <select
-                                                        className="input_box"
-                                                        type="text"
-                                                        name="type"
-                                                        value={roomData.type}
-                                                        onChange={handleInputChange}
-                                                    >
-                                                    <option value="single">VIP</option>
-                                                    <option value="double">Economy</option>
-                                                </select>
-                                        </div>
-                                    </Col>
-                                    <Col>
-                                        <div className="form-group">
-                                            <label htmlFor="field3"><b>Total Capacity:</b></label>
+                                            <label htmlFor="field3"><b>Type:</b></label>
                                             <input
                                                 className="input_box"
                                                 type="text"
@@ -294,8 +280,7 @@ export default function RoomStatus() {
                                             />
                                         </div>
                                     </Col>
-                                </Row>
-                                <Row>
+                                    
                                     <Col>
                                         <div className="form-group">
                                             <label htmlFor="field4"><b>Remaining Capacity:</b></label>
@@ -308,6 +293,9 @@ export default function RoomStatus() {
                                             />
                                         </div>
                                     </Col>
+                                </Row>
+                                <Row>
+                                   
                                     <Col>
                                         <div className="form-group">
                                             <label htmlFor="field5"><b>Price</b></label>
@@ -321,8 +309,21 @@ export default function RoomStatus() {
                                         </div>
                                     </Col>
                                     <Col>
-                                    
+                                        <div className="form-group">
+                                            <label htmlFor="field2"><b>Images</b></label>
+                                                <input
+                                                        className="input_box"
+                                                        type="file"
+                                                        name="roomImages"
+                                                        value={roomData.roomImages}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                   
+                                        </div>
                                     </Col>
+                                   <Col>
+                                   
+                                   </Col>
                                 </Row>
                                 <Row>
                                     <Col>

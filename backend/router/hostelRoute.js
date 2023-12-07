@@ -7,7 +7,7 @@ const Hostel = require("../model/hostelSchema"); // Hostel Schema
 const authenticate = require("../middleware/authenticate");
 
 const storage = multer.diskStorage({
-    destination: 'publi/userImages',
+    destination: 'public/userImages',
     filename: (req, file, cb) => {
         cb(null, file.originalname);
     }

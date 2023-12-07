@@ -45,7 +45,6 @@ router.post('/addRoom/:hostelId', authenticate, async (req, res) => {
 
         const room = new Room({
             roomNumber,
-            type,
             capacity,
             currentCapacity,
             price,
