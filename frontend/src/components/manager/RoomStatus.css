@@ -2,7 +2,6 @@
 .image-container3 {
     display: flex;
     align-items: left;
-    
   }
   
   .image-container3 img {
@@ -57,7 +56,7 @@
     margin-bottom: 20px;
     text-align: left;
   }
-  .input_box {
+  .input_box_room {
     width: 50%;
     padding: 8px;
     box-sizing: border-box;
@@ -65,8 +64,14 @@
     border-radius: 4px;
     margin-bottom: 10px;
   }
-
-  
+  .input_box_room1 {
+    width: 60%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
 
 #plus-button {
     font-size: 30px;
@@ -99,82 +104,3 @@
     background-color: #3C6B97;
     color: #ffffff;
 }
-  /*#form {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    margin: 0 auto;
-    max-width: 500px;
-    display: none;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: bold;
-}
-
-input {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-}
-
-button[type="submit"] {
-    background-color: rgba(60, 107, 151, 1);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 10%;
-    font-size: 16px;
-    margin-top: 20px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-select {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-    background-color: #fff;
-}
-
-.checkboxes label {
-    display: inline-block;
-    margin-right: 10px;
-    color: #333;
-    font-weight: bold;
-}
-
-.checkboxes input[type="checkbox"] {
-    display: inline-block;
-    margin-right: 5px;
-    cursor: pointer;
-}
-
-.images {
-    margin-top: 20px;
-}
-
-.images label {
-    display: block;
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: bold;
-}
-.images input[type="file"] {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}*/

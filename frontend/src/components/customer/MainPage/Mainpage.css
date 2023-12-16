@@ -9,7 +9,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 45%;
+    padding: 30%;
+}
+.stats-heading2{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20%;
 }
 .popular-hostel-btn{
     width: auto;

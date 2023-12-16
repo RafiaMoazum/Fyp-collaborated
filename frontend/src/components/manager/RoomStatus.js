@@ -1,10 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect} from 'react';
-import Navbar from '../customer/Navbar/Navbar'
 import './RoomStatus.css'
 import { useParams } from 'react-router-dom';
 import BlueHeader2 from './BlueHeader2';
+import Navbar from './Navbar'
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
@@ -186,18 +186,16 @@ export default function RoomStatus() {
                         <nav>
                             <ul>
                                 <li>{userData && <h2>{userData.name}</h2>}</li>
-                                <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
-                                <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                                <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Rooms</Link></li>
-                                <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                                <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Customer Information</Link></li>
-                                <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                                <li><Link to="" style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
-                                <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                                <li><Link to="" style={{textDecoration: "none", color: "white"}} >Messages</Link></li>
-                                <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                                <li><Link to="" style={{textDecoration: "none", color: "white"}} >Logout</Link></li>
-                                <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
+                                <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Rooms</Link></li>
+                                <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                                <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Customer Information</Link></li>
+                                <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                                <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
+                                <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                                <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                                <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                                <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
+                                <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                             </ul>
                         </nav>
                     </div>
@@ -257,9 +255,9 @@ export default function RoomStatus() {
                                 <Row>
                                     <Col>
                                         <div className="form-group">
-                                            <label htmlFor="field1"><b>Room Number</b></label>
+                                            <label htmlFor="field1"><b>Room Number: </b></label>
                                             <input
-                                                className="input_box"
+                                                className="input_box_room"
                                                 type="text"
                                                 name="roomNumber"
                                                 value={roomData.roomNumber}
@@ -272,7 +270,7 @@ export default function RoomStatus() {
                                         <div className="form-group">
                                             <label htmlFor="field3"><b>Type:</b></label>
                                             <input
-                                                className="input_box"
+                                                className="input_box_room"
                                                 type="text"
                                                 name="capacity"
                                                 value={roomData.capacity}
@@ -285,7 +283,7 @@ export default function RoomStatus() {
                                         <div className="form-group">
                                             <label htmlFor="field4"><b>Remaining Capacity:</b></label>
                                             <input
-                                                className="input_box"
+                                                className="input_box_room"
                                                 type="text"
                                                 name="currentCapacity"
                                                 value={roomData.currentCapacity}
@@ -298,9 +296,9 @@ export default function RoomStatus() {
                                    
                                     <Col>
                                         <div className="form-group">
-                                            <label htmlFor="field5"><b>Price</b></label>
+                                            <label htmlFor="field5"><b>Price: </b></label>
                                             <input
-                                                className="input_box"
+                                                className="input_box_room"
                                                 type="number"
                                                 name="price"
                                                 value={roomData.price}
@@ -310,9 +308,9 @@ export default function RoomStatus() {
                                     </Col>
                                     <Col>
                                         <div className="form-group">
-                                            <label htmlFor="field2"><b>Images</b></label>
+                                            <label htmlFor="field2"><b>Images: </b></label>
                                                 <input
-                                                        className="input_box"
+                                                        className="input_box_room1"
                                                         type="file"
                                                         name="roomImages"
                                                         value={roomData.roomImages}

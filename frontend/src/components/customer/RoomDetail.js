@@ -16,11 +16,11 @@ export default function RoomDetail() {
   
   
   const images = [
-    '/hostel2.jpg',
-    '/InHostel1.jpg',
-    '/InHostel2.jpg',
-    '/InHostel3.jpg',
-    '/images/242009851.jpg',
+   
+   
+   
+   
+   
   ];
 
   const { roomId: contextRoomId, setRoomId } = useRoomContext();

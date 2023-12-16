@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
 import { FaPlusCircle } from 'react-icons/fa'
+import Container from 'react-bootstrap/esm/Container';
 
 export default function HostelsPage() {
 
@@ -89,7 +90,7 @@ export default function HostelsPage() {
     <>
       <Navbar/>
       <BlueHeader2/>
-      <div>
+      <Container fluid>
         <Row>
           <Col xs={4} sm={4} md={2} lg={2}>
             <div>
@@ -97,50 +98,63 @@ export default function HostelsPage() {
               <nav>
                 <ul>
                   {userData && <h2>{userData.name}</h2>}
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Profile</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Messages</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Logout</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                 </ul>
               </nav>
               </div>
             </div>
           </Col>
           <Col xs={8} sm={8} md={10} lg={10}>
-          <section>
-            <div>
+          <Container fluid>
+            <div className='form-container1'>
               <Row>
-              <h2 className='title'>
-                    <Link to="/hostel_AddForm" style={{textDecoration: "none", color: "Black"}} >
-                    <FaPlusCircle/>  Add Hostel
-                    </Link>
-                  </h2>
-              </Row>
-            </div>
-            {hostelData.map((hostel, index) => (
-              <>      
-                <div className="container" key={index}>
-                  <div className="image-container">
-                    <img src="hostel1.png" alt="hostel" className="rounded-image" />
+                <Col></Col>
+                <Col>
+                <div className="d-flex justify-content-center ">
+                    <Row>
+                      <div className='form-container1'>
+                      <h4 className='title'>
+                        <Link to="/hostel_AddForm" style={{ textDecoration: "none", color: "Black" }}>
+                          <FaPlusCircle /> Add Hostel
+                        </Link>
+                      </h4>
+                      </div>
+                    </Row>
                   </div>
-                  <div className="content-container">
-                      <h2><NavLink to={`/HostelProfile/${hostel._id}`} key={hostel._id}className='hostelNameLink'>{hostel.name}</NavLink></h2>
-                      <p> {hostel.city}</p>
-                      <br></br>
-                    </div>
-                    <div style={{ border: "1px solid black"}}>
-                    </div>
-                </div>
-              </>
-            ))}
-          </section>
-          </Col>
-        </Row>
-      </div>
+                </Col>
+                <Col></Col>
+              </Row>
+              <Row>
+                    {hostelData.map((hostel, index) => (
+                      <Col key={index} xs={12} sm={6} md={4} lg={4}>
+                      <div className="container" key={index}>
+                        <div className="image-container">
+                          <img src="hostel1.png" alt="hostel" className="rounded-image img-fluid" /> 
+                        </div>
+                        <div className="content-container">
+                          <h2>
+                            <NavLink to={`/HostelProfile/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
+                              {hostel.name}
+                            </NavLink>
+                          </h2>
+                          <p>{hostel.city}</p>
+                        </div>
+                      </div>
+                      </Col>
+                    ))}
+                </Row>
+              </div>
+            </Container>
+            </Col>
+          </Row>
+      </Container>
     </>
   )
 }

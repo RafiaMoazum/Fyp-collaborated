@@ -109,10 +109,9 @@ const  Advertisement= () => {
                   </Col>
                 ))} */}
               </Row>
-              <p><b>{hostel.description}</b></p>
-              <p><b>{hostel.address}</b></p>
-              <p><b>{hostel.phone}</b></p>
-              <p><b>{hostel.email}</b></p>
+              <p style={{ textAlign: "left"}}>{hostel.description}</p>
+              <p style={{ textAlign: "left"}}>{hostel.address}</p>
+              <p style={{ textAlign: "left"}}>{hostel.phone}</p>
               {/* <p><b>{item.mapLink}</b></p> */}
             </Col>
           </Row>

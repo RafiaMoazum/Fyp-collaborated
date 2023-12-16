@@ -155,26 +155,23 @@ const Mainpage = () => {
                     <Col sm ={2}>
                         <div className ='style-stats'>
                             <h1 className='stats-heading'>
-                                100+
+                                10+ <br></br> Cities
                             </h1>
                         </div>
-                        <h3 style = {{paddingTop: "20px"}}><b>Cities</b></h3>
+                    </Col>
+                    <Col sm ={2}>
+                        <div className ='style-stats'>
+                            <h1 className='stats-heading2'>
+                                300+ <br></br> Happy Customers
+                            </h1>
+                        </div>
                     </Col>
                     <Col sm ={2}>
                         <div className ='style-stats'>
                             <h1 className='stats-heading'>
-                                3000+
+                                100+ <br></br> Hostels
                             </h1>
                         </div>
-                        <h4 style = {{ paddingTop: "20px"}}><b>Happy Customers</b></h4>
-                    </Col>
-                    <Col sm ={2}>
-                        <div className ='style-stats'>
-                            <h1 className='stats-heading'>
-                                1000+
-                            </h1>
-                        </div>
-                        <h3 style = {{paddingTop: "20px"}}><b>Hostels</b></h3>
                     </Col>
                     <Col sm ={3}>
                     

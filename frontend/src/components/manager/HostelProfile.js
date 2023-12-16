@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import SideMenu from './SideMenu';
+import {FaMapMarkerAlt,FaPhone, FaEnvelope, FaCircleNotch} from 'react-icons/fa';
 
 const BackendUrl = 'http://localhost:8000';
 
@@ -92,18 +93,18 @@ export default function HostelProfile() {
                 <nav>
                   <ul>
                     <li>{userData && <h2>{userData.name}</h2>}</li>
-                    <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
-                    <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                    <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Rooms</Link></li>
-                    <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                    <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Customer Information</Link></li>
-                    <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                    <li><Link to="" style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
-                    <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                    <li><Link to="" style={{textDecoration: "none", color: "white"}} >Messages</Link></li>
-                    <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                    <li><Link to="" style={{textDecoration: "none", color: "white"}} >Logout</Link></li>
-                    <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
+                    <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "black"}} >Home</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Rooms</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Customer Information</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                   </ul>
                 </nav>
                 </div>
@@ -127,58 +128,82 @@ export default function HostelProfile() {
                     </Link>
                   </button>
                 </div>
-
-          <div className="image-row">
-            <div className="image-container2">
-            {hostelData.hostelImages && hostelData.hostelImages.length > 0 ? (
-        hostelData.hostelImages.map((image, index) => (
-          <img key={index} src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} />
-        ))
-      ) : (
-                 <>
-                  <div className="image-container2">
-                    <img src="/InHostel2.jpg" alt="Image 2" />
-                    
-                  </div>
-                  <div className="image-container2">
-                    <img src="/InHostel3.jpg" alt="Image 3" />
-                    
-                  </div>
-                 </>
-              )}
-            </div>       
-          </div>
-
-                <div className="text-container">
-                  <p>{hostelData.description}</p>
-                </div>
-                <div className="text-container">
-                  <p>For:{hostelData.customersGender}</p>
-                </div>
-                <div className="text-container">
-                  <p>Total Floors:{hostelData.NoOfFloors}</p>
-                </div>
-                <div className="text-container">
-                  <p>Total Rooms:{hostelData.NoOfRooms}</p>
-                </div>
-
-                <div className="image-container3">
-                    <img src="/images/address.png" alt="Image 1" />
-                    <p>{hostelData.address}</p>
-                  </div>
-                  <div className="image-container3">
-                    <img src="/contact.png" alt="Image 2" />
-                    <p>{hostelData.phone}</p>
-                  </div>
-                  <div className="image-container3">
-                    <img src="/email.png" alt="Image 3" />
-                    <p>{hostelData.email}</p>
-                  </div>
-                  <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
-                       {hostelData.facilities && Object.keys(hostelData.facilities).length > 0 && Object.entries(hostelData.facilities).map(([facility, value]) => (
-                        value && <li key={facility}>{facility}</li>
+                <Row>
+                <Col lg = {1}></Col>
+                <Col lg = {7}>
+                <p className="text-container1">{hostelData.description}</p>
+                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
+                <Row>
+                <Col>
+                  <p className="text-container2">Gender: {hostelData.customersGender}</p>
+                  </Col>
+                  <Col>
+                  <p className="text-container2">Floors: {hostelData.NoOfFloors}</p>
+                  </Col>
+                  <Col>
+                  <p className="text-container2">Total Rooms: {hostelData.NoOfRooms}</p>
+                </Col>
+                </Row>
+                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
+                <Row>
+                <Col>
+                  <p className="text-container2"><FaMapMarkerAlt/>  {hostelData.address}</p>
+                  </Col>
+                  <Col>
+                  <p className="text-container2"><FaPhone/>  {hostelData.phone}</p>
+                  </Col>
+                  <Col>
+                  <p className="text-container2"><FaEnvelope/>  {hostelData.email}</p>
+                  </Col>
+                </Row>
+                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
+                <Row>
+                <p className="text-container1">Facilities:</p>
+                <div className="container">
+                  <div className="row">
+                    {hostelData.facilities &&
+                      Object.keys(hostelData.facilities).length > 0 &&
+                      Object.entries(hostelData.facilities).map(([facility, value]) => (
+                        value && (
+                          <div key={facility} className="col-md-4">
+                            <div><FaCircleNotch/>   {facility}</div>
+                            <br></br>
+                          </div>
+                        )
                       ))}
-                </ul>
+                  </div>
+                </div>
+                </Row>
+                </Col>
+                <Col lg = {5}>
+                </Col>
+                </Row>
+                <br></br>
+                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
+                <Row className="image-row">
+                {hostelData.hostelImages && hostelData.hostelImages.length > 0 ? (
+                  hostelData.hostelImages.map((image, index) => (
+                    <Col key={index} xs={12} sm={6} md={4} lg={3}>
+                      <div className="image-container2">
+                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid" />
+                      </div>
+                    </Col>
+                  ))
+                ) : (
+                  <>
+                    <Col xs={12} sm={6} md={4} lg={3}>
+                      <div className="image-container2">
+                        <img src="/InHostel2.jpg" alt="Image 2" className="img-fluid" />
+                      </div>
+                    </Col>
+                    <Col xs={12} sm={6} md={4} lg={3}>
+                      <div className="image-container2">
+                        <img src="/InHostel3.jpg" alt="Image 3" className="img-fluid" />
+                      </div>
+                    </Col>
+                  </>
+                )}
+              </Row>
                 </section>
             </Col>
           </Row>

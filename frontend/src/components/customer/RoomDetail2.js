@@ -12,15 +12,14 @@ import BookingForm from './BookingForm';
 import './RoomDetail.css';
 import { FaCheck } from 'react-icons/fa';
 
-export default function RoomDetail() {
+export default function RoomDetail2() {
   
   
   const images = [
-    '/hostel2.jpg',
-    '/InHostel1.jpg',
-    '/InHostel2.jpg',
-    '/InHostel3.jpg',
-    '/images/242009851.jpg',
+    '/roompic.jpg',
+        '/roompic.jpg',
+        '/roompic.jpg',
+        '/roompic.jpg',
   ];
 
   const [isDivVisible, setDivVisible] = useState(false);
@@ -102,7 +101,7 @@ export default function RoomDetail() {
                           </Link>
                         </>
                       ) : (
-                        <p>Loading room details...</p>
+                        <p>Loading room details....</p>
                       )}
                       <div>
                         {isDivVisible && (

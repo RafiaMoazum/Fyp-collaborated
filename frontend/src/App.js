@@ -23,9 +23,9 @@ import { RoomProvider } from './components/customer/RoomContext';
 import AllHostels from './components/customer/AllHostels';
 import Reviews from './components/customer/Reviews/Reviews';
 import ReviewForm from './components/customer/Reviews/ReviewForm';
-
-// import Contact_us from './components/customer/Contact_us';
-
+import ContactUs from './components/customer/Contact_us/Contact_us';
+import RoomDetail2 from './components/customer/RoomDetail2';
+ 
 function App() {
   return (
     <div className="App" >
@@ -33,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Mainpage />} />
         <Route path="/about" element={<About/>}/> 
-        {/* <Route path="/contact_us" element={<Contact_us/>} /> */}
+        <Route path="/contact_us" element={<ContactUs/>} />
         <Route path="/hostel_ad" exact element={<Hostel_ad />} /> 
         <Route path="/lahore" element={<Lahore />} /> 
         <Route path="/signupPage" exact element={<SignupPage />} />
@@ -49,6 +49,7 @@ function App() {
         <Route path='/Hostel_ad/:hostelId' element={<Hostel_ad/>} />
         <Route path='/RoomsDisplay/:hostelId' element={<RoomsDisplay/>} />
         <Route path='/RoomDetail/:roomId' element={<RoomDetail/>} />
+        <Route path='/RoomDetail2/:roomId' element={<RoomDetail2/>} />
         <Route path='/BookingPage/:roomId' element={<BookingPage/>} />
         <Route path='/allHostels' element={<AllHostels/>} />
         <Route path='/allHostels' element={<AllHostels/>} />

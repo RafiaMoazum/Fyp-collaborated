@@ -23,15 +23,14 @@ const Hostel_ad = () => {
 
 
     const images = [
-    '/hostel2.jpg',
     // '/images/242009851.jpg',
     // '/images/242009851.jpg',
     // '/images/242009851.jpg',
     // '/images/242009851.jpg',
-    '/InHostel1.jpg',
-    '/InHostel2.jpg',
-    '/InHostel3.jpg',
     '/images/242009851.jpg',
+    '/roompic.jpg',
+    '/hallway.webp',
+
   ];
 
     const [isDivVisible, setDivVisible] = useState(false);
@@ -134,12 +133,7 @@ const Hostel_ad = () => {
                         </Col>
                         <Col sm style = {{alignItems: "right",justifyContent: "right",display: "flex"}}>
                             <Row >
-                                <Col >
-                                    <p style={{border : "1px solid black", padding : "5px"}}>
-                                    <b> 3.5/5</b>
-                                    </p>
-                                </Col>
-                                <Col className="d-flex align-items-center justify-content-end" >
+                                <Col className="d-flex align-items-center " >
                                     <FaStar className='star'/>
                                     <FaStar className='star'/>
                                     <FaStar className='star'/>
@@ -203,11 +197,6 @@ const Hostel_ad = () => {
                             <p>
                             {hostelData.description}
                             </p>
-                            {/* <div style={{ border: "1px solid gray", margin: "20px 0" }}></div>
-                            <h2 style={{ padding: "15px" }}>
-                                <b>Room Amenties</b>
-                            </h2>
-                            <Features /> */}
                             <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
                             <h2 style = {{padding:"15px"}}>
                                 <b>Facilities</b> 

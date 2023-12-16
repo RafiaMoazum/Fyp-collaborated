@@ -14,8 +14,6 @@ export default function BookingPage() {
       };
       return (
         <>
-       <Navbar option1={"Home"} link1={"/"} option2={"Login"} link2={"/loginPage"}option3= {"Contact Us"} link3={"/contactUs"}/> 
-       
         <div className="outer">
         <img src="/images/SignUPimg.png" alt="img" width="1400" height="550"></img> 
         <div className="text">

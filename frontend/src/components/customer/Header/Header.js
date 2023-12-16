@@ -8,9 +8,9 @@ const header = () => {
     return (
         <div className ='headerstyle' >
             <p><b> 
-            Register as hostel manager? 
-             <Link to="/signupPage" className='Link_style'>
-                Sign Up Now!
+            Continue as a hostel manager? 
+             <Link to="/loginPage" className='Link_style'>
+                Login
               </Link>
             </b></p>
         </div>

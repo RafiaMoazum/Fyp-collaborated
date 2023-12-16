@@ -1,9 +1,4 @@
-.style_head{
-  
-  background-color: #3C6B97;
-  color:white;
-  padding: 20px;
-}
+
 h2{
     padding-top: 10px;
 }
@@ -17,9 +12,16 @@ h2{
   }
 .title{
   
-    margin-top: 100px;
+    padding: 20px;
+    text-align: center;
 }
-
+.form-container1 {
+  max-width: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
 .image-container {
     margin-left: 20px;
     margin: 30px;
@@ -60,19 +62,19 @@ h2{
   height: 100vh; /* 100% of the viewport height */
   top: 0;
   left: 0;
-  background-color: #3C6B97;
+  background-color: #ffffff;
 }
 
 nav ul {
   list-style-type: none;
   padding: 0;
-  color : white;
+  color : rgb(0, 0, 0);
 }
 
 nav li {
   padding: 15px;
   text-align: center;
-  color: white;
+  color: rgb(0, 0, 0);
   cursor: pointer;
   transition: 0.2s;
 }

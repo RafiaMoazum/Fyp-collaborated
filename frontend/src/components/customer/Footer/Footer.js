@@ -53,10 +53,10 @@ const Footer = () => {
             </Col>
             <Col xs={12} sm={2} className="mb-4 mb-sm-0">
               <p> <b>Quick Links</b></p>
-              <Link to="/About">About us</Link>
-              <p>FAQ's</p>
-              <p>Privacy Policy</p>
-              <p>Terms and Conditions</p> 
+              <Link style = {{textDecoration: "none", color: "black"}}  to="/About">About us</Link><br></br>
+              <Link style = {{textDecoration: "none", color: "black"}}  to="/About">FAQ's</Link><br></br>
+              <Link style = {{textDecoration: "none", color: "black"}}  to="/About">Privacy Policy</Link><br></br>
+              <Link style = {{textDecoration: "none", color: "black"}}  to="/About">Terms and Conditions</Link><br></br>
             </Col>
             <Col xs={12} sm={3} className="mb-4 mb-sm-0">
               <p> <b>Contact us</b></p>

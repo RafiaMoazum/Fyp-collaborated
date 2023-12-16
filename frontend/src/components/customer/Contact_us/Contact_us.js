@@ -1,10 +1,11 @@
 import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { ImageBackground } from 'react-native-web';
 import ContactForm from './ContactForm';
+import Header from '../Header/Header';
+import Navbar from "../Navbar/Navbar";
 
-const About = () => {
+const ContactUs = () => {
     const h_style =
       {
           color: "Black",
@@ -45,6 +46,8 @@ const About = () => {
 
     return(
         <>
+        <Header/>
+         <Navbar/>
             <div sclass = "image" style = {imageStyle}>
                 <Row>
                     <Col class="col-sm-6">
@@ -82,4 +85,4 @@ const About = () => {
         </>
     );
 }
-export default About;
+export default ContactUs;
