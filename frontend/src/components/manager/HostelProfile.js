@@ -9,7 +9,8 @@ import { useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import SideMenu from './SideMenu';
-import {FaMapMarkerAlt,FaPhone, FaEnvelope, FaCircleNotch} from 'react-icons/fa';
+import {FaMapMarkerAlt,FaPhone, FaEnvelope, FaCircleNotch, FaEdit} from 'react-icons/fa';
+import { Container } from 'react-bootstrap';
 
 const BackendUrl = 'http://localhost:8000';
 
@@ -84,7 +85,7 @@ export default function HostelProfile() {
     <>
       <Navbar/>
       <BlueHeader2/>
-      <div>
+      <Container fluid>
           <Row>
             <Col xs={4} sm={4} md={2} lg={2}>
               <div>
@@ -93,11 +94,7 @@ export default function HostelProfile() {
                 <nav>
                   <ul>
                     <li>{userData && <h2>{userData.name}</h2>}</li>
-                    <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "black"}} >Home</Link></li>
-                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                    <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Rooms</Link></li>
-                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                    <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Customer Information</Link></li>
+                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                     <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
@@ -118,13 +115,22 @@ export default function HostelProfile() {
                     <img src="/hostel1.png" alt="My Image" className="rounded-image" />
                   </div>
                   <div className="content-container">    
-                    <h2>{hostelData.name}</h2>
+                    <Row>
+                      <Col>
+                      <h2>{hostelData.name}</h2>
+                      </Col>
+                      <Col style={{textAlign: "left", paddingTop: "10px",fontSize:"20px"}}>
+                      <Link to = "/Hostel_AddForm" style={{color: "black"}}>
+                        <FaEdit/>
+                      </Link>
+                      </Col>
+                    </Row>
                     <p>{hostelData.city}</p>
                     <br></br>
                   </div>
                   <button type="button" className="btn">
-                    <Link to="/Hostel_AddForm" style={{textDecoration: "none", color: "white", textAlign: "center"}}>
-                      Edit Hostel Profile
+                    <Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white", textAlign: "center"}}>
+                      See Rooms
                     </Link>
                   </button>
                 </div>
@@ -207,7 +213,7 @@ export default function HostelProfile() {
                 </section>
             </Col>
           </Row>
-      </div>  
+      </Container>  
     </>
   )
 }

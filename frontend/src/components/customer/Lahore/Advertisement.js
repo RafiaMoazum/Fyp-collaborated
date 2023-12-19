@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Lahore.css';
+import {FaMapMarkerAlt,FaPhone,FaStar} from 'react-icons/fa';
 
 
 const  Advertisement= () => {
@@ -110,8 +110,8 @@ const  Advertisement= () => {
                 ))} */}
               </Row>
               <p style={{ textAlign: "left"}}>{hostel.description}</p>
-              <p style={{ textAlign: "left"}}>{hostel.address}</p>
-              <p style={{ textAlign: "left"}}>{hostel.phone}</p>
+              <p style={{ textAlign: "left"}}><FaMapMarkerAlt/>   {hostel.address}</p>
+              <p style={{ textAlign: "left"}}><FaPhone/>   {hostel.phone}</p>
               {/* <p><b>{item.mapLink}</b></p> */}
             </Col>
           </Row>

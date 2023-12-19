@@ -8,12 +8,24 @@ import Navbar from './Navbar'
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
-import FaCheck from 'react-icons/fa';
+import {FaEdit} from 'react-icons/fa';
+import { Container } from 'react-bootstrap';
+import RoomForm from './RoomForm';
 
 export default function RoomStatus() {
     const { hostelId } = useParams();
     const[userData, setUserData]=useState({ name: 'Manager' });
     const navigate = useNavigate();
+    
+    const [isModalVisible, setModalVisible] = useState(false);
+    const roomNumbers = [1, 2, 3, 4];
+    const handleRoomClick = () => {
+        setModalVisible(true);
+      };
+    
+      const closeModal = () => {
+        setModalVisible(false);
+      };
 
     //const navigate = useNavigate();
     const [roomData, setRoomData] = useState({
@@ -178,7 +190,7 @@ export default function RoomStatus() {
    <>
     <Navbar/>
     <BlueHeader2/>
-    <div>
+    <Container fluid>
         <Row>
             <Col xs={4} sm={4} md={2} lg={2}>
                 <div>
@@ -186,9 +198,7 @@ export default function RoomStatus() {
                         <nav>
                             <ul>
                                 <li>{userData && <h2>{userData.name}</h2>}</li>
-                                <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Rooms</Link></li>
-                                <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Customer Information</Link></li>
+                                <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
                                 <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                                 <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
                                 <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
@@ -202,7 +212,105 @@ export default function RoomStatus() {
               </div>
             </Col>
             <Col xs={8} sm={8} md={10} lg={10}>
-                <section className="form-container">
+                <Container>
+                    <Row>
+                    <h1 style={{textAlign: "left"}}>Rooms</h1>
+                    <br></br>
+                    {roomNumbers.map((number) => (
+                        <Col key={number}>
+                        <div className='rooms'>
+                        <h1 style={{ color: "white", paddingTop: "8px", cursor: "pointer" }} onClick={handleRoomClick}>
+                            {number}
+                        </h1>
+                        </div>
+                        </Col>
+                    ))}`
+                    </Row>
+                    {isModalVisible && (
+                        <div className="modal-overlay" onClick={closeModal}>
+                        <div className="modal-content">
+                            <div style={{backgroundColor: "#3C6B97",display: "flex", justifyContent: "flex-end"}}>
+                                <button style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}} >    
+                                    <FaEdit/>
+                                </button>
+                                <button style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}} onClick={closeModal}>x</button>
+                            </div>
+                            <div className="roomTable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Room No.</th>
+                                        <th>Room Type</th>
+                                        <th>Total Capacity</th>
+                                        <th>Current Capacity</th>
+                                        <th>Price</th>
+                                        <th>Facilities</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {displayrooms.map((room) => (
+                                        <tr key={room._id}>
+                                        <td>{room.roomNumber}</td>
+                                        <td>{room.type}</td>
+                                        <td>{room.capacity}</td>
+                                        <td>{room.currentCapacity}</td>
+                                        <td>{room.price}</td>
+                                        <td>
+                                            <ul>
+                                            {room.facilities.ac && <li>AC</li>}
+                                            {room.facilities.workingDesk && <li>Working Desk</li>}
+                                            {room.facilities.attachedBath && <li>Attached Bath</li>}
+                                            {room.facilities.roomFridge && <li>Room Fridge</li>}
+                                            {room.facilities.geyser && <li>Geyser</li>}
+                                            {room.facilities.Kitchenette && <li>Kitchenette</li>}
+                                            {room.facilities.Safe && <li>Safe</li>}
+                                            {room.facilities.Iron && <li>Iron</li>}
+                                            {room.facilities.room_Service && <li>Room Service</li>}
+                                            </ul>
+                                        </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <table>
+                            <thead>
+                                    <tr>
+                                        <th >Tenant Name</th>
+                                        <th>Phone</th>
+                                        <th>CNIC</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {displayrooms.map((room) => (
+                                        <tr key={room._id}>
+                                        <td>{room.roomNumber}</td>
+                                        <td>{room.type}</td>
+                                        <td>{room.capacity}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <table>
+                            <thead>
+                                <tr>
+                                    <th >Room Images</th>
+                                </tr>
+                            </thead>
+                                <tbody>
+                                {displayrooms.map((room) => (
+                                        <tr key={room._id}>
+                                        <td>{room.roomNumber}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                    )}
+                </Container>
+                {/*<section className="form-container">
                     <div className="roomTable">
                         <table>
                             <thead>
@@ -241,7 +349,7 @@ export default function RoomStatus() {
                             </tbody>
                         </table>
                     </div>
-                </section>
+                    </section>*/}
                 <section className="form-container">
                     <div className="container">
                         <h1 style={headingStyle}>Add a Room</h1>
@@ -250,199 +358,12 @@ export default function RoomStatus() {
                         </button>
                     </div>
                     {formVisible && (
-                        <form method="POST" id="form" onSubmit={handleSubmit}>
-                            <div>
-                                <Row>
-                                    <Col>
-                                        <div className="form-group">
-                                            <label htmlFor="field1"><b>Room Number: </b></label>
-                                            <input
-                                                className="input_box_room"
-                                                type="text"
-                                                name="roomNumber"
-                                                value={roomData.roomNumber}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-                                    </Col>
-                                   
-                                    <Col>
-                                        <div className="form-group">
-                                            <label htmlFor="field3"><b>Type:</b></label>
-                                            <input
-                                                className="input_box_room"
-                                                type="text"
-                                                name="capacity"
-                                                value={roomData.capacity}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-                                    </Col>
-                                    
-                                    <Col>
-                                        <div className="form-group">
-                                            <label htmlFor="field4"><b>Remaining Capacity:</b></label>
-                                            <input
-                                                className="input_box_room"
-                                                type="text"
-                                                name="currentCapacity"
-                                                value={roomData.currentCapacity}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                   
-                                    <Col>
-                                        <div className="form-group">
-                                            <label htmlFor="field5"><b>Price: </b></label>
-                                            <input
-                                                className="input_box_room"
-                                                type="number"
-                                                name="price"
-                                                value={roomData.price}
-                                                onChange={handleInputChange}
-                                            />
-                                        </div>
-                                    </Col>
-                                    <Col>
-                                        <div className="form-group">
-                                            <label htmlFor="field2"><b>Images: </b></label>
-                                                <input
-                                                        className="input_box_room1"
-                                                        type="file"
-                                                        name="roomImages"
-                                                        value={roomData.roomImages}
-                                                        onChange={handleInputChange}
-                                                    />
-                                                   
-                                        </div>
-                                    </Col>
-                                   <Col>
-                                   
-                                   </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                    <div className="form-group">
-                                        <label>
-                                            <b>Facilities:</b>
-                                            <div className="facilities">
-                                            <Row>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="ac"
-                                                            checked={roomData.ac}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        AC
-                                                    </label>
-                                                </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="workingDesk"
-                                                            checked={roomData.workingDesk}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Working Desk
-                                                    </label>
-                                                </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="attachedBath"
-                                                            checked={roomData.attachedBath}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Attached Bath
-                                                    </label>
-                                        
-                                                </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="roomFridge"
-                                                            checked={roomData.roomFridge}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Room Fridge
-                                                    </label>
-                                                </Col>
-                                            </Row>
-                                            <Row>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="geyser"
-                                                            checked={roomData.geyser}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Geyser
-                                                    </label>  
-                                                </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                        type="checkbox"
-                                                        name="Kitchenette"
-                                                        checked={roomData.Kitchenette}
-                                                        onChange={handleInputChange}
-                                                        style={{marginRight: "8px"}}
-                                                        />
-                                                        Kitchenette
-                                                    </label>
-                                                </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="Safe"
-                                                            checked={roomData.Safe}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        Safe
-                                                    </label>
-                                                </Col>
-                                                <Col>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            name="room_Service"
-                                                            checked={roomData.room_Service}
-                                                            onChange={handleInputChange}
-                                                            style={{marginRight: "8px"}}
-                                                        />
-                                                        room_Service
-                                                    </label>
-                                                </Col>
-                                            </Row>   
-                                        </div>
-                                        </label>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </div>
-                            <input className="btn_sub" type="submit" value="Add Room" onClick={AddRoom}/>
-                        </form>
+                        <RoomForm/>
                     )}
                 </section>
             </Col>
           </Row>
-      </div>  
+      </Container>  
     </>
   )
 }

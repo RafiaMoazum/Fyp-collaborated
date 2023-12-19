@@ -72,13 +72,23 @@ const Mainpage = () => {
                 <Col xs={10} sm={6} md={8} lg={6} xl={6}>
                     <div style = {align_style}>
                         <Row>
-                            <Col sm={9}>
-                                <div style = {align_style1}>
-                                    <p style={{ paddingTop: "7px", paddingLeft: "7px" }}>
-                                        <FaMapMarkerAlt /> Add Address
-                                    </p>
-                                </div>
-                            </Col>
+                        <Col xs={12} sm={9}>
+                        <div style={align_style1}>
+                            <div className="input-group">
+                            <div className="input-group-append">
+                                <span className="input-group-text" style = {{backgroundColor:"white" ,border : "none", marginTop: "5px"}}>
+                                <FaMapMarkerAlt />
+                                </span>
+                            </div>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Location"
+                                style={{ paddingTop: "7px", paddingLeft: "7px", border: "none" }}
+                            />
+                            </div>
+                        </div>
+                        </Col>
                             <Col sm={3} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                                 <Button size="lg" style={{ width: "100%", backgroundColor: "#3C6B97" }}>
                                     Find
@@ -94,18 +104,21 @@ const Mainpage = () => {
                 <Col xs={10} sm={6} md={8} lg={6} xl={6}>
                     <div style = {align_style}>
                         <Row>
-                            <Col sm={5}>
+                            <Col xs={12} sm={9}>
                                 <div style = {align_style1}>
-                                    <p style={{ paddingTop: "7px", paddingLeft: "7px" }}>
-                                        <FaSearch /> Search by keyword
-                                    </p>
+                                <div className="input-group">
+                                <div className="input-group-append">
+                                    <span className="input-group-text" style = {{backgroundColor:"white" ,border : "none", marginTop: "5px"}}>
+                                    <FaSearch />
+                                    </span>
                                 </div>
-                            </Col>
-                            <Col sm={4}>
-                                <div style = {align_style1}>
-                                    <p style={{ paddingTop: "7px", paddingLeft: "7px" }}>
-                                        <FaSlidersH /> Filter
-                                    </p>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Search keyword"
+                                    style={{ paddingTop: "7px", paddingLeft: "7px", border: "none" }}
+                                />
+                                </div>
                                 </div>
                             </Col>
                             <Col sm={3} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -120,7 +133,7 @@ const Mainpage = () => {
             </Row>
         </Container>
 
-            <Container fluid style={{ backgroundImage: "url(./images/arch.png)", backgroundSize: "cover", padding: "100px" }}>
+            <Container fluid className="background-container" style={{backgroundImage: "url(./images/arch.png)"}}>
                 <Row className="justify-content-center">
                     <Col xs={10} sm={8} md={6} lg={4}>
                     <div className='general'>

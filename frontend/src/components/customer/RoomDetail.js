@@ -18,7 +18,9 @@ export default function RoomDetail() {
   const images = [
    
    
-   
+    '/images/242009851.jpg',
+    '/roompic.jpg',
+    '/hallway.webp',
    
    
   ];
@@ -68,8 +70,7 @@ export default function RoomDetail() {
       <BlueHeader2/>
       <section>
         <div className="container">
-          <div>
-                <Container>
+                <Container> 
                     <Row>
                     <Col xs={0} sm={1} md={1} lg={1}>
                         
@@ -105,7 +106,6 @@ export default function RoomDetail() {
                     </Col>
                     </Row>
                 </Container>
-            </div>
             </div>
           </section>
     </>

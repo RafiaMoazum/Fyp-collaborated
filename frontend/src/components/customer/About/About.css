@@ -1,0 +1,26 @@
+h_style
+{
+    color: Black;
+    background-color: white;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+style1
+{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+style2
+{
+    font-size: 18px;
+    padding-top: 10px;
+}
+general{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

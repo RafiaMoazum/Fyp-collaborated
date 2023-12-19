@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import CardComponent from './CardComponent';
 import { useEffect } from 'react'
 import {useState} from 'react';
+import {FaMapMarkerAlt,FaPhone,FaStar} from 'react-icons/fa';
 
 const Popular = () => {
   const [hostelData, setHostelData] = useState([]);
@@ -99,7 +100,7 @@ const Popular = () => {
       <Slider {...settings}> 
         {hostelData.map((hostel, index) => (
           <div key={index}>
-            <CardComponent title={hostel.name} content={hostel.description} />
+            <CardComponent title={hostel.name} content={hostel.address}/>
           </div>
         ))}
         {cardData.map((card, index) => (

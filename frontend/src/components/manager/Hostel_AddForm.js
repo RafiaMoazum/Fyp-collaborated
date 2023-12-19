@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/esm/Container';
 
 
 function Hostel_AddForm() {
@@ -129,7 +130,7 @@ function Hostel_AddForm() {
         <>
           <Navbar/>
           <BlueHeader2/>
-          <div>
+          <Container fluid>
             <Row>
                 <Col xs={4} sm={4} md={2} lg={2}>
                     <div>
@@ -408,7 +409,7 @@ function Hostel_AddForm() {
                     </div>
                 </Col>
               </Row>
-            </div>
+            </Container>
           </>
     );
 }

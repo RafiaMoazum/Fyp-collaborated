@@ -46,7 +46,7 @@ const Footer = () => {
             <Col xs={12} sm={4} className="mb-4 mb-sm-0">
               <img
                 alt=""
-                src="./images/H-logo2.png"
+                src="/images/H-logo2.png"
                 className="img-fluid"
                 style={{ maxWidth: '100%', height: 'auto' }}
               />
