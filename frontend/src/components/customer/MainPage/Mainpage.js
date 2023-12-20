@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -11,6 +11,9 @@ import { FaMapMarkerAlt, FaSearch, FaSlidersH, FaWifi, FaSuitcase, FaParking} fr
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import "./Mainpage.css";
+import { NavLink } from 'react-router-dom';
+
+
 
 const Mainpage = () => {
     const image = 
@@ -61,6 +64,47 @@ const Mainpage = () => {
     },
   ];
     
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [hostels, setHostels] = useState(null);
+
+  const searchHostels = async () => {
+    try {
+        console.log('Search terms:', { name, address });
+        const response = await fetch(`/searchHostels?name=${name}&address=${address}`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+        });
+
+        if (response.status === 200) {
+            const data = await response.json();
+            console.log('Retrieved data:', data); 
+            setHostels(data);
+            console.log('setHostel=:', setHostels); 
+
+        } else {
+            throw new Error('Failed to fetch hostels');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
+
+useEffect(() => {
+    if (name !== '' || address !== '') {
+      searchHostels();
+    } else {
+      setHostels([]); // Set an empty array or null based on your preference
+    }
+  }, [name, address]);
+  
+
+  
     return (
         <>
         <Header/>
@@ -84,13 +128,14 @@ const Mainpage = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder="Location"
+                                value={address} onChange={(e) => setAddress(e.target.value)}
                                 style={{ paddingTop: "7px", paddingLeft: "7px", border: "none" }}
                             />
                             </div>
                         </div>
                         </Col>
                             <Col sm={3} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <Button size="lg" style={{ width: "100%", backgroundColor: "#3C6B97" }}>
+                                <Button onClick={searchHostels} size="lg" style={{ width: "100%", backgroundColor: "#3C6B97" }}>
                                     Find
                                 </Button>
                             </Col>
@@ -115,14 +160,15 @@ const Mainpage = () => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    placeholder="Search keyword"
+                                    placeholder="Search Name"
+                                    value={name} onChange={(e) => setName(e.target.value)}
                                     style={{ paddingTop: "7px", paddingLeft: "7px", border: "none" }}
                                 />
                                 </div>
                                 </div>
                             </Col>
                             <Col sm={3} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <Button size="lg" style={{ width: "100%", backgroundColor: "#3C6B97" }}>
+                                <Button onClick={searchHostels} size="lg" style={{ width: "100%", backgroundColor: "#3C6B97" }}>
                                     Find
                                 </Button>
                             </Col>
@@ -132,6 +178,39 @@ const Mainpage = () => {
                 <Col xs={1} sm={3} md={2} lg={3} xl={3}></Col>
             </Row>
         </Container>
+        <Container>
+  <div>
+    {console.log('Component is rerendering. Hostels:', hostels)}
+    {name !== '' || address !== '' ? (
+      hostels !== null ? (
+        hostels.length > 0 ? (
+          <ul>
+            {hostels.map((hostel) => (
+              <NavLink to={`/HostelDetails/${hostel._id}`} className='hostelNameLink'>
+                <div key={hostel._id} className="roomDisplay">
+                  <div>
+                    <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />
+                    <p>Hostel Name. {hostel.name}</p>
+                    <p>Address. {hostel.address}</p>
+                    <p>Contact No: {hostel.phone}</p>
+                    {/* Additional hostel details */}
+                  </div>
+                </div>
+              </NavLink>
+            ))}
+          </ul>
+        ) : (
+          <p>No hostels found</p>
+        )
+      ) : (
+        <p>Loading...</p>
+      )
+    ) : null}
+  </div>
+</Container>
+
+
+
 
             <Container fluid className="background-container" style={{backgroundImage: "url(./images/arch.png)"}}>
                 <Row className="justify-content-center">
