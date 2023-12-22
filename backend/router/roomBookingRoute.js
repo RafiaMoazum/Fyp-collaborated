@@ -7,8 +7,72 @@ require('../db/connection'); //Database Connection
 const Room=require("../model/roomsSchema");
 const User=require("../model/userSchema");
 const Booking=require("../model/bookingSchema")
+const TempBooking=require("../model/temporaryBookingSchema")
 const customerAuthentication = require("../middleware/customerAuthentication");
 
+//Apply for booking
+router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
+    const roomId = req.params.roomId;
+    console.log(`Room id= ${roomId}`);
+    const {name,email,phone,cnic,checkIn_date,checkOut_date} = req.body;
+  
+
+    //console.log(req.body);
+    try {
+        const userId = req.rootUser._id;  //req.rootUser= user's complete complete record
+        //const userId=req.userId;
+        
+        const room = await Room.findById(roomId);
+       
+        if (!room) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
+        
+        // Checking if the room is fully booked
+        if (room.currentCapacity <= 0) {
+            return res.status(422).json({ error: 'Room is fully booked' });
+        }
+
+       
+    
+        // Create a new booking
+        const tempbooking = new TempBooking({
+            name,
+            email,
+            phone,
+            cnic,
+            checkIn_date,
+            checkOut_date
+            
+        });
+
+        // Save the tempbooking document to the database
+        const savedtempBooking= await tempbooking.save();
+
+        
+        // Retrieve the booking ID
+        const bookingId = savedtempBooking._id;
+        
+        try{
+             await TempBooking.findByIdAndUpdate(bookingId, 
+                {$push : { rooms: roomId }, 
+            })
+            await TempBooking.findByIdAndUpdate(bookingId, 
+                {$push : { users: userId }, 
+            })
+        }catch(err){
+             console.log(`Error in Booking🤞 ${err}`);
+        }
+
+
+
+        res.status(201).json({ message: 'Booking Done' });
+        console.log(req.body);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'An error occurred while Booking' });
+    }
+})
 
 //Booking a room
 router.post('/bookingroom/:roomId',customerAuthentication, async(req,res) =>{

@@ -96,7 +96,7 @@ export default function HostelProfile() {
                     <li>{userData && <h2>{userData.name}</h2>}</li>
                     <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
+                    <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                     <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>

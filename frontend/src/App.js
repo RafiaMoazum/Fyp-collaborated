@@ -25,6 +25,9 @@ import Reviews from './components/customer/Reviews/Reviews';
 import ReviewForm from './components/customer/Reviews/ReviewForm';
 import ContactUs from './components/customer/Contact_us/Contact_us';
 import RoomDetail2 from './components/customer/RoomDetail2';
+import Notification from './components/manager/Notification';
+
+
  
 function App() {
   return (
@@ -43,6 +46,7 @@ function App() {
         <Route path="/hostelsPage" element={<HostelsPage />} />
         <Route path='hostelProfile/:hostelId' element={<HostelProfile/>} />
         <Route path='customerInfo/:hostelId' element={<CustomerInfo/>} />
+        <Route path='notification/:hostelId' element={<Notification/>} />
         <Route path='roomStatus/:hostelId' element={<RoomStatus/>} />
         <Route path='hostel_AddForm' element={<Hostel_AddForm/>} />
         <Route path='/hostelDetails/:hostelId' element={<HostelDetails/>} />

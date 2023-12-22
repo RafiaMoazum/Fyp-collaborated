@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-export default function CustomerInfo() {
+export default function Notification() {
   const { hostelId } = useParams();
   const [bookingDetails, setBookingDetails] = useState([]);
   const[userData, setUserData]=useState({ name: 'Manager' });
@@ -77,6 +77,15 @@ export default function CustomerInfo() {
     fetchBookingDetails();
   }, [hostelId]);
 
+  const handleAllow = (bookingId) => {
+    window.alert("Allow clicked for bookingId:', bookingId")
+    console.log('Allow clicked for bookingId:', bookingId);
+  };
+
+  const handleReject = (bookingId) => {
+    window.alert("Reject clicked for bookingId:', bookingId")
+    console.log('Reject clicked for bookingId:', bookingId);
+  };
 	
   return (
     <>
@@ -116,10 +125,9 @@ export default function CustomerInfo() {
             <th>Name</th>
             <th>CNIC Number</th>
             <th>Phone</th>
+            <th>Email</th>
             <th>Price</th>
-            <th>Total Capacity</th>
-            <th>Remaining Capacity</th>
-            <th>Check In date</th>
+           <th>Check In date</th>
             <th>Check Out date</th>
           </tr>
         </thead>
@@ -137,17 +145,34 @@ export default function CustomerInfo() {
             <td>{user.name}</td>
             <td>{user.cnic}</td>
             <td>{user.phone}</td>
+            <td>{user.email}</td>
+
           </React.Fragment>
         ))}
         {booking.rooms.map((room, roomIndex) => (
           <React.Fragment key={roomIndex}>
             <td>{room.price}</td>
-            <td>{room.capacity}</td>
-            <td>{room.currentCapacity}</td>
+           
           </React.Fragment>
         ))}
         <td>{booking.checkIn_date}</td>
         <td>{booking.checkOut_date}</td>
+        <td>
+                        <button
+                          onClick={() => handleAllow(booking.bookingId)}
+                          style={{ backgroundColor: 'green', color: 'white' }}
+                        >
+                          Allow
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleReject(booking.bookingId)}
+                          style={{ backgroundColor: 'red', color: 'white' }}
+                        >
+                          Reject
+                        </button>
+                      </td>
       </tr>
     ))}
 

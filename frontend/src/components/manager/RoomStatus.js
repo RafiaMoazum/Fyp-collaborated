@@ -213,19 +213,19 @@ export default function RoomStatus() {
             </Col>
             <Col xs={8} sm={8} md={10} lg={10}>
                 <Container>
-                    <Row>
-                    <h1 style={{textAlign: "left"}}>Rooms</h1>
-                    <br></br>
-                    {roomNumbers.map((number) => (
-                        <Col key={number}>
-                        <div className='rooms'>
-                        <h1 style={{ color: "white", paddingTop: "8px", cursor: "pointer" }} onClick={handleRoomClick}>
-                            {number}
-                        </h1>
-                        </div>
-                        </Col>
-                    ))}`
-                    </Row>
+                <Row>
+                                <h1 style={{ textAlign: "left" }}>Rooms</h1>
+                                <br></br>
+                                {displayrooms.map((room) => (
+                                    <Col key={room._id}>
+                                        <div className='rooms'>
+                                            <h1 style={{ color: "white", paddingTop: "8px", cursor: "pointer" }} onClick={handleRoomClick}>
+                                                {room.roomNumber}
+                                            </h1>
+                                        </div>
+                                    </Col>
+                                ))}
+                            </Row>
                     {isModalVisible && (
                         <div className="modal-overlay" onClick={closeModal}>
                         <div className="modal-content">
