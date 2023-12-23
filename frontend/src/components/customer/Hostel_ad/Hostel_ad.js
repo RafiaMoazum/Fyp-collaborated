@@ -148,9 +148,13 @@ const Hostel_ad = () => {
                     </Row>
                     <Row>
                         <Col sm style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', paddingBottom: '5px' }}>
-                        <Button size="lg" style={{ width: '100%', backgroundColor: '#3C6B97' }}>
+                            
+                        <NavLink to={`/BookVisitForm/${hostelId}`} >
+                        <Button  size="lg" style={{ width: '100%', backgroundColor: '#3C6B97' }}>
                             Book A Visit
                         </Button>
+                       </NavLink>
+                       
                         </Col>
                         <Col sm style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: '5px' }}>
                         <Button onClick={handleButtonClick}

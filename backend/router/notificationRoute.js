@@ -6,6 +6,9 @@ const Booking = require('../model/bookingSchema');
 const TempBooking=require('../model/temporaryBookingSchema');
 const User = require('../model/userSchema');
 const Room = require('../model/roomsSchema');
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
+const { OAuth2 } = google.auth;
 
 
 // Display pending booking details
@@ -58,76 +61,52 @@ bookingDetail.users.push(...users);
   }
 });
 
+// OAuth 2.0 credentials
+const clientId = '20839287515-dms9q3b52t26k41nsfd54edgqnijrplr.apps.googleusercontent.com';
+const clientSecret = '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';
+const redirectUri = 'https://developers.google.com/oauthplayground';
+const refresh_token = '1//04Sb7Y8IXZRgUCgYIARAAGAQSNwF-L9Ird9U3vHzGF4JkqkKZFjCcMyBIbAbFbOv1P_-76JUKcmZLkYlYQkpuedIfLPabsTCJj0w';
 
+// Gmail API scopes
+const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
 
+// Creating an OAuth2 client
+const oAuth2Client = new OAuth2(clientId, clientSecret, redirectUri);
 
-// // Display pending booking details
-// router.get('/pendingBookings/:hostelId', authenticate, async (req, res) => {
-//   try {
-//     const hostelId = req.params.hostelId;
+// Send email route
+router.post('/sendEmail', async (req, res) => {
+  const { to, subject, text, sender } = req.body;
 
-//     // Finding the hostel document by ID
-//     const hostel = await Hostel.findById(hostelId);
+  try {
+    
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: 'rafiamoazum@gmail.com',
+        clientId: clientId,
+        clientSecret: clientSecret,
+        refreshToken: refresh_token,
+        accessToken: oAuth2Client.credentials.access_token,
+      },
+    });
 
-//     if (!hostel) {
-//       return res.status(404).json({ error: 'Hostel not found' });
-//     }
+    const mailOptions = {
+      from: sender || 'rafiamoazum@gmail.com', // Set dynamic sender or use a default sender
+      to,
+      subject:'About Booking',
+      text: text || 'You Bookung is Confirmed! Congratulations', 
+    };
 
-//     // Getting the array of room IDs from the hostel document
-//     const roomIds = hostel.rooms;
+    const result = await transporter.sendMail(mailOptions);
+    console.log('Email sent:', result);
 
-//     // Finding all bookings where roomId matches any of the roomIds
-//     const pendingbookings = await TempBooking.find({ rooms: { $in: roomIds } });
-
-//     // Create an array to store booking details
-//     const bookingDetails = [];
-
-//     // Iterate through the bookings and retrieve room and user information
-//     for (const booking of pendingbookings) {
-//       const bookingDetail = {
-//         bookingId: booking._id,
-//         checkIn_date: booking.checkIn_date,
-//         checkOut_date: booking.checkOut_date,
-//         rooms: [],
-//         users: [],
-//       };
-
-//       // Retrieve room information for the booking
-//       for (const roomId of booking.rooms) {
-//         const room = await Room.findById(roomId);
-//         if (room) {
-//           bookingDetail.rooms.push({
-//             roomNumber: room.roomNumber,
-//             price: room.price,
-//             capacity: room.capacity,
-//             currentCapacity: room.currentCapacity,
-//             // Add other room properties as needed
-//           });
-//         }
-//       }
-
-//       // Retrieve user information for the booking
-//       for (const userId of booking.users) {
-//         const user = await User.findById(userId);
-//         if (user) {
-//           bookingDetail.users.push({
-//             name: user.name,
-//             cnic: user.cnic,
-//             phone: user.phone,
-//             // Add other user properties as needed
-//           });
-//         }
-//       }
-
-//       bookingDetails.push(bookingDetail);
-//     }
-
-//     res.status(200).json({ bookings: bookingDetails });
-//   } catch (error) {
-//     console.error('Error:', error);
-//     res.status(500).json({ error: 'An error occurred while fetching booking details' });
-//   }
-// });
+    res.status(200).json({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred while sending the email' });
+  }
+});
 
 module.exports = router;
 

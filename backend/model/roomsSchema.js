@@ -4,20 +4,20 @@ const roomSchema = new mongoose.Schema({
     
     roomNumber: {
         type: String,
-        required: true
+        //required: true
     },
    
     capacity: {
         type: Number,
-        required: true
+        //required: true
     },
     currentCapacity: {
         type: Number,
-        required: true
+        //required: true
     },
     price: {
         type: Number,
-        required: true
+        //required: true
     },
     
     facilities: {

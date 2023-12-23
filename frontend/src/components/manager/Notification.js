@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Notification() {
   const { hostelId } = useParams();
   const [bookingDetails, setBookingDetails] = useState([]);
-  const[userData, setUserData]=useState({ name: 'Manager' });
+  const[managerData, setManagerData]=useState({ name: 'Manager' });
   const navigate = useNavigate();
 
 
@@ -33,7 +33,7 @@ export default function Notification() {
        console.log(`name= ${data.name}`);
        //console.log(`data=: ${data}`);
 
-       setUserData(data);
+       setManagerData(data);
        
        
 
@@ -75,16 +75,45 @@ export default function Notification() {
     };
 
     fetchBookingDetails();
+    fetchManagerData();
   }, [hostelId]);
 
-  const handleAllow = (bookingId) => {
-    window.alert("Allow clicked for bookingId:', bookingId")
-    console.log('Allow clicked for bookingId:', bookingId);
+  const handleAllow = async (bookingId, userEmail) => {
+    window.alert(`Allow clicked for bookingId: ${bookingId}`);
+    console.log(`Allow clicked for bookingId: ${bookingId}`);
+    
+    try {
+      
+      const res = await fetch('/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: userEmail,
+          subject: 'Booking Approved',
+          text: 'Your booking has been approved!',
+          sender: managerData.email,
+        }),
+      });
+  
+      if (res.status === 200) {
+        window.alert('Email sent successfully');
+        console.log('Email sent successfully');
+      } else {
+        const error = await res.json();
+        console.error('Error:', error);
+        window.alert('An error occurred while sending the email');
+      }
+    } catch (err) {
+      console.error(err);
+      window.alert('An error occurred while sending the email');
+    }
   };
-
+  
   const handleReject = (bookingId) => {
-    window.alert("Reject clicked for bookingId:', bookingId")
-    console.log('Reject clicked for bookingId:', bookingId);
+    window.alert(`Reject clicked for bookingId: ${bookingId}`)
+    console.log(`Reject clicked for bookingId: ${bookingId}`);
   };
 	
   return (
@@ -98,15 +127,16 @@ export default function Notification() {
             <div className='side'>
               <nav>
                 <ul>
-                  <li>{userData && <h2>{userData.name}</h2>}</li>
+                  <li>{managerData && <h2>{managerData.name}</h2>}</li>
                   <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
                   <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Rooms</Link></li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
                   <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Customer Information</Link></li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
+                  <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
+                 
                   <li><Link to="" style={{textDecoration: "none", color: "white"}} >Messages</Link></li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
                   <li><Link to="" style={{textDecoration: "none", color: "white"}} >Logout</Link></li>
@@ -158,12 +188,11 @@ export default function Notification() {
         <td>{booking.checkIn_date}</td>
         <td>{booking.checkOut_date}</td>
         <td>
-                        <button
-                          onClick={() => handleAllow(booking.bookingId)}
-                          style={{ backgroundColor: 'green', color: 'white' }}
-                        >
-                          Allow
-                        </button>
+        <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email)}
+        style={{ backgroundColor: 'green', color: 'white' }}>
+                                                        
+         Allow
+        </button>
                       </td>
                       <td>
                         <button
@@ -184,7 +213,11 @@ export default function Notification() {
 
         </Col>
       </Row>  
-    </div>             
+    </div>     
+
+    <Link to={`/PendingVisitReq/${hostelId}`}>
+    <h1>Pending Visit Requests</h1>
+    </Link>        
     </>
   )
 }

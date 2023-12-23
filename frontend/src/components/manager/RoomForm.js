@@ -102,7 +102,7 @@ export default function RoomForm() {
                                             <input
                                                 className="input_box_room"
                                                 type="text"
-                                                name="RoomNumber"
+                                                name="roomNumber"
                                                 value={roomData.roomNumber}
                                                 onChange={handleInputChange}
                                             />
@@ -111,11 +111,11 @@ export default function RoomForm() {
                                    
                                     <Col>
                                         <div className="form-group">
-                                            <label htmlFor="field3"><b>Type:</b></label>
+                                            <label htmlFor="field3"><b>Current Capacity:</b></label>
                                             <input
                                                 className="input_box_room"
                                                 type="text"
-                                                name="Capacity"
+                                                name="capacity"
                                                 value={roomData.capacity}
                                                 onChange={handleInputChange}
                                             />

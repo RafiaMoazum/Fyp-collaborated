@@ -36,6 +36,7 @@ app.use(require('./router/bookingsInfoRoute'))
 app.use(require('./router/reviewsRoute'))
 app.use(require('./router/searchRoute'))
 app.use(require('./router/notificationRoute'))
+app.use(require('./router/visitRoute'))
 app.use('/public', express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'public')));
 

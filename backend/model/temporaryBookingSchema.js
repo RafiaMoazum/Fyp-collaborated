@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const temporaryBookingSchema = new mongoose.Schema({
-  rooms:{  type: [String]  },
+  rooms:{type: [String]},
   users:{  type: [String]  },
   name:{  type: String  },
   email: {  type: String },

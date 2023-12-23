@@ -15,7 +15,7 @@ router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
     const roomId = req.params.roomId;
     console.log(`Room id= ${roomId}`);
     const {name,email,phone,cnic,checkIn_date,checkOut_date} = req.body;
-  
+
 
     //console.log(req.body);
     try {
@@ -42,7 +42,8 @@ router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
             phone,
             cnic,
             checkIn_date,
-            checkOut_date
+            checkOut_date,
+            
             
         });
 
@@ -54,7 +55,7 @@ router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
         const bookingId = savedtempBooking._id;
         
         try{
-             await TempBooking.findByIdAndUpdate(bookingId, 
+            await TempBooking.findByIdAndUpdate(bookingId, 
                 {$push : { rooms: roomId }, 
             })
             await TempBooking.findByIdAndUpdate(bookingId, 
@@ -73,6 +74,9 @@ router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
         res.status(500).json({ error: 'An error occurred while Booking' });
     }
 })
+
+
+
 
 //Booking a room
 router.post('/bookingroom/:roomId',customerAuthentication, async(req,res) =>{
