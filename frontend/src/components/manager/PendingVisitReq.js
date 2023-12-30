@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PendingVisitReq() {
   const { hostelId } = useParams();
-  const[userData, setUserData]=useState({ name: 'Manager' });
+  const[managerData, setmanagerData]=useState({ name: 'Manager' });
   const [bookingDetails, setBookingDetails] = useState([]);
 
   const fetchManagerData = async () =>{
@@ -31,7 +31,7 @@ export default function PendingVisitReq() {
        console.log(`name= ${data.name}`);
        //console.log(`data=: ${data}`);
 
-       setUserData(data);
+       setmanagerData(data);
        
        
 
@@ -79,9 +79,38 @@ export default function PendingVisitReq() {
   }, [hostelId]);
 
 
-  const handleAllow = (bookingId) => {
-    window.alert(`Visit Booking Request sent successfully: ${bookingId}`)
-    console.log(`Visit Booking Request sent successfully: ${bookingId}`);
+  const handleAllow = async (bookingId,userEmail) => {
+    window.alert(`Allow clicked for bookingId: ${bookingId}`);
+    console.log(`Allow clicked for bookingId: ${bookingId}`);
+    console.log(`Manager's Email: ${managerData.email}`); 
+    
+    try {
+      
+      const res = await fetch('/visitEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: userEmail,
+          subject: 'Booking Approved',
+          text: `Your Visit has been approved!>💌 ${managerData.email}`,
+          
+        }),
+      });
+  
+      if (res.status === 200) {
+        window.alert('Email sent successfully');
+        console.log('Email sent successfully');
+      } else {
+        const error = await res.json();
+        console.error('Error:', error);
+        window.alert('An error occurred while sending the email');
+      }
+    } catch (err) {
+      console.error(err);
+      window.alert('An error occurred while sending the email');
+    }
   };
 	 
   const handleReject = (bookingId) => {
@@ -100,7 +129,7 @@ export default function PendingVisitReq() {
             <div className='side'>
               <nav>
                 <ul>
-                <li>{userData && <h2>{userData.name}</h2>}</li>                  <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
+                <li>{managerData && <h2>{managerData.name}</h2>}</li>                  <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
                   <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Rooms</Link></li>
                   <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
@@ -141,7 +170,7 @@ export default function PendingVisitReq() {
                     <td>{book.date}</td>
                     <td>
                       <button
-                        onClick={() => handleAllow(book._id)}
+                        onClick={() => handleAllow(book._id,book.email)}
                         style={{ backgroundColor: 'green', color: 'white' }}
                       >
                         Allow
