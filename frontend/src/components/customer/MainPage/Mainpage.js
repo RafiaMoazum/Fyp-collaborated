@@ -229,7 +229,7 @@ useEffect(() => {
                         </p>
                         <Row>
                             <Col sm={12} className="text-center">
-                            <Button size="lg" style={{ width: "150px", backgroundColor: "#3C6B97", color: "white", border: "1px solid black" }}>
+                            <Button as={Link} to="/signupPage" size="lg" style={{ width: "150px", backgroundColor: "#3C6B97", color: "white", border: "1px solid black" }}>
                                 <b>Start Now!</b>
                             </Button>
                             </Col>

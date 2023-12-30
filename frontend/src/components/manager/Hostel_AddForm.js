@@ -31,6 +31,26 @@ function Hostel_AddForm() {
         hostelImages: [], // Array to store selected image files
     });
 
+    const [coordinates, setCoordinates] = useState(null);
+    const geocodeAddress = async () => {
+    const address = hostelData.address;
+
+    try {
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=AIzaSyBCPI0UR1KaQeH1FsXrtSzjUXZtUwCxO6k`);
+      const data = await response.json();
+
+      if (response.ok && data.results.length > 0) {
+        const location = data.results[0].geometry.location;
+        setCoordinates({ latitude: location.lat, longitude: location.lng });
+        console.log(`Coordinates: ${location.lat}, ${location.lng}`);
+      } else {
+        console.error('Error fetching coordinates:', data.error_message || 'Unknown error');
+      }
+    } catch (error) {
+      console.error('Error fetching coordinates:', error);
+    }
+  };
+
     let name, value;
     const handleInputChange = (event) => {
       const { name, value, type, checked } = event.target;
@@ -98,7 +118,12 @@ function Hostel_AddForm() {
       hostelData.hostelImages.forEach((image, index) => {
           formData.append('hostelImages', image);
       });
+
+      if (coordinates) {
+        console.log('Coordinates:', coordinates);
+      }
   
+
       try {
           const response = await fetch("/addHostel", {
               method: "POST",
@@ -122,7 +147,6 @@ function Hostel_AddForm() {
           console.error('Error:', error);
       }
   };
-    
 
 
   
@@ -176,10 +200,11 @@ function Hostel_AddForm() {
                             Address:
                             <input
                               className="input_box"
-                              type="tel"
+                              type="address"
                               name="address"
                               value={hostelData.address}
-                              onChange={handleInputChange}
+                              onChange={(e) => setHostelData({ ...hostelData, address: e.target.value })}
+                              onBlur={geocodeAddress}
                             />
                           </label>
                         </div>
@@ -214,11 +239,16 @@ function Hostel_AddForm() {
                         </Col>  
                         </Row>
                         <Row>
+                          <Col>
+                            
+                          </Col>
+                        </Row>
+                        <Row>
                         <Col>
                         <div className="form-group">
                           <label className="form-label">
                             Description:<br></br>
-                            <input
+                            <textarea
                               className="input_box_desc"
                               type="text"
                               name="description"

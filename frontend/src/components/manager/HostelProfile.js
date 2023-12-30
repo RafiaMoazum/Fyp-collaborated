@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import BlueHeader2 from './BlueHeader2';
-import Navbar from '../customer/Navbar/Navbar';
+import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 import './HostelProfile.css';
 import { Link } from "react-router-dom";

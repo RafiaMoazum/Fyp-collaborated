@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Navbar from '../customer/Navbar/Navbar'
+import Navbar from './Navbar';
 import BlueHeader2 from './BlueHeader2'
 import './CustomerInfo.css'
 import { useParams } from 'react-router-dom';

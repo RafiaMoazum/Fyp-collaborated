@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Router } from 'react-router-dom';
 import SignupPage from './components/manager/SignupPage';
 import LoginPage from './components/manager/LoginPage';
 import HostelsPage from './components/manager/HostelsPage';
@@ -32,40 +32,45 @@ import PendingVisitReq from './components/manager/PendingVisitReq';
 
  
 function App() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="App" >
-      <RoomProvider>
-      <Routes>
-        <Route path="/" element={<Mainpage />} />
-        <Route path="/about" element={<About/>}/> 
-        <Route path="/contact_us" element={<ContactUs/>} />
-        <Route path="/hostel_ad" exact element={<Hostel_ad />} /> 
-        <Route path="/lahore" element={<Lahore />} /> 
-        <Route path="/signupPage" exact element={<SignupPage />} />
-        <Route path="/loginPage" element={<LoginPage />} />
-        <Route path="/userSignupPage" exact element={<UserSignupPage />} />
-        <Route path="/loginPageC" exact element={<LoginPageC />} />
-        <Route path="/hostelsPage" element={<HostelsPage />} />
-        <Route path='hostelProfile/:hostelId' element={<HostelProfile/>} />
-        <Route path='customerInfo/:hostelId' element={<CustomerInfo/>} />
-        <Route path='notification/:hostelId' element={<Notification/>} />
-        <Route path='BookVisitForm/:hostelId' element={<BookVisitForm/>} />
-        <Route path='PendingVisitReq/:hostelId' element={<PendingVisitReq/>} />
-        <Route path='roomStatus/:hostelId' element={<RoomStatus/>} />
-        <Route path='hostel_AddForm' element={<Hostel_AddForm/>} />
-        <Route path='/hostelDetails/:hostelId' element={<HostelDetails/>} />
-        <Route path='/Hostel_ad/:hostelId' element={<Hostel_ad/>} />
-        <Route path='/RoomsDisplay/:hostelId' element={<RoomsDisplay/>} />
-        <Route path='/RoomDetail/:roomId' element={<RoomDetail/>} />
-        <Route path='/RoomDetail2/:roomId' element={<RoomDetail2/>} />
-        <Route path='/BookingPage/:roomId' element={<BookingPage/>} />
-        <Route path='/allHostels' element={<AllHostels/>} />
-        <Route path='/allHostels' element={<AllHostels/>} />
-        <Route path='/reviews' element={<Reviews/>} />
-        <Route path='/reviewsForm' element={<ReviewForm/>} />
-      </Routes>
-      </RoomProvider>
-      <Footer/>
+        <RoomProvider>
+        <Routes>
+          <Route path="/" element={<Mainpage />} />
+          <Route path="/about" element={<About/>}/> 
+          <Route path="/contact_us" element={<ContactUs/>} />
+          <Route path="/hostel_ad" exact element={<Hostel_ad />} /> 
+          <Route path="/lahore" element={<Lahore />} /> 
+          <Route path="/signupPage" exact element={<SignupPage />} />
+          <Route path="/loginPage" element={<LoginPage />} />
+          <Route path="/userSignupPage" exact element={<UserSignupPage />} />
+          <Route path="/loginPageC" exact element={<LoginPageC />} />
+          <Route path="/hostelsPage" element={<HostelsPage />} />
+          <Route path='hostelProfile/:hostelId' element={<HostelProfile/>} />
+          <Route path='customerInfo/:hostelId' element={<CustomerInfo/>} />
+          <Route path='notification/:hostelId' element={<Notification/>} />
+          <Route path='BookVisitForm/:hostelId' element={<BookVisitForm/>} />
+          <Route path='PendingVisitReq/:hostelId' element={<PendingVisitReq/>} />
+          <Route path='roomStatus/:hostelId' element={<RoomStatus/>} />
+          <Route path='hostel_AddForm' element={<Hostel_AddForm/>} />
+          <Route path='/hostelDetails/:hostelId' element={<HostelDetails/>} />
+          <Route path='/Hostel_ad/:hostelId' element={<Hostel_ad/>} />
+          <Route path='/RoomsDisplay/:hostelId' element={<RoomsDisplay/>} />
+          <Route path='/RoomDetail/:roomId' element={<RoomDetail/>} />
+          <Route path='/RoomDetail2/:roomId' element={<RoomDetail2/>} />
+          <Route path='/BookingPage/:roomId' element={<BookingPage/>} />
+          <Route path='/allHostels' element={<AllHostels/>} />
+          <Route path='/allHostels' element={<AllHostels/>} />
+          <Route path='/reviews' element={<Reviews/>} />
+          <Route path='/reviewsForm' element={<ReviewForm/>} />
+        </Routes>
+        </RoomProvider>
+        <Footer/>
     </div>
   );
 }
