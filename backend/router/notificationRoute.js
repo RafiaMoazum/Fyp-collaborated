@@ -62,10 +62,10 @@ bookingDetail.users.push(...users);
 });
 
 // OAuth 2.0 credentials
-const clientId = '20839287515-dms9q3b52t26k41nsfd54edgqnijrplr.apps.googleusercontent.com';
-const clientSecret = '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';
+const clientId = '562995918458-jdo8on8efcbs9ns79lmpgrrdrk5b4evl.apps.googleusercontent.com';
+const clientSecret = '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';
 const redirectUri = 'https://developers.google.com/oauthplayground';
-const refresh_token = '1//04Sb7Y8IXZRgUCgYIARAAGAQSNwF-L9Ird9U3vHzGF4JkqkKZFjCcMyBIbAbFbOv1P_-76JUKcmZLkYlYQkpuedIfLPabsTCJj0w';
+const refresh_token = '1//041HtjeO2j26dCgYIARAAGAQSNwF-L9Irdybl6-0mL3KHyZqBnkTPMp8MXY6tBBpgO1M0SRWZeKocTYi-6utXMH9KTww4R7kiBv0';
 
 // Gmail API scopes
 const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
@@ -78,12 +78,13 @@ router.post('/sendEmail', async (req, res) => {
   const { to, subject, text, sender } = req.body;
 
   try {
-    
+    console.log('Sender received:', sender); // Add this line
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         type: 'OAuth2',
-        user: 'rafiamoazum@gmail.com',
+        user: 'explorerhostel2@gmail.com',
         clientId: clientId,
         clientSecret: clientSecret,
         refreshToken: refresh_token,
@@ -91,11 +92,12 @@ router.post('/sendEmail', async (req, res) => {
       },
     });
 
+    console.log('Sender:', sender);
     const mailOptions = {
-      from: sender || 'rafiamoazum@gmail.com', // Set dynamic sender or use a default sender
+      from: sender, // Set dynamic sender or use a default sender
       to,
       subject:'About Booking',
-      text: text || 'You Bookung is Confirmed! Congratulations', 
+      text: text || `You Bookung is Confirmed! Congratulations by ${sender} `, 
     };
 
     const result = await transporter.sendMail(mailOptions);

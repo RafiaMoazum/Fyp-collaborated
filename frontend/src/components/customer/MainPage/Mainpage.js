@@ -186,7 +186,7 @@ useEffect(() => {
         hostels.length > 0 ? (
           <ul>
             {hostels.map((hostel) => (
-              <NavLink to={`/HostelDetails/${hostel._id}`} className='hostelNameLink'>
+              <NavLink to={`/Hostel_ad/${hostel._id}`} className='hostelNameLink'>
                 <div key={hostel._id} className="roomDisplay">
                   <div>
                     <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />

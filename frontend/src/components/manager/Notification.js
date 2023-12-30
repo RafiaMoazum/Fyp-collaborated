@@ -16,39 +16,41 @@ export default function Notification() {
   const navigate = useNavigate();
 
 
-  const fetchManagerData = async () =>{
-      
-    try{
-      const res = await fetch('/managerData',{
-         
-        method:"GET",
-        headers:{
-           Accept:"application/json",
-           "Content-Type":"application/json"
+  const fetchManagerData = async () => {
+    try {
+      const res = await fetch('/managerData', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
-        credentials:"include"
+        credentials: 'include',
       });
-      
-       const data= await res.json();
-       console.log(`name= ${data.name}`);
-       //console.log(`data=: ${data}`);
-
-       setManagerData(data);
-       
-       
-
-        if(res.status !== 200)
-        {
-          const error= new Error(res.error);
-          throw error;
+  
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(`Manager data: ${JSON.stringify(data)}`);
+        
+        // Ensuring that managerData has the correct structure
+        setManagerData({
+          name: data.name,
+          email: data.email, 
+        });
+  
+        if (!data.email) {
+          console.error('Manager email not available');
+          
         }
-
-    }catch(err){
+      } else {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
       console.log(err);
       navigate("/loginPage");
     }
-}
-
+  };
+  
   useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
@@ -81,6 +83,7 @@ export default function Notification() {
   const handleAllow = async (bookingId, userEmail) => {
     window.alert(`Allow clicked for bookingId: ${bookingId}`);
     console.log(`Allow clicked for bookingId: ${bookingId}`);
+    console.log(`Manager's Email: ${managerData.email}`); 
     
     try {
       
@@ -92,7 +95,7 @@ export default function Notification() {
         body: JSON.stringify({
           to: userEmail,
           subject: 'Booking Approved',
-          text: 'Your booking has been approved!',
+          text: `Your booking has been approved!>💌 ${managerData.email}`,
           sender: managerData.email,
         }),
       });
