@@ -86,12 +86,13 @@ export default function PendingVisitReq() {
     
     try {
       
-      const res = await fetch('/visitEmail', {
+      const res = await fetch('/confirmVisit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          sender: managerData.email,
           to: userEmail,
           subject: 'Booking Approved',
           text: `Your Visit has been approved!>💌 ${managerData.email}`,
@@ -113,9 +114,37 @@ export default function PendingVisitReq() {
     }
   };
 	 
-  const handleReject = (bookingId) => {
+  const handleReject = async (bookingId,userEmail) => {
     window.alert(`Reject clicked for bookingId: ${bookingId}`)
     console.log(`Reject clicked for bookingId: ${bookingId}`);
+    try {
+      
+      const res = await fetch('/rejectVisit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sender: managerData.email,
+          to: userEmail,
+          subject: 'Sorry!',
+          text: `Your request for visit hasn't been approved. Please try again another day!>💌 ${managerData.email}`,
+          
+        }),
+      });
+  
+      if (res.status === 200) {
+        window.alert('Email sent successfully');
+        console.log('Email sent successfully');
+      } else {
+        const error = await res.json();
+        console.error('Error:', error);
+        window.alert('An error occurred while sending the email');
+      }
+    } catch (err) {
+      console.error(err);
+      window.alert('An error occurred while sending the email');
+    }
   };
 	
   return (
@@ -173,12 +202,12 @@ export default function PendingVisitReq() {
                         onClick={() => handleAllow(book._id,book.email)}
                         style={{ backgroundColor: 'green', color: 'white' }}
                       >
-                        Allow
+                        Confirm
                       </button>
                     </td>
                     <td>
                       <button
-                        onClick={() => handleReject(book._id)}
+                        onClick={() => handleReject(book._id,book.email)}
                         style={{ backgroundColor: 'red', color: 'white' }}
                       >
                         Reject

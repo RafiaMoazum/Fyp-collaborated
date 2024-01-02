@@ -83,11 +83,12 @@ const Hostel_ad = () => {
         },
         credentials: 'include',
       });
-  
+
       if (res.status === 200) {
         const data = await res.json();
         console.log(`hostelsProfile✌: ${data}`);
         setHostelData(data);
+
        
       }else {
         const error = new Error(res.error);
@@ -215,7 +216,9 @@ const Hostel_ad = () => {
                             </Row>
                         </Col>
                         <Col xs={12} md={4} style={{ marginTop: "20px" }}>
-                            <Map_component />
+
+                        <Map_component hostelCoordinates={hostelData.coordinates} />
+
                         </Col>
                     </Row>
                     <br></br><br></br>

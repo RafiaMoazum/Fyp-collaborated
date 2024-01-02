@@ -75,8 +75,8 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
 // Creating an OAuth2 client
 const oAuth2Client = new OAuth2(clientId, clientSecret, redirectUri);
 
-// Send email route
-router.post('/visitEmail', async (req, res) => {
+// Send email route -> Confirm Visit
+router.post('/confirmVisit', async (req, res) => {
   const { to, subject, text, sender } = req.body;
 
   try {
@@ -112,4 +112,42 @@ router.post('/visitEmail', async (req, res) => {
   }
 });
 
+
+
+// Send email route -> Confirm Visit
+router.post('/rejectVisit', async (req, res) => {
+    const { to, subject, text, sender } = req.body;
+  
+    try {
+      console.log('Sender received:', sender); // Add this line
+  
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          type: 'OAuth2',
+          user: 'explorerhostel2@gmail.com',
+          clientId: clientId,
+          clientSecret: clientSecret,
+          refreshToken: refresh_token,
+          accessToken: oAuth2Client.credentials.access_token,
+        },
+      });
+  
+      console.log('Sender:', sender);
+      const mailOptions = {
+        from: sender || 'explorerhostel2@gmail.com', // Set dynamic sender or use a default sender
+        to,
+        subject:'About Visit',
+        text: text || `You Request for booking is not approved by ${sender} `, 
+      };
+  
+      const result = await transporter.sendMail(mailOptions);
+      console.log('Email sent:', result);
+  
+      res.status(200).json({ message: 'Email sent successfully' });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'An error occurred while sending the email' });
+    }
+  });
 module.exports= router;

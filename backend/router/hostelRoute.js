@@ -18,7 +18,7 @@ const upload = multer({
 });
 
 // Add Hostel Route
-// Create Hostel
+// Server-side code
 router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req, res) => {
 
     const { name, address, city, phone, email, description, customersGender, NoOfFloors, NoOfRooms,
@@ -27,16 +27,22 @@ router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req
         laundry,
         Elevator,
         mess,
-        livingArea} = req.body;
+        livingArea } = req.body;
 
     try {
+        const coordinatesString = req.body.coordinates;
+        const [latitude, longitude] = coordinatesString.split(',').map(coord => parseFloat(coord.trim()));
+
+        console.log("Latitude=", latitude);
+        console.log("Longitude=", longitude);
+
         const hostelImages = req.files.map(file => file.path);
 
         const managerId = req.userID; // Get the managerId from req.rootUser
 
         // Create a new hostel document based on Hostel schema
         const hostel = new Hostel({
-            name,address,city,phone,email,description,customersGender,NoOfFloors,NoOfRooms,
+            name, address, city, phone, email, description, customersGender, NoOfFloors, NoOfRooms,
             facilities: {
                 parking,
                 wifi,
@@ -44,8 +50,8 @@ router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req
                 Elevator,
                 mess,
                 livingArea,
-                
             },
+            coordinates: `${latitude}, ${longitude}`, // Storing coordinates as a string
             hostelImages
         });
 
@@ -67,8 +73,6 @@ router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req
         res.status(500).json({ error: 'An error occurred while adding the hostel' });
     }
 });
-
-
 
 // Route to retrieve all hostels
 router.get('/getAllHostels', async (req, res) => {

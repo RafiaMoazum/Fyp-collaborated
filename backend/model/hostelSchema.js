@@ -47,6 +47,10 @@ const hostelSchema = new mongoose.Schema({
         livingArea:{ type: Boolean, default: false },
         
     },
+    coordinates: {
+        type: String,
+        default: null,
+    },
     rooms:{
         type: [String]
     },

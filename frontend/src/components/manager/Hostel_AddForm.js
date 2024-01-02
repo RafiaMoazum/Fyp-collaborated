@@ -41,7 +41,7 @@ function Hostel_AddForm() {
 
       if (response.ok && data.results.length > 0) {
         const location = data.results[0].geometry.location;
-        setCoordinates({ latitude: location.lat, longitude: location.lng });
+        setCoordinates(`${location.lat}, ${location.lng}`);
         console.log(`Coordinates: ${location.lat}, ${location.lng}`);
       } else {
         console.error('Error fetching coordinates:', data.error_message || 'Unknown error');
@@ -119,10 +119,8 @@ function Hostel_AddForm() {
           formData.append('hostelImages', image);
       });
 
-      if (coordinates) {
-        console.log('Coordinates:', coordinates);
-      }
-  
+      formData.append('coordinates', coordinates);
+
 
       try {
           const response = await fetch("/addHostel", {

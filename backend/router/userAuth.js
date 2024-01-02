@@ -44,7 +44,7 @@ router.post('/userSignup',async (req,res) => {
 
         const user= new User({name,email,phone,cnic,city,password,confirmPassword}) //Behind the scene= name:name  => name variable/db fiels = name user entered
         
-        //Password Hashing, middleware is defined in managerSchema.js
+        //Password Hashing, middleware is defined in userSchema.js
 
         await user.save();
 

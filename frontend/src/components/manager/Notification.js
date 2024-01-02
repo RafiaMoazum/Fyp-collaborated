@@ -80,22 +80,63 @@ export default function Notification() {
     fetchManagerData();
   }, [hostelId]);
 
+
+  const [confirmationStatus, setConfirmationStatus] = useState({});
+
   const handleAllow = async (bookingId, userEmail) => {
-    window.alert(`Allow clicked for bookingId: ${bookingId}`);
-    console.log(`Allow clicked for bookingId: ${bookingId}`);
+    window.alert(`Accept clicked for bookingId: ${bookingId}`);
+    console.log(`Accept clicked for bookingId: ${bookingId}`);
     console.log(`Manager's Email: ${managerData.email}`); 
     
     try {
       
-      const res = await fetch('/sendEmail', {
+      const res = await fetch('/acceptEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           to: userEmail,
-          subject: 'Booking Approved',
+          subject: 'Booking Accepted',
           text: `Your booking has been approved!>💌 ${managerData.email}`,
+          sender: managerData.email,
+        }),
+      });
+  
+      if (res.status === 200) {
+        window.alert('Email sent successfully');
+        console.log('Email sent successfully');
+        setConfirmationStatus((prevStatus) => ({
+          ...prevStatus,
+          [bookingId]: true,
+        }));
+      } else {
+        const error = await res.json();
+        console.error('Error:', error);
+        window.alert('An error occurred while sending the email');
+      }
+    } catch (err) {
+      console.error(err);
+      window.alert('An error occurred while sending the email');
+    }
+  };
+  
+  const handleReject =  async (bookingId, userEmail)=> {
+    window.alert(`Reject clicked for bookingId: ${bookingId}`)
+    console.log(`Reject clicked for bookingId: ${bookingId}`);
+    console.log(`Manager's Email: ${managerData.email}`); 
+    
+    try {
+      
+      const res = await fetch('/rejectEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: userEmail,
+          subject: 'Booking Not Accepted',
+          text: `Your booking has not been accepted! Try again later>💌 ${managerData.email}`,
           sender: managerData.email,
         }),
       });
@@ -113,10 +154,11 @@ export default function Notification() {
       window.alert('An error occurred while sending the email');
     }
   };
-  
-  const handleReject = (bookingId) => {
-    window.alert(`Reject clicked for bookingId: ${bookingId}`)
-    console.log(`Reject clicked for bookingId: ${bookingId}`);
+
+  const handleConfirm = (bookingId) => {
+    window.alert(`Confirm clicked for bookingId: ${bookingId}`);
+    console.log(`Confirm clicked for bookingId: ${bookingId}`);
+    
   };
 	
   return (
@@ -191,15 +233,30 @@ export default function Notification() {
         <td>{booking.checkIn_date}</td>
         <td>{booking.checkOut_date}</td>
         <td>
+        {confirmationStatus[booking.bookingId] ? (
+          <button onClick={() => handleConfirm(booking.bookingId)}
+          style={{ backgroundColor: 'green', color: 'white' }}>
+            Confirmed
+          </button>
+        ) : (
+          <button
+            onClick={() => handleAllow(booking.bookingId, booking.users[0].email)}
+            style={{ backgroundColor: 'green', color: 'white' }}
+          >
+            Accept
+          </button>
+        )}
+      </td>
+      {/* <td>
         <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email)}
         style={{ backgroundColor: 'green', color: 'white' }}>
                                                         
-         Allow
+         Accept
         </button>
-                      </td>
+      </td> */}
                       <td>
                         <button
-                          onClick={() => handleReject(booking.bookingId)}
+                          onClick={() => handleReject(booking.bookingId, booking.users[0].email)}
                           style={{ backgroundColor: 'red', color: 'white' }}
                         >
                           Reject
