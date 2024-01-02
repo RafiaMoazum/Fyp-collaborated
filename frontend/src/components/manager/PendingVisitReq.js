@@ -1,13 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Navbar from '../customer/Navbar/Navbar'
-import BlueHeader2 from './BlueHeader2'
 import './CustomerInfo.css'
 import { useParams } from 'react-router-dom';
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 export default function PendingVisitReq() {
   const { hostelId } = useParams();
@@ -149,78 +143,41 @@ export default function PendingVisitReq() {
 	
   return (
     <>
-    <Navbar/>
-    <BlueHeader2/>
-    <div>
-      <Row>
-      <Col xs={4} sm={4} md={2} lg={2}>
-          <div>
-            <div className='side'>
-              <nav>
-                <ul>
-                <li>{managerData && <h2>{managerData.name}</h2>}</li>                  <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Rooms</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Customer Information</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                 
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Messages</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Logout</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                </ul>
-              </nav>
+      <div className="booking-list-container">
+        {bookingDetails.map((book) => (
+        <div className="booking-item" key={book._id}>
+          <div className="booking-details">
+            <div>
+              <p><b>Name:</b> {book.name}</p>
+            </div>
+            <div>
+              <p><b>CNIC:</b> {book.cnic}</p>
+            </div>
+            <div>
+              <p><b>Phone:</b> {book.phone}</p>
+            </div>
+            <div>
+              <p><b>Email:</b> {book.email}</p>
+            </div>
+            <div>
+              <p><b>Date:</b> {book.date}</p>
             </div>
           </div>
-        </Col>
-       
-        <Col xs={8} sm={8} md={10} lg={10}>
-          <section className="form-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>CNIC Number</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bookingDetails.map((book) => (
-                  <tr key={book._id}>
-                    <td>{book.name}</td>
-                    <td>{book.cnic}</td>
-                    <td>{book.phone}</td>
-                    <td>{book.email}</td>
-                    <td>{book.date}</td>
-                    <td>
-                      <button
-                        onClick={() => handleAllow(book._id,book.email)}
-                        style={{ backgroundColor: 'green', color: 'white' }}
-                      >
-                        Confirm
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => handleReject(book._id,book.email)}
-                        style={{ backgroundColor: 'red', color: 'white' }}
-                      >
-                        Reject
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        </Col>
-      </Row>
+          <div>
+          <button
+            onClick={() => handleAllow(book._id, book.email)}
+            className='confirmed'>
+            Confirm
+          </button>
+          <button
+            onClick={() => handleReject(book._id, book.email)}
+            className='rejected'>
+            Reject
+          </button>
+          </div>
+      </div>
+      ))}
     </div>
-    </>
+  </>
   )
 }

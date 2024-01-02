@@ -8,6 +8,9 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import "./Notification.css"
+import PendingVisitReq from './PendingVisitReq';
 
 export default function Notification() {
   const { hostelId } = useParams();
@@ -165,119 +168,122 @@ export default function Notification() {
     <>
     <Navbar/>
     <BlueHeader2/>
-    <div>
+    <Container fluid>
       <Row>
         <Col xs={4} sm={4} md={2} lg={2}>
-          <div>
-            <div className='side'>
+          <div className='side'>
               <nav>
                 <ul>
                   <li>{managerData && <h2>{managerData.name}</h2>}</li>
-                  <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Rooms</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Customer Information</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                 
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Messages</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Logout</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                </ul>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
+                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                    </ul>
               </nav>
             </div>
-          </div>
         </Col>
         <Col xs={8} sm={8} md={10} lg={10}>
-        <section className="form-container">
-        <table>
-        <thead>
-          <tr>
-              <th>Room</th>
-            <th>Name</th>
-            <th>CNIC Number</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Price</th>
-           <th>Check In date</th>
-            <th>Check Out date</th>
-          </tr>
-        </thead>
-        <tbody>
-    {bookingDetails.map((booking, index) => (
-      <tr key={index}>
-        {booking.rooms.map((room, roomIndex) => (
-          <React.Fragment key={roomIndex}>
-            <td>{room.roomNumber}</td>
-            
-          </React.Fragment>
-        ))}
-        {booking.users.map((user, userIndex) => (
-          <React.Fragment key={userIndex}>
-            <td>{user.name}</td>
-            <td>{user.cnic}</td>
-            <td>{user.phone}</td>
-            <td>{user.email}</td>
-
-          </React.Fragment>
-        ))}
-        {booking.rooms.map((room, roomIndex) => (
-          <React.Fragment key={roomIndex}>
-            <td>{room.price}</td>
-           
-          </React.Fragment>
-        ))}
-        <td>{booking.checkIn_date}</td>
-        <td>{booking.checkOut_date}</td>
-        <td>
-        {confirmationStatus[booking.bookingId] ? (
-          <button onClick={() => handleConfirm(booking.bookingId)}
-          style={{ backgroundColor: 'green', color: 'white' }}>
-            Confirmed
-          </button>
-        ) : (
-          <button
-            onClick={() => handleAllow(booking.bookingId, booking.users[0].email)}
-            style={{ backgroundColor: 'green', color: 'white' }}
-          >
-            Accept
-          </button>
-        )}
-      </td>
-      {/* <td>
-        <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email)}
-        style={{ backgroundColor: 'green', color: 'white' }}>
-                                                        
-         Accept
-        </button>
-      </td> */}
-                      <td>
-                        <button
-                          onClick={() => handleReject(booking.bookingId, booking.users[0].email)}
-                          style={{ backgroundColor: 'red', color: 'white' }}
-                        >
-                          Reject
-                        </button>
-                      </td>
-      </tr>
-    ))}
-
-          
-        </tbody>
-      </table>
-
-        </section>
-
+          <Container fluid className="form-container">
+          <Row>
+            <Col>
+            <h5 className='head5'>
+              New Booking Request:
+            </h5>
+            </Col>
+          </Row>
+          <br></br>
+          <Row>
+            <Col>
+            <div className="booking-list-container">
+              {bookingDetails.map((booking, index) => (
+                <div className="booking-item" key={index}>
+                  <div className="booking-details">
+                    {booking.rooms.map((room, roomIndex) => (
+                      <div key={roomIndex}>
+                        <p> <b>Room No:</b> {room.roomNumber}</p>
+                      </div>
+                    ))}
+                    {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p><b>Name:</b> {user.name} </p>
+                        </div>
+                      </div>
+                    ))}
+                    {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p><b>CNIC:</b> {user.cnic}</p>
+                        </div>
+                      </div>
+                    ))}
+                      {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p> <b>Phone:</b> {user.phone}</p>
+                        </div>
+                      </div>
+                    ))}
+                      {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p><b>Email:</b> {user.email}</p>
+                        </div>
+                      </div>
+                    ))}
+                    {booking.rooms.map((room, roomIndex) => (
+                      <div key={roomIndex}>
+                        <p><b>Rent:</b>  {room.price} </p>
+                      </div>
+                    ))}
+                    <div>
+                      <p><b>Check-in:</b> {booking.checkIn_date}</p>
+                    </div>
+                    <div>
+                      <p><b>Check-out:</b> {booking.checkOut_date} </p>
+                    </div>
+                  </div>
+                  <div >
+                    {confirmationStatus[booking.bookingId] ? (
+                      <button onClick={() => handleConfirm(booking.bookingId)} className="confirmed">
+                        Confirmed
+                      </button>
+                    ) : (
+                      <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email)} className="accepted">
+                        Accept
+                      </button>
+                    )}
+                    <button onClick={() => handleReject(booking.bookingId, booking.users[0].email)} className="rejected">
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            </Col>
+          </Row>
+          <br></br>
+          <br></br>
+          <Row>
+            <Col>
+              <h5 className='head5'>Pending Visit Requests</h5>
+            </Col>
+          </Row>
+          <br></br>
+          <Row>
+            <Col>
+              <PendingVisitReq/>
+            </Col>
+          </Row>
+          </Container>
         </Col>
       </Row>  
-    </div>     
-
-    <Link to={`/PendingVisitReq/${hostelId}`}>
-    <h1>Pending Visit Requests</h1>
-    </Link>        
-    </>
+    </Container>             
+  </>
   )
 }
