@@ -1,47 +1,59 @@
 import React, { useEffect } from "react";
 
-export default function SimpleMap() {
+export default function SimpleMap({ hostelCoordinates }) {
   useEffect(() => {
-    // Check if the Google Maps API is available
+    console.log("Hostel Coordinates:", hostelCoordinates);
+
+    // Checking if the Google Maps API is available
     if (window.google) {
-      // Get the user's location using the Geolocation API
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            console.log(position.coords)
-            const userLocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
+      console.log("Google Maps API is available");
 
-            // Create a new map centered at the user's location
-            const map = new window.google.maps.Map(document.getElementById("map"), {
-              center: userLocation,
+      // Checking if hostelCoordinates is a non-empty string
+      if (hostelCoordinates && typeof hostelCoordinates === "string") {
+        console.log("hostelCoordinates is a valid string");
+
+        // Splitting the string into latitude and longitude
+        const [latitude, longitude] = hostelCoordinates.split(", ");
+
+        // Log latitude and longitude for debugging
+        console.log("Latitude:", latitude);
+        console.log("Longitude:", longitude);
+
+        // Checking if latitude and longitude are valid
+        if (latitude !== undefined && longitude !== undefined) {
+          console.log("Valid latitude and longitude");
+
+          const hostelLocation = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+
+          // Creating a new map centered at the hostel's location
+          const map = new window.google.maps.Map(
+            document.getElementById("map"),
+            {
+              center: hostelLocation,
               zoom: 15, // Adjust the zoom level as needed
-            });
+            }
+          );
 
-            // Add a marker at the user's location
-            new window.google.maps.Marker({
-              position: userLocation,
-              map: map,
-              title: "Your Location",
-              icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                scaledSize: new window.google.maps.Size(24, 24),
-              },
-            });
-          },
-          (error) => {
-            console.error("Error getting user's location:", error);
-          }
-        );
+          // Adding a marker at the hostel's location
+          new window.google.maps.Marker({
+            position: hostelLocation,
+            map: map,
+            title: "Hostel Location",
+            icon: {
+              url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Change marker color if needed
+              scaledSize: new window.google.maps.Size(24, 24),
+            },
+          });
+        } else {
+          console.error("Invalid latitude or longitude provided");
+        }
       } else {
-        console.error("Geolocation is not supported by this browser");
+        console.error("Invalid hostelCoordinates string provided");
       }
     } else {
       console.error("Google Maps API is not available");
     }
-  }, []); // Run once on component mount
+  }, [hostelCoordinates]);
 
   return (
     <div

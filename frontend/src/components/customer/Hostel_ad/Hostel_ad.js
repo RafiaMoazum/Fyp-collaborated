@@ -102,7 +102,7 @@ const Hostel_ad = () => {
   useEffect(() =>{
     HostelDetails();
 },[]);
- 
+console.log('Hostel Coordinates in Hostel_ad:', hostelData.coordinates);
     
     return (
     <>
