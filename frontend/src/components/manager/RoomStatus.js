@@ -8,20 +8,23 @@ import Navbar from './Navbar'
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
-import {FaEdit} from 'react-icons/fa';
+import {FaEdit,FaTrash} from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
 import RoomForm from './RoomForm';
 
 export default function RoomStatus() {
     const { hostelId } = useParams();
+    const { roomId } = useParams();
     const[userData, setUserData]=useState({ name: 'Manager' });
     const navigate = useNavigate();
-    
+    const [selectedRoomId, setSelectedRoomId] = useState(null);
+    const [confirmationText, setConfirmationText] = useState('');
+const [showConfirmation, setShowConfirmation] = useState(false);
+const [confirmationVisible, setConfirmationVisible] = useState(false);
+
     const [isModalVisible, setModalVisible] = useState(false);
     const roomNumbers = [1, 2, 3, 4];
-    const handleRoomClick = () => {
-        setModalVisible(true);
-      };
+   
     
       const closeModal = () => {
         setModalVisible(false);
@@ -81,18 +84,7 @@ export default function RoomStatus() {
 
     const [displayrooms, setDisplayRooms] = useState([]);
 
-     
-    const handleInputChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        const newValue = type === 'checkbox' ? checked : value;
-        setRoomData({ ...roomData, [name]: newValue });
-    }
-
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      // Handle form submission
-    }
+  
 
     const AddRoom = async (e) => {
     e.preventDefault();
@@ -176,6 +168,47 @@ export default function RoomStatus() {
     DisplayRoomData();
 },[AddRoom]);
 
+
+const handleRoomClick = (roomId) => {
+    setModalVisible(true);
+    setSelectedRoomId(roomId);
+};
+
+
+const handleUpdateButton = () => {
+    if (selectedRoomId) {
+        navigate(`/UpdateRoom/${selectedRoomId}`);
+    }
+};
+const handleDelete = async () => {
+    if (confirmationText.toLowerCase() !== 'i want to delete this room') {
+    window.alert('Please enter the correct confirmation statement.');
+    return;
+  }
+
+
+    try {
+        const response = await fetch(`/deleteRoom/${selectedRoomId}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            window.alert('Room deleted successfully');
+            // You might want to update the room list after deletion
+            DisplayRoomData();
+        } else {
+            const errorData = await response.json();
+            window.alert(`Error deleting room: ${errorData.error}`);
+        }
+    } catch (error) {
+        console.error('Error deleting room:', error);
+    }
+};
+
+const showConfirmationPopup = () => {
+    setConfirmationVisible(true);
+  };
   
     const [formVisible, setFormVisible] = useState(false);
 
@@ -217,22 +250,52 @@ export default function RoomStatus() {
                                 <h1 style={{ textAlign: "left" }}>Rooms</h1>
                                 <br></br>
                                 {displayrooms.map((room) => (
-                                    <Col key={room._id}>
-                                        <div className='rooms'>
-                                            <h1 style={{ color: "white", paddingTop: "8px", cursor: "pointer" }} onClick={handleRoomClick}>
-                                                {room.roomNumber}
-                                            </h1>
-                                        </div>
-                                    </Col>
-                                ))}
-                            </Row>
+    <Col key={room._id}>
+        <div className='rooms'>
+            <h1 style={{ color: "white", paddingTop: "8px", cursor: "pointer" }} onClick={() => handleRoomClick(room._id)}>
+                {room.roomNumber}
+            </h1>
+        </div>
+    </Col>
+))}
+
+        </Row>
                     {isModalVisible && (
                         <div className="modal-overlay" onClick={closeModal}>
                         <div className="modal-content">
                             <div style={{backgroundColor: "#3C6B97",display: "flex", justifyContent: "flex-end"}}>
-                                <button style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}} >    
-                                    <FaEdit/>
-                                </button>
+                            
+          <button
+                className="btn_sub"
+                onClick={showConfirmationPopup}
+                style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}}
+            >
+                <FaTrash />
+            </button>
+
+            {confirmationVisible && (
+  <div className="confirmation-popup">
+    <p>Please enter the following statement to confirm:</p>
+    <p>I want to delete this Room</p>
+    <input
+      type="text"
+      value={confirmationText}
+      onChange={(e) => setConfirmationText(e.target.value)}
+    />
+    <button onClick={handleDelete}>Confirm</button>
+    <button onClick={() => setConfirmationVisible(false)}>Cancel</button>
+  </div>
+)}
+                       
+          
+                               <button
+                           style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}}
+                           onClick={handleUpdateButton}
+                           >
+                          <FaEdit />
+                        </button>
+
+                                
                                 <button style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}} onClick={closeModal}>x</button>
                             </div>
                             <div className="roomTable">
@@ -309,6 +372,7 @@ export default function RoomStatus() {
                     </div>
                     </div>
                     )}
+            
                 </Container>
                 {/*<section className="form-container">
                     <div className="roomTable">
@@ -363,6 +427,7 @@ export default function RoomStatus() {
                 </section>
             </Col>
           </Row>
+          
       </Container>  
     </>
   )

@@ -48,7 +48,7 @@ const hostelSchema = new mongoose.Schema({
         
     },
     coordinates: {
-        type: String,
+        type: [String, Array],
         default: null,
     },
     rooms:{

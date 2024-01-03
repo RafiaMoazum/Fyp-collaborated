@@ -79,6 +79,23 @@ router.post('/addRoom/:hostelId', authenticate, async (req, res) => {
     console.log(req.body)
 });
 
+// Get room by ID
+router.get('/getRoom/:roomId', authenticate, async (req, res) => {
+  const roomId = req.params.roomId;
+
+  try {
+      const room = await Room.findById(roomId);
+
+      if (!room) {
+          return res.status(404).json({ error: 'Room not found' });
+      }
+
+      res.status(200).json(room);
+  } catch (error) {
+      console.error('Error fetching room details:', error);
+      res.status(500).json({ error: 'An error occurred while fetching room details' });
+  }
+});
 
 //Display Room Data
 router.get('/showRooms/:hostelId', async (req, res) => {
@@ -86,6 +103,7 @@ router.get('/showRooms/:hostelId', async (req, res) => {
   
     try {
       // Finding the hostel by its ID
+      //console.log('Hostel ID:', hostelId);
       const hostel = await Hostel.findById(hostelId);
   
       if (!hostel) {
@@ -105,6 +123,82 @@ router.get('/showRooms/:hostelId', async (req, res) => {
     }
   });
   
-  
+  // Update room
+router.put('/updateRoom/:roomId', authenticate, async (req, res) => {
+  const roomId = req.params.roomId;
+  const {
+      roomNumber,
+      capacity,
+      currentCapacity,
+      price,
+      ac,
+      workingDesk,
+      attachedBath,
+      roomFridge,
+      geyser,
+      Kitchenette,
+      Safe,
+      Iron,
+      room_Service,
+  } = req.body;
+
+  try {
+      const updatedRoom = await Room.findByIdAndUpdate(
+          roomId,
+          {
+              roomNumber,
+              capacity,
+              currentCapacity,
+              price,
+              facilities: {
+                  ac,
+                  workingDesk,
+                  attachedBath,
+                  roomFridge,
+                  geyser,
+                  Kitchenette,
+                  Safe,
+                  Iron,
+                  room_Service,
+              },
+          },
+          { new: true } // Return the modified document rather than the original
+      );
+
+      res.status(200).json(updatedRoom);
+  } catch (error) {
+      console.error('Error updating room:', error);
+      res.status(500).json({ error: 'An error occurred while updating the room' });
+  }
+});
+
+// Delete room by ID
+router.delete('/deleteRoom/:roomId', authenticate, async (req, res) => {
+  const roomId = req.params.roomId;
+
+  try {
+    // Check if the room exists
+    const room = await Room.findById(roomId);
+    if (!room) {
+      return res.status(404).json({ error: 'Room not found' });
+    }
+
+    // Remove the room from the associated hostel
+    const hostel = await Hostel.findOneAndUpdate(
+      { rooms: roomId },
+      { $pull: { rooms: roomId } },
+      { new: true }
+    );
+
+    // Delete the room
+    await Room.findByIdAndDelete(roomId);
+
+    res.status(200).json({ message: 'Room deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting room:', error);
+    res.status(500).json({ error: 'An error occurred while deleting the room' });
+  }
+});
+
 
 module.exports = router;

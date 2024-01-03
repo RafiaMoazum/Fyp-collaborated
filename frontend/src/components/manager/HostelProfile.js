@@ -19,6 +19,9 @@ export default function HostelProfile() {
   const{hostelId}= useParams();
   const navigate = useNavigate();
   const [hostelData, setHostelData] = useState([]);
+  const [confirmationText, setConfirmationText] = useState('');
+const [showConfirmation, setShowConfirmation] = useState(false);
+
 
   const fetchManagerData = async () =>{
       
@@ -79,8 +82,38 @@ export default function HostelProfile() {
     }
   };
   useEffect(() =>{
+    fetchManagerData();
     HostelProfileData();
 },[]);
+
+const handleDelete = async () => {
+  if (confirmationText !== 'I want to delete this hostel') {
+      window.alert('Please enter the correct confirmation statement.');
+      return;
+  }
+
+  try {
+      const response = await fetch(`/deleteHostel/${hostelId}`, {
+          method: 'DELETE',
+          credentials: 'include',
+      });
+
+      if (response.ok) {
+          window.alert('Hostel deleted successfully');
+          navigate('/hostelsPage');
+      } else {
+          const errorData = await response.json();
+          window.alert(`Error deleting hostel: ${errorData.error}`);
+      }
+  } catch (error) {
+      console.error('Error deleting hostel:', error);
+  }
+};
+
+const showConfirmationPopup = () => {
+  setShowConfirmation(true);
+};
+
   return (
     <>
       <Navbar/>
@@ -120,7 +153,7 @@ export default function HostelProfile() {
                       <h2>{hostelData.name}</h2>
                       </Col>
                       <Col style={{textAlign: "left", paddingTop: "10px",fontSize:"20px"}}>
-                      <Link to = "/Hostel_AddForm" style={{color: "black"}}>
+                      <Link to={`/UpdateHostel/${hostelId}`} style={{color: "black"}}>
                         <FaEdit/>
                       </Link>
                       </Col>
@@ -213,6 +246,27 @@ export default function HostelProfile() {
                 </section>
             </Col>
           </Row>
+          <button
+                className="btn_sub"
+                onClick={showConfirmationPopup}
+                style={{ backgroundColor: 'red', color: 'white' }}
+            >
+                Delete Hostel
+            </button>
+
+            {showConfirmation && (
+                <div className="confirmation-popup">
+                    <p>Please enter the following statement to confirm:</p>
+                    <p>I want to delete this hostel</p>
+                    <input
+                        type="text"
+                        value={confirmationText}
+                        onChange={(e) => setConfirmationText(e.target.value)}
+                    />
+                    <button onClick={handleDelete}>Confirm</button>
+                    <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                </div>
+            )}
       </Container>  
     </>
   )

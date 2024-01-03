@@ -28,6 +28,8 @@ import RoomDetail2 from './components/customer/RoomDetail2';
 import Notification from './components/manager/Notification';
 import BookVisitForm from './components/customer/BookVisitForm';
 import PendingVisitReq from './components/manager/PendingVisitReq';
+import UpdateHostel from './components/manager/UpdateHostel';
+import UpdateRoom from './components/manager/UpdateRoom';
 
 
  
@@ -68,6 +70,11 @@ function App() {
           <Route path='/allHostels' element={<AllHostels/>} />
           <Route path='/reviews' element={<Reviews/>} />
           <Route path='/reviewsForm' element={<ReviewForm/>} />
+          <Route path='/updateHostel/:hostelId' element={<UpdateHostel/>} />
+          <Route path='/updateRoom/:roomId' element={<UpdateRoom/>} />
+
+          
+
         </Routes>
         </RoomProvider>
         <Footer/>
