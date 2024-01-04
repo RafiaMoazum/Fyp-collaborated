@@ -5,6 +5,8 @@ import { useEffect } from 'react'
 import {useState} from 'react';
 import {FaMapMarkerAlt,FaPhone,FaStar} from 'react-icons/fa';
 
+const BackendUrl = 'http://localhost:8000';
+
 const Popular = () => {
   const [hostelData, setHostelData] = useState([]);
   const lahoreHostels = async () => {
@@ -41,13 +43,14 @@ const Popular = () => {
   },[]);
 
   const cardData = [
-    { title: 'Hostel Name 1', content: 'price/-  per night\naddress' },
-    { title: 'Hostel Name 2', content: 'price/-  per night\naddress' },
-    { title: 'Hostel Name 3', content: 'price/-  per night\naddress' },
-    { title: 'Hostel Name 4', content: 'price/-  per night\naddress' },
-    { title: 'Hostel Name 5', content: 'price/-  per night\naddress' },
-    // ... Repeat for other card data
+  
   ];
+
+  const getHostelImage = (hostel) => {
+    return hostel.hostelImages.length > 0
+      ? `${BackendUrl}/${hostel.hostelImages[0]}`
+      : "/images/242009851.jpg";
+  };
   const h_style =
   {
       color: "Black",
@@ -100,7 +103,7 @@ const Popular = () => {
       <Slider {...settings}> 
         {hostelData.map((hostel, index) => (
           <div key={index}>
-            <CardComponent title={hostel.name} content={hostel.address}/>
+            <CardComponent title={hostel.name} content={hostel.address}  image={getHostelImage(hostel)}/>
           </div>
         ))}
         {cardData.map((card, index) => (
