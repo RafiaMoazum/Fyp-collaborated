@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import Filters from './Lahore/Filters';
 import './AllHostels.css';
 
+const BackendUrl = 'http://localhost:8000';
 export default function HostelsDisplay() {
 
     const [hostels, setHostels] = useState([]);
@@ -71,18 +72,23 @@ export default function HostelsDisplay() {
       <div className="room-selector">
       {filteredHostels.map((hostel) => (
             <NavLink to={`/HostelDetails/${hostel._id}`} className='hostelNameLink'>
-            <div key={hostel._id} className="roomDisplay">
-              <div>
-              <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />
-
-                <p>Hostel Name. {hostel.name}</p>
-                <p>Address. {hostel.address}</p>
-                <p>Contact No: {hostel.phone}</p>
-                {/* <p>Current Capacity. {room.currentCapacity}</p>
-                <p>Price. {room.price}</p> */}
-               
-              </div>
+            <div className="roomDisplay">
+            <div>
+              {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+                <img
+                  src={`${BackendUrl}/${hostel.hostelImages[0]}`}
+                  alt={`Image 1`}
+                  style={{ width: '60%', height: '60%' }}
+                />
+              ) : (
+                <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />
+              )}
+              <p>Hostel Name. {hostel.name}</p>
+              <p>Address. {hostel.address}</p>
+              <p>Contact No: {hostel.phone}</p>
+              
             </div>
+          </div>
             </NavLink>
           ))}
         </div>

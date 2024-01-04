@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import './Hostel_AddForm.css'; // Create a corresponding CSS file
 import BlueHeader2 from './BlueHeader2';
 import Navbar from './Navbar'
@@ -41,7 +41,8 @@ function Hostel_AddForm() {
 
       if (response.ok && data.results.length > 0) {
         const location = data.results[0].geometry.location;
-        setCoordinates(`${location.lat}, ${location.lng}`);
+        //setCoordinates(`${location.lat}, ${location.lng}`);
+        setCoordinates([`${location.lat}, ${location.lng}`]);
         console.log(`Coordinates: ${location.lat}, ${location.lng}`);
       } else {
         console.error('Error fetching coordinates:', data.error_message || 'Unknown error');
@@ -101,6 +102,10 @@ function Hostel_AddForm() {
         navigate("/loginPage");
       }
   }
+
+  useEffect(() =>{
+    fetchManagerData();
+  },[])
     
     const handleSubmit = async (event) => {
       event.preventDefault();

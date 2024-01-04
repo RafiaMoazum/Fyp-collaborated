@@ -12,6 +12,9 @@ import { Link } from 'react-router-dom';
 import { FaPlusCircle } from 'react-icons/fa'
 import Container from 'react-bootstrap/esm/Container';
 
+
+const BackendUrl = 'http://localhost:8000';
+
 export default function HostelsPage() {
 
   const navigate= useNavigate();
@@ -132,24 +135,32 @@ export default function HostelsPage() {
                 <Col></Col>
               </Row>
               <Row>
-                    {hostelData.map((hostel, index) => (
-                      <Col key={index} xs={12} sm={6} md={4} lg={4}>
-                      <div className="container" key={index}>
-                        <div className="image-container">
-                          <img src="hostel1.png" alt="hostel" className="rounded-image img-fluid" /> 
-                        </div>
-                        <div className="content-container">
-                          <h2>
-                            <NavLink to={`/HostelProfile/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
-                              {hostel.name}
-                            </NavLink>
-                          </h2>
-                          <p>{hostel.city}</p>
-                        </div>
-                      </div>
-                      </Col>
-                    ))}
-                </Row>
+      {hostelData.map((hostel, index) => (
+        <Col key={index} xs={12} sm={6} md={4} lg={4}>
+          <div className="container" key={index}>
+            <div className="image-container">
+              {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+                <img
+                  src={`${BackendUrl}/${hostel.hostelImages[0]}`}
+                  alt={`Hostel ${index + 1}`}
+                  className="rounded-image img-fluid"
+                />
+              ) : (
+                <img src="hostel1.png" alt="hostel" className="rounded-image img-fluid" />
+              )}
+            </div>
+            <div className="content-container">
+              <h2>
+                <NavLink to={`/HostelProfile/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
+                  {hostel.name}
+                </NavLink>
+              </h2>
+              <p>{hostel.city}</p>
+            </div>
+          </div>
+        </Col>
+      ))}
+    </Row>
               </div>
             </Container>
             </Col>

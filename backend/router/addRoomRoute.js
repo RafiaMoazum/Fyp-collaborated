@@ -1,14 +1,23 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const router = express.Router();
+const multer = require('multer');
 const Room = require('../model/roomsSchema'); // Import the Room schema
 const Hostel = require('../model/hostelSchema');
 const authenticate = require('../middleware/authenticate');
 
-router.use(fileUpload()); // Use the fileUpload middleware
+const storage = multer.diskStorage({
+  destination: 'public/userImages',
+  filename: (req, file, cb) => {
+      cb(null, file.originalname);
+  }
+});
+
+const upload = multer({
+  storage: storage
+});
 
 //Get and store room
-router.post('/addRoom/:hostelId', authenticate, async (req, res) => {
+router.post('/addRoom/:hostelId', authenticate,upload.array('roomImages'),async (req, res) => {
     const hostelId = req.params.hostelId;
     console.log(`Hostel id= ${hostelId}`);
     const {
@@ -29,19 +38,9 @@ router.post('/addRoom/:hostelId', authenticate, async (req, res) => {
     } = req.body;
 
     try {
-        // const roomImages = [];
+        
+      const roomImages = req.files.map(file => file.path);
 
-        // if (req.files && req.files.roomImages) {
-        //     if (Array.isArray(req.files.roomImages)) {
-        //         req.files.roomImages.forEach(file => {
-        //             const filePath = file.path;
-        //             roomImages.push(filePath);
-        //         });
-        //     } else {
-        //         const filePath = req.files.roomImages.path;
-        //         roomImages.push(filePath);
-        //     }
-        // }
 
         const room = new Room({
             roomNumber,
@@ -59,7 +58,7 @@ router.post('/addRoom/:hostelId', authenticate, async (req, res) => {
                 Iron,
                 room_Service
             },
-            //roomImages
+            roomImages
         });
 
         const savedRoom= await room.save();

@@ -13,6 +13,7 @@ import Navbar from "../Navbar/Navbar";
 import "./Mainpage.css";
 import { NavLink } from 'react-router-dom';
 
+const BackendUrl = 'http://localhost:8000';
 
 
 const Mainpage = () => {
@@ -184,12 +185,20 @@ useEffect(() => {
     {name !== '' || address !== '' ? (
       hostels !== null ? (
         hostels.length > 0 ? (
-          <ul>
+            <ul>
             {hostels.map((hostel) => (
-              <NavLink to={`/Hostel_ad/${hostel._id}`} className='hostelNameLink'>
-                <div key={hostel._id} className="roomDisplay">
+              <NavLink to={`/Hostel_ad/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
+                <div className="roomDisplay">
                   <div>
-                    <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />
+                    {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+                      <img
+                        src={`${BackendUrl}/${hostel.hostelImages[0]}`}
+                        alt={`Image 1`}
+                        style={{ width: '60%', height: '60%' }}
+                      />
+                    ) : (
+                      <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />
+                    )}
                     <p>Hostel Name. {hostel.name}</p>
                     <p>Address. {hostel.address}</p>
                     <p>Contact No: {hostel.phone}</p>

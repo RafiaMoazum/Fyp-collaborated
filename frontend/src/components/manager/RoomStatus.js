@@ -166,6 +166,7 @@ const [confirmationVisible, setConfirmationVisible] = useState(false);
   };
   useEffect(() =>{
     DisplayRoomData();
+    fetchManagerData();
 },[AddRoom]);
 
 

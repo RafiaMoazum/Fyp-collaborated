@@ -19,6 +19,9 @@ import "./Hostel_ad.css";
 import { NavLink } from 'react-router-dom';
 import '../RoomsDisplay.css';
     
+
+const BackendUrl = 'http://localhost:8000';
+
 const Hostel_ad = () => {
 
 
@@ -102,7 +105,9 @@ const Hostel_ad = () => {
   useEffect(() =>{
     HostelDetails();
 },[]);
-console.log('Hostel Coordinates in Hostel_ad:', hostelData.coordinates);
+//console.log('Hostel Coordinates in Hostel_ad:', hostelData.coordinates);
+console.log('Hostel Coordinates in Hostel_ad:', hostelData?.coordinates);
+
     
     return (
     <>
@@ -116,7 +121,7 @@ console.log('Hostel Coordinates in Hostel_ad:', hostelData.coordinates);
                         
                     </Col>
                     <Col xs={12} sm={8} md={8} lg={8}>
-                        <ImageSlider images={images} />
+                        <ImageSlider images={hostelData.hostelImages} />
                     </Col>
                     <Col xs={12} sm={2} md={2} lg={2}>
                         
@@ -217,7 +222,8 @@ console.log('Hostel Coordinates in Hostel_ad:', hostelData.coordinates);
                         </Col>
                         <Col xs={12} md={4} style={{ marginTop: "20px" }}>
 
-                        <Map_component hostelCoordinates={hostelData.coordinates} />
+                        {/* <Map_component hostelCoordinates={hostelData.coordinates[0]} /> */}
+                        <Map_component hostelCoordinates={hostelData?.coordinates?.[0]} />
 
                         </Col>
                     </Row>

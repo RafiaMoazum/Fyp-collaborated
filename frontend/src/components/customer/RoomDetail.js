@@ -12,6 +12,8 @@ import BookingForm from './BookingForm';
 import './RoomDetail.css';
 import { FaCheck } from 'react-icons/fa';
 
+const BackendUrl = 'http://localhost:8000';
+
 export default function RoomDetail() {
   
   
@@ -76,7 +78,8 @@ export default function RoomDetail() {
                         
                     </Col>
                     <Col xs={6} sm={6} md={7} lg={8}>
-                        <ImageSlider2 images={images} />
+                      
+                    <ImageSlider2 images={roomData.roomImages} />
                     </Col>
                     <Col xs={6} sm={5} md={4} lg={3}>
                     <div style = {{textAlign: "left"}} >

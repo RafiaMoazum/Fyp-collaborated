@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import './Lahore.css';
 import {FaMapMarkerAlt,FaPhone,FaStar} from 'react-icons/fa';
 
+const BackendUrl = 'http://localhost:8000';
 
 const  Advertisement= () => {
   const [hostelData, setHostelData] = useState([]);
@@ -42,57 +43,29 @@ const  Advertisement= () => {
       lahoreHostels();
   },[]);
 
-  // const divArray = [
-  //   {
-  //     imgSrc: './images/242009851.jpg',
-  //     hotelName: 'Hotel Name 1',
-  //     stars: 3,
-  //     features: ['Double bed', 'Free internet', '+4'],
-  //     price: 'Rs. 1000/- per night',
-  //     address: 'Address 1, Lahore',
-  //     mapLink: 'Link to Map 1'
-  //   },
-  //   {
-  //     imgSrc: './images/242009851.jpg',
-  //     hotelName: 'Hotel Name 2',
-  //     stars: 4,
-  //     features: ['Double bed', 'Free internet', '+6'],
-  //     price: 'Rs. 1500/- per night',
-  //     address: 'Address 2, Lahore',
-  //     mapLink: 'Link to Map 2'
-  //   },
-  //   {
-  //     imgSrc: './images/242009851.jpg',
-  //     hotelName: 'Hotel Name 2',
-  //     stars: 4,
-  //     features: ['Double bed', 'Free internet', '+6'],
-  //     price: 'Rs. 1500/- per night',
-  //     address: 'Address 2, Lahore',
-  //     mapLink: 'Link to Map 2'
-  //   },
-  //   {
-  //     imgSrc: './images/242009851.jpg',
-  //     hotelName: 'Hotel Name 2',
-  //     stars: 4,
-  //     features: ['Double bed', 'Free internet', '+6'],
-  //     price: 'Rs. 1500/- per night',
-  //     address: 'Address 2, Lahore',
-  //     mapLink: 'Link to Map 2'
-  //   },
-  // ];
+  
+  
 
   return (
     <div style={{paddingTop:'20px'}}>
-      {/* <Link to={`/HostelProfile/${hostelData._id}`} style={{textDecoration:'none', color:'black'}}> */}
      
-      {/* {divArray.map((item, index) => ( */}
       {hostelData.map((hostel, index) => (
         <>
         <div key={index} className='add_style'>
           <NavLink to={`/Hostel_ad/${hostel._id}`} key={hostel._id}className='hostelNameLink'>
           <Row>
             <Col>
-              <img alt="" src='./images/242009851.jpg' width="100%" height="100%" />
+            {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+                  <img
+                    src={`${BackendUrl}/${hostel.hostelImages[0]}`}
+                    alt={`Image 1`}
+                    className="img-fluid"
+                    width="100%"
+                    height="100%"
+                  />
+                ) : (
+                  <img alt="" src='./images/242009851.jpg' width="100%" height="100%" />
+                )}
             </Col>
             <Col>
             {/* <h2><NavLink to={`/HostelDetails/${hostel._id}`} key={hostel._id}className='hostelNameLink'>{hostel.name}</NavLink></h2> */}

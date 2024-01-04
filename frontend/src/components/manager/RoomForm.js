@@ -35,65 +35,122 @@ export default function RoomForm() {
     }
 
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      // Handle form submission
+   
+
+    const handleImageChange = (event) => {
+        const selectedImages = event.target.files;
+        // Convert the FileList to an array
+        const selectedImagesArray = Array.from(selectedImages);
+        // If roomImages is not an array, convert it to an array before spreading
+        const roomImagesArray = Array.isArray(roomData.roomImages) ? roomData.roomImages : [roomData.roomImages];
+        // Concatenate the new images to the existing array
+        setRoomData({ ...roomData, roomImages: [...roomImagesArray, ...selectedImagesArray] });
+    };
+
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+
+        Object.entries(roomData).forEach(([key, value]) => {
+            if (key !== 'roomImages') {
+                formData.append(key, value);
+            }
+        });
+    
+        roomData.roomImages.forEach((image, index) => {
+            formData.append('roomImages', image);
+        });
+
+        // const { roomNumber,capacity,currentCapacity,price,
+        //     ac,
+        //     workingDesk,
+        //     attachedBath,
+        //     roomFridge,
+        //     geyser,
+        //     Kitchenette,
+        //     Safe,
+        //     Iron,
+        //     room_Service,
+        //      } = roomData;
+        
+            const res = await fetch(`/addRoom/${hostelId}`, {
+                method: "POST",
+                credentials: "include",
+              
+                body: formData
+            });
+        
+            
+  
+            // Check response status
+            if (res.status === 422) {
+                // Handle the error case
+                const errorData = await res.json();
+                window.alert(`Room couldn't be registered: ${errorData.error}`);
+                console.log(`Room couldn't be registered: ${errorData.error}`);
+            } else {
+                // Handle the success case
+                //const data = await res.json();
+                window.alert("Room registered successfully✌");
+                console.log("Room registered successfully✌");
+                //navigate("/hostelsPage");
+            }
     }
+//     const AddRoom = async (e) => {
+//     e.preventDefault();
+//     const { roomNumber,capacity,currentCapacity,price,
+//     ac,
+//     workingDesk,
+//     attachedBath,
+//     roomFridge,
+//     geyser,
+//     Kitchenette,
+//     Safe,
+//     Iron,
+//     room_Service,
+//      } = roomData;
 
-    const AddRoom = async (e) => {
-    e.preventDefault();
-    const { roomNumber,capacity,currentCapacity,price,
-    ac,
-    workingDesk,
-    attachedBath,
-    roomFridge,
-    geyser,
-    Kitchenette,
-    Safe,
-    Iron,
-    room_Service,
-     } = roomData;
+//     const res = await fetch(`/addRoom/${hostelId}`, {
+//         method: "POST",
+//         credentials: "include",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//           roomNumber,capacity,currentCapacity,price,
+//           ac,
+//           workingDesk,
+//           attachedBath,
+//           roomFridge,
+//           geyser,
+//           Kitchenette,
+//           Safe,
+//           Iron,
+//           room_Service
+//         })
+//     });
 
-    const res = await fetch(`/addRoom/${hostelId}`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          roomNumber,capacity,currentCapacity,price,
-          ac,
-          workingDesk,
-          attachedBath,
-          roomFridge,
-          geyser,
-          Kitchenette,
-          Safe,
-          Iron,
-          room_Service
-        })
-    });
-
-    // Check response status
-    if (res.status === 422) {
-        // Handle the error case
-        const errorData = await res.json();
-        window.alert(`Room couldn't be registered: ${errorData.error}`);
-        console.log(`Room couldn't be registered: ${errorData.error}`);
-    } else {
-        // Handle the success case
-        //const data = await res.json();
-        window.alert("Room registered successfully✌");
-        console.log("Room registered successfully✌");
-        //navigate("/hostelsPage");
-    }
-}
+//     // Check response status
+//     if (res.status === 422) {
+//         // Handle the error case
+//         const errorData = await res.json();
+//         window.alert(`Room couldn't be registered: ${errorData.error}`);
+//         console.log(`Room couldn't be registered: ${errorData.error}`);
+//     } else {
+//         // Handle the success case
+//         //const data = await res.json();
+//         window.alert("Room registered successfully✌");
+//         console.log("Room registered successfully✌");
+//         //navigate("/hostelsPage");
+//     }
+// }
 
 
   
   return (
    <>
-        <form method="POST" id="form" onSubmit={handleSubmit}>
+        <form method="POST"  enctype="multipart/form-data" id="form" onSubmit={handleSubmit}>
                             <div>
                                 <Row>
                                     <Col>
@@ -156,8 +213,9 @@ export default function RoomForm() {
                                                         className="input_box_room1"
                                                         type="file"
                                                         name="roomImages"
-                                                        value={roomData.roomImages}
-                                                        onChange={handleInputChange}
+                                                        // value={roomData.roomImages}
+                                                        onChange={handleImageChange}
+                                                        multiple
                                                     />
                                                    
                                         </div>
@@ -279,7 +337,7 @@ export default function RoomForm() {
                                     </Col>
                                 </Row>
                             </div>
-                            <input className="btn_sub" type="submit" value="Add Room" onClick={AddRoom}/>
+                            <input className="btn_sub" type="submit" value="Add Room" />
                         </form>
     </>
   )
