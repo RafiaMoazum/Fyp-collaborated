@@ -167,4 +167,6 @@ router.delete('/deleteHostel/:hostelId', authenticate, async (req, res) => {
 });
 
 
+
+
 module.exports= router;

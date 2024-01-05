@@ -8,6 +8,7 @@ import Autoplay from 'embla-carousel-autoplay';
 const Reviews = () => {
   const { hostelId } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState(null);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: false, autoplay: true, autoplayInterval: 5000 },
     [Autoplay()],
@@ -32,6 +33,18 @@ const Reviews = () => {
           const error = new Error(res.error);
           throw error;
         }
+
+         // Fetch average rating
+         const averageRatingResponse = await fetch(`/averageRating/${hostelId}`);
+         if (averageRatingResponse.status === 200) {
+           const averageRatingData = await averageRatingResponse.json();
+           
+           setAverageRating(averageRatingData.averageRating);
+         } else {
+           const error = new Error(averageRatingResponse.error);
+           throw error;
+         }
+
       } catch (err) {
         console.error(err);
       }
@@ -62,12 +75,14 @@ const Reviews = () => {
             <div key={index} className="embla__slide mx-2">
               <Card style={{ width: "18rem", borderRadius: "25px" }} className="mr-3">
                 <Card.Header style={card_title}>
-                  <h5>Rafia</h5>
+                  <h5>User</h5>
                 </Card.Header>
                 <Card.Body>
                   <div style={{ textAlign: "center" }}>
                     <Card.Title>
-                      {Array(data.rating).fill(<FaStar style={star1} />)}
+                    {Array(data.rating).fill(null).map((_, index) => (
+                     <FaStar key={index} style={star1} />
+                     ))}
                     </Card.Title>
                   </div>
                   <Card.Text style={{ textAlign: "center" }}>

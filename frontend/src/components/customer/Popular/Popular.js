@@ -9,9 +9,9 @@ const BackendUrl = 'http://localhost:8000';
 
 const Popular = () => {
   const [hostelData, setHostelData] = useState([]);
-  const lahoreHostels = async () => {
+  const fetchPopularHostels = async () => {
     try {
-      const res = await fetch('/hostelsInLahore', {
+      const res = await fetch('/popularHostels', {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -19,28 +19,26 @@ const Popular = () => {
         },
         credentials: 'include',
       });
-  
+
+      console.log('Response status:', res.status);
+
       if (res.status === 200) {
         const data = await res.json();
         console.log(`hostels✌: ${data.hostels}`);
         console.log(`hostels✌: ${data}`);
         setHostelData(data.hostels);
-       
-      }else {
+      } else {
         const error = new Error(res.error);
         throw error;
       }
     } catch (err) {
       console.error(err);
-      //navigate('/loginPage');
     }
   };
 
-
-
-  useEffect(() =>{
-      lahoreHostels();
-  },[]);
+  useEffect(() => {
+    fetchPopularHostels();
+  }, []);
 
   const cardData = [
   
@@ -103,7 +101,7 @@ const Popular = () => {
       <Slider {...settings}> 
         {hostelData.map((hostel, index) => (
           <div key={index}>
-            <CardComponent title={hostel.name} content={hostel.address}  image={getHostelImage(hostel)}/>
+            <CardComponent title={hostel.name} content={hostel.address}  image={getHostelImage(hostel)} hostelId={hostel._id} />
           </div>
         ))}
         {cardData.map((card, index) => (
@@ -113,15 +111,7 @@ const Popular = () => {
         ))}
        
        </Slider>
-       {/* {hostelData.map((hostel, index) => (
-          <div key={index} style={hostelInfo}>
-            <h2>{hostel.name}</h2> 
-            <p>Address:{hostel.address}</p>
-            <p>Contact:{hostel.phone}</p>
-            <p>City:{hostel.city}</p>
-            <p>Description:{hostel.description}</p>
-          </div>
-        ))} */}
+      
     </>
   );
 };

@@ -38,6 +38,8 @@ router.post('/addReview/:hostelId',  async (req, res) => {
            console.log(`Error in Booking🤞 ${err}`);
       }
 
+    //     // Calling the averageRating route after adding a new review
+    // await fetch(`/averageRating/${hostelId}`);
     res.status(201).json(newReview);
   } catch (error) {
     console.error(error);
@@ -61,6 +63,31 @@ router.get('/showReviews/:hostelId', async (req, res) => {
     }
   });
   
+
+router.get('/averageRating/:hostelId', async (req, res) => {
+  try {
+    const hostelId = req.params.hostelId;
+
+    // Aggregate pipeline to calculate the average rating
+    const averageRating = await Review.aggregate([
+      { $match: { hostel: hostelId } },
+      { $group: { _id: null, avgRating: { $avg: '$rating' } } },
+    ]);
+
+      // Round the average rating to one decimal place
+      const roundedAverageRating = parseFloat(averageRating[0].avgRating.toFixed(1));
+
+      // Updating the average rating in the Hostel model
+      await Hostel.findByIdAndUpdate(hostelId, { averageRating: roundedAverageRating });
+   
+
+    console.log('Average Rating:', averageRating[0].avgRating);
+    res.json({ averageRating: averageRating[0].avgRating });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 
 module.exports = router;

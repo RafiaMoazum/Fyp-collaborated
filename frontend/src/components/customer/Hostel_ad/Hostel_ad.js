@@ -140,9 +140,9 @@ console.log('Hostel Coordinates in Hostel_ad:', hostelData?.coordinates);
                         <Col sm style = {{alignItems: "right",justifyContent: "right",display: "flex"}}>
                             <Row >
                                 <Col className="d-flex align-items-center " >
+                                {hostelData.averageRating}
                                     <FaStar className='star'/>
-                                    <FaStar className='star'/>
-                                    <FaStar className='star'/>
+                                    
                                 </Col>
                             </Row>
                         </Col>

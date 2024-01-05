@@ -58,7 +58,8 @@ const hostelSchema = new mongoose.Schema({
         {
             type: String// Array of image URLs
         }
-    ]
+    ],
+    averageRating: { type: Number, default: 0.0 }
 });
 
 const Hostel = mongoose.model('Hostel', hostelSchema);
