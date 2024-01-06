@@ -12,6 +12,7 @@ const ImageSlider = ({ images }) => {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
+        height: "100%"
     };
 
     if (!images || images.length === 0) {
