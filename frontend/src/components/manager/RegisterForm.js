@@ -117,7 +117,7 @@ function RegisterForm() {
             <p>Forget Password?</p>
           </div>
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
-          <input type="submit" name="signin" value="Register" onClick={registerData} />
+          <input className="form-register" type="submit" name="signin" value="Register" onClick={registerData} />
           </div>
         </form>
       </div>

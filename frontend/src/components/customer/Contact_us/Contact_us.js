@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import ContactForm from './ContactForm';
 import Header from '../Header/Header';
 import Navbar from "../Navbar/Navbar";
+import { Container } from 'react-bootstrap';
 
 const ContactUs = () => {
     const h_style =
@@ -48,7 +49,7 @@ const ContactUs = () => {
         <>
         <Header/>
          <Navbar/>
-            <div sclass = "image" style = {imageStyle}>
+            <Container fluid class = "image" style = {imageStyle}>
                 <Row>
                     <Col class="col-sm-6">
 
@@ -59,7 +60,7 @@ const ContactUs = () => {
                         </div>
                     </Col>
                 </Row>
-            </div>
+            </Container>
             <div style={style1}>
 
             </div>

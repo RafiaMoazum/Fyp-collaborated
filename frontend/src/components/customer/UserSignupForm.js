@@ -65,96 +65,76 @@ function UserSignupForm() {
 
 
   return (
-    <form method="POST" className="form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="form-label">
-          Name:
-          <input
-            className="form-input"
-            type="text"
-            name="name"
-            value={UserData.name}
-            onChange={handleInputChange}
-          />
-        </label>
+    <div>
+      <div className="login-form-container">
+        <form method="POST" onSubmit={handleSubmit}>
+          <div className="input-row">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={UserData.name}
+              onChange={(handleInputChange)}/>
+          </div>
+          <div className="input-row">
+            <input
+              type="text"
+              name="cnic"
+              placeholder="CNIC"
+              value={UserData.cnic}
+              onChange={(handleInputChange)}/>
+          </div>
+          <div className="input-row">
+            <input
+              type="tel"
+              name="phone"
+              placeholder="CNIC"
+              value={UserData.phone}
+              onChange={(handleInputChange)}/>
+          </div>
+          <div className="input-row">
+            <input
+              type="text"
+              name="city"
+              placeholder="City"
+              value={UserData.city}
+              onChange={(handleInputChange)}/>
+          </div>
+          <div className="input-row">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={UserData.email}
+              onChange={(handleInputChange)}/>
+          </div>
+          <div className="input-row">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={UserData.password}
+              onChange={(handleInputChange)}/>
+          </div>
+          <div className="input-row">
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={UserData.confirmPassword}
+              onChange={(handleInputChange)}/>
+          </div>
+          <div className="forget-password">
+            <p>Forget Password?</p>
+          </div>
+          <input className="form-register" type="submit" value="Register" onClick={signUp} />
+        </form>
+        <br></br>
+          <p style={{textAlign: "center", paddingBottom:"50px"}}>
+            Already a member? <Link to="/LoginPage">Login</Link>
+          </p>
       </div>
-      <div className="form-group">
-        <label className="form-label">
-          CNIC:
-          <input
-            className="form-input"
-            type="text"
-            name="cnic"
-            value={UserData.cnic}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Phone:
-          <input
-            className="form-input"
-            type="tel"
-            name="phone"
-            value={UserData.phone}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          City:
-          <input
-            className="form-input"
-            type="text"
-            name="city"
-            value={UserData.city}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Email:
-          <input
-            className="form-input"
-            type="email"
-            name="email"
-            value={UserData.email}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Password:
-          <input
-            className="form-input"
-            type="password"
-            name="password"
-            value={UserData.password}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Confirm Password:
-          <input
-            className="form-input"
-            type="password"
-            name="confirmPassword"
-            value={UserData.confirmPassword}
-            onChange={handleInputChange}
-          />
-        </label>
-        
-      </div>
-      <input className="form-register" type="submit" value="Register" onClick={signUp} />
-      
-      <p style={{ color:'grey', fontSize:'20px'}}>Already a Member? <Link style={{ color:'black'}} to="/loginPageC">Login</Link></p>
-    </form>
+    </div>
     
   );
 }

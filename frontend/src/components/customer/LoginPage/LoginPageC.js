@@ -4,8 +4,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import {FaCheck} from 'react-icons/fa';
 import Navbar from "../Navbar/Navbar";
+import {useEffect } from 'react';
+import BlueHeader2 from '../../manager/BlueHeader2';
 
 export default function Login() {
+
   const image = 
     {
         width: "100%",
@@ -51,7 +54,7 @@ export default function Login() {
   return (
     <>
     <Navbar/>
-      <div style={style1}></div>
+    <BlueHeader2/>
       <div style={{ position: "relative" }}>
         <img src="./images/Website.png" alt="Logo" style={image} />
         <div style={overlay}>
@@ -69,7 +72,7 @@ export default function Login() {
             <Col xs={1} sm={1} md={1} lg={1} style={{ textAlign: "center" }}>
               <FaCheck />
             </Col>
-            <Col xs={5} sm={5} md={5} lg={5}>
+            <Col xs={5} sm={5} md={5} lg={5} style={{ textAlign: "left" }}>
               <p>
                 <b>{feature.text}</b>
               </p>
