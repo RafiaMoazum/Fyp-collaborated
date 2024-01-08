@@ -39,6 +39,7 @@ router.get('/popularHostels', async (req, res) => {
           return res.status(404).json({ error: 'No highly rated hostels found' });
       }
 
+      console.log(hostels)
       res.status(200).json({ hostels });
   } catch (error) {
       console.error('Error:', error);

@@ -14,7 +14,7 @@ export default function RoomForm() {
         roomNumber: '',
         type: '',
         capacity: '',
-        currentCapacity:'',
+        remainingCapacity:'',
         price: '',
         ac: false,
         workingDesk: false,
@@ -62,7 +62,7 @@ export default function RoomForm() {
             formData.append('roomImages', image);
         });
 
-        // const { roomNumber,capacity,currentCapacity,price,
+        // const { roomNumber,capacity,remainingCapacity,price,
         //     ac,
         //     workingDesk,
         //     attachedBath,
@@ -99,7 +99,7 @@ export default function RoomForm() {
     }
 //     const AddRoom = async (e) => {
 //     e.preventDefault();
-//     const { roomNumber,capacity,currentCapacity,price,
+//     const { roomNumber,capacity,remainingCapacity,price,
 //     ac,
 //     workingDesk,
 //     attachedBath,
@@ -118,7 +118,7 @@ export default function RoomForm() {
 //             "Content-Type": "application/json"
 //         },
 //         body: JSON.stringify({
-//           roomNumber,capacity,currentCapacity,price,
+//           roomNumber,capacity,remainingCapacity,price,
 //           ac,
 //           workingDesk,
 //           attachedBath,
@@ -150,7 +150,7 @@ export default function RoomForm() {
   
   return (
    <>
-        <form method="POST"  enctype="multipart/form-data" id="form" onSubmit={handleSubmit}>
+        <form method="POST"  encType="multipart/form-data" id="form" onSubmit={handleSubmit}>
                             <div>
                                 <Row>
                                     <Col>
@@ -168,7 +168,7 @@ export default function RoomForm() {
                                    
                                     <Col>
                                         <div className="form-group">
-                                            <label htmlFor="field3"><b>Current Capacity:</b></label>
+                                            <label htmlFor="field3"><b>Total Capacity:</b></label>
                                             <input
                                                 className="input_box_room"
                                                 type="text"
@@ -185,8 +185,8 @@ export default function RoomForm() {
                                             <input
                                                 className="input_box_room"
                                                 type="text"
-                                                name="currentCapacity"
-                                                value={roomData.currentCapacity}
+                                                name="remainingCapacity"
+                                                value={roomData.remainingCapacity}
                                                 onChange={handleInputChange}
                                             />
                                         </div>

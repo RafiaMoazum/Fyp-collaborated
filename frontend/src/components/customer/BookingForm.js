@@ -12,10 +12,7 @@ function BookingForm() {
 
   const navigate= useNavigate();
   const [bookingData, setbookingData] = useState({
-    name:'',
-    email:'',
-    phone:'',
-    cnic:'',
+    
     checkIn_date: '',
     checkOut_date: ''
   });
@@ -35,7 +32,7 @@ function BookingForm() {
   //Fetch Data from form using Fetch API
  const BookRoom = async (e) => {
     e.preventDefault();
-    const { name,email,phone,cnic,checkIn_date,checkOut_date} = bookingData;
+    const { checkIn_date,checkOut_date} = bookingData;
 
     const res = await fetch(`/apply/${roomId}`, {
         method: "POST",
@@ -44,7 +41,7 @@ function BookingForm() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name,email,phone,cnic,checkIn_date,checkOut_date,roomId
+            checkIn_date,checkOut_date,roomId
         })
     });
 
@@ -67,58 +64,9 @@ function BookingForm() {
 
   return (
     <form method="POST" className="form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="form-label">
-          Name
-          <input
-            className="form-input"
-            type="text"
-            name="name"
-            value={bookingData.name}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Email
-          <input
-            className="form-input"
-            type="email"
-            name="email"
-            value={bookingData.email}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Phone
-          <input
-            className="form-input"
-            type="number"
-            name="phone"
-            value={bookingData.phone}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          CNIC
-          <input
-            className="form-input"
-            type="text"
-            name="cnic"
-            value={bookingData.cnic}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-      </div>
+      
+     
+      
       <div className="form-group">
         <label className="form-label">
           Check-In Date
@@ -134,7 +82,7 @@ function BookingForm() {
       </div>
       <div className="form-group">
         <label className="form-label">
-          Check-Out Date
+          Check-Out Date(Optional)
           <input
             className="form-input"
             type="date"

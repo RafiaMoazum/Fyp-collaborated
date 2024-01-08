@@ -56,7 +56,7 @@ export default function RoomsDisplay() {
                 <p>Room No. {room.roomNumber}</p>
                 <p>Room Type. {room.type}</p>
                 <p>Total Capacity. {room.capacity}</p>
-                <p>Current Capacity. {room.currentCapacity}</p>
+                <p>Remaining Capacity. {room.currentCapacity}</p>
                 <p>Price. {room.price}</p>
                
               </div>

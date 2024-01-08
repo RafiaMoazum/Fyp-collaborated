@@ -18,6 +18,7 @@ export default function RoomStatus() {
     const[userData, setUserData]=useState({ name: 'Manager' });
     const navigate = useNavigate();
     const [selectedRoomId, setSelectedRoomId] = useState(null);
+    
     const [confirmationText, setConfirmationText] = useState('');
 const [showConfirmation, setShowConfirmation] = useState(false);
 const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -85,55 +86,30 @@ const [confirmationVisible, setConfirmationVisible] = useState(false);
     const [displayrooms, setDisplayRooms] = useState([]);
 
   
-
-    const AddRoom = async (e) => {
-    e.preventDefault();
-    const { roomNumber,capacity,currentCapacity,price,
-    ac,
-    workingDesk,
-    attachedBath,
-    roomFridge,
-    geyser,
-    Kitchenette,
-    Safe,
-    Iron,
-    room_Service,
-     } = roomData;
-
-    const res = await fetch(`/addRoom/${hostelId}`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          roomNumber,capacity,currentCapacity,price,
-          ac,
-          workingDesk,
-          attachedBath,
-          roomFridge,
-          geyser,
-          Kitchenette,
-          Safe,
-          Iron,
-          room_Service
-        })
-    });
-
-    // Check response status
-    if (res.status === 422) {
-        // Handle the error case
-        const errorData = await res.json();
-        window.alert(`Room couldn't be registered: ${errorData.error}`);
-        console.log(`Room couldn't be registered: ${errorData.error}`);
-    } else {
-        // Handle the success case
-        //const data = await res.json();
-        window.alert("Room registered successfully✌");
-        console.log("Room registered successfully✌");
-        //navigate("/hostelsPage");
-    }
-}
+    const fetchRoomDetails = async (roomId) => {
+        try {
+          const response = await fetch(`/roomDetails/${roomId}`, {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
+    
+          if (response.ok) {
+            const roomDetails = await response.json();
+            // Update the roomData state with the details of the specific room
+            setRoomData(roomDetails);
+          } else {
+            const errorData = await response.json();
+            window.alert(`Error fetching room details: ${errorData.error}`);
+          }
+        } catch (error) {
+          console.error('Error fetching room details:', error);
+        }
+      };
+    
 
 
   const DisplayRoomData = async () => {
@@ -167,12 +143,15 @@ const [confirmationVisible, setConfirmationVisible] = useState(false);
   useEffect(() =>{
     DisplayRoomData();
     fetchManagerData();
-},[AddRoom]);
+},[]);
 
 
 const handleRoomClick = (roomId) => {
+    
     setModalVisible(true);
     setSelectedRoomId(roomId);
+
+    fetchRoomDetails(roomId);
 };
 
 
@@ -234,9 +213,9 @@ const showConfirmationPopup = () => {
                                 <li>{userData && <h2>{userData.name}</h2>}</li>
                                 <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
                                 <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
+                                <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
                                 <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                                <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Customer Info</Link></li>
                                 <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                                 <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
                                 <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
@@ -251,7 +230,7 @@ const showConfirmationPopup = () => {
                                 <h1 style={{ textAlign: "left" }}>Rooms</h1>
                                 <br></br>
                                 {displayrooms.map((room) => (
-    <Col key={room._id}>
+      <Col key={room._id}>
         <div className='rooms'>
             <h1 style={{ color: "white", paddingTop: "8px", cursor: "pointer" }} onClick={() => handleRoomClick(room._id)}>
                 {room.roomNumber}
@@ -312,31 +291,34 @@ const showConfirmationPopup = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {displayrooms.map((room) => (
-                                        <tr key={room._id}>
-                                        <td>{room.roomNumber}</td>
-                                        <td>{room.type}</td>
-                                        <td>{room.capacity}</td>
-                                        <td>{room.currentCapacity}</td>
-                                        <td>{room.price}</td>
-                                        <td>
-                                            <ul>
-                                            {room.facilities.ac && <li>AC</li>}
-                                            {room.facilities.workingDesk && <li>Working Desk</li>}
-                                            {room.facilities.attachedBath && <li>Attached Bath</li>}
-                                            {room.facilities.roomFridge && <li>Room Fridge</li>}
-                                            {room.facilities.geyser && <li>Geyser</li>}
-                                            {room.facilities.Kitchenette && <li>Kitchenette</li>}
-                                            {room.facilities.Safe && <li>Safe</li>}
-                                            {room.facilities.Iron && <li>Iron</li>}
-                                            {room.facilities.room_Service && <li>Room Service</li>}
-                                            </ul>
-                                        </td>
-                                        </tr>
-                                    ))}
+                                {displayrooms.map((room) => room._id === selectedRoomId && (
+  <tr key={room._id}>
+    <td>{room.roomNumber}</td>
+    <td>{room.type}</td>
+    <td>{room.capacity}</td>
+    <td>{room.currentCapacity}</td>
+    <td>{room.price}</td>
+    <td>
+      <ul>
+        {room.facilities.ac && <li>AC</li>}
+        {room.facilities.workingDesk && <li>Working Desk</li>}
+        {room.facilities.attachedBath && <li>Attached Bath</li>}
+        {room.facilities.roomFridge && <li>Room Fridge</li>}
+        {room.facilities.geyser && <li>Geyser</li>}
+        {room.facilities.Kitchenette && <li>Kitchenette</li>}
+        {room.facilities.Safe && <li>Safe</li>}
+        {room.facilities.Iron && <li>Iron</li>}
+        {room.facilities.room_Service && <li>Room Service</li>}
+      </ul>
+      
+    </td>
+  </tr>
+))}
+
+                                  
                                 </tbody>
                             </table>
-                            <table>
+                            {/* <table>
                             <thead>
                                     <tr>
                                         <th >Tenant Name</th>
@@ -354,7 +336,7 @@ const showConfirmationPopup = () => {
                                         </tr>
                                     ))}
                                 </tbody>
-                            </table>
+                            </table> */}
                             <table>
                             <thead>
                                 <tr>

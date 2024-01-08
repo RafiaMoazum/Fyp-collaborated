@@ -7,11 +7,11 @@ const roomSchema = new mongoose.Schema({
         //required: true
     },
    
-    capacity: {
+    capacity: {        //total capacity
         type: Number,
         //required: true
     },
-    currentCapacity: {
+    remainingCapacity: {    // remaining capacity
         type: Number,
         //required: true
     },

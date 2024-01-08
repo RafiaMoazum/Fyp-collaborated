@@ -38,7 +38,7 @@ const Popular = () => {
 
   useEffect(() => {
     fetchPopularHostels();
-  }, []);
+  },[]);
 
   const cardData = [
   

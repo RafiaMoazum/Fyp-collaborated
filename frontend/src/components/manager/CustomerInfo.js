@@ -52,7 +52,7 @@ export default function CustomerInfo() {
   useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
-        const res = await fetch(`/pendingBookings/${hostelId}`, {
+        const res = await fetch(`/showBookings/${hostelId}`, {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -74,6 +74,7 @@ export default function CustomerInfo() {
       }
     };
 
+    fetchManagerData();
     fetchBookingDetails();
   }, [hostelId]);
 

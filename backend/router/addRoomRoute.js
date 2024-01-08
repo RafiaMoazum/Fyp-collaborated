@@ -24,7 +24,7 @@ router.post('/addRoom/:hostelId', authenticate,upload.array('roomImages'),async 
         roomNumber,
         type,
         capacity,
-        currentCapacity,
+        remainingCapacity,
         price,
         ac,
         workingDesk,
@@ -45,7 +45,7 @@ router.post('/addRoom/:hostelId', authenticate,upload.array('roomImages'),async 
         const room = new Room({
             roomNumber,
             capacity,
-            currentCapacity,
+            remainingCapacity,
             price,
             facilities: {
                 ac,
@@ -128,7 +128,7 @@ router.put('/updateRoom/:roomId', authenticate, async (req, res) => {
   const {
       roomNumber,
       capacity,
-      currentCapacity,
+      remainingCapacity,
       price,
       ac,
       workingDesk,
@@ -147,7 +147,7 @@ router.put('/updateRoom/:roomId', authenticate, async (req, res) => {
           {
               roomNumber,
               capacity,
-              currentCapacity,
+              remainingCapacity,
               price,
               facilities: {
                   ac,

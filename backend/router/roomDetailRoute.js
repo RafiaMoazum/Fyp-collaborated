@@ -7,7 +7,7 @@ const Hostel= require("../model/hostelSchema")  //hostelSchema
 const Room= require("../model/roomsSchema") 
 //const authenticate = require("../middleware/authenticate");
 
-// Backend endpoint to get hostel details by ID
+// Backend endpoint to get room details by ID
 router.get('/roomDetails/:roomId', async (req, res) => {
     try {
       const roomId = req.params.roomId;

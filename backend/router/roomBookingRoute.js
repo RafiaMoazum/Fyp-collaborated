@@ -9,12 +9,14 @@ const User=require("../model/userSchema");
 const Booking=require("../model/bookingSchema")
 const TempBooking=require("../model/temporaryBookingSchema")
 const customerAuthentication = require("../middleware/customerAuthentication");
+const authenticate = require('../middleware/authenticate');
+
 
 //Apply for booking
 router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
     const roomId = req.params.roomId;
     console.log(`Room id= ${roomId}`);
-    const {name,email,phone,cnic,checkIn_date,checkOut_date} = req.body;
+    const {checkIn_date,checkOut_date} = req.body;
 
 
     //console.log(req.body);
@@ -29,7 +31,7 @@ router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
         }
         
         // Checking if the room is fully booked
-        if (room.currentCapacity <= 0) {
+        if (room.remainingCapacity <= 0) {
             return res.status(422).json({ error: 'Room is fully booked' });
         }
 
@@ -37,10 +39,7 @@ router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
     
         // Create a new booking
         const tempbooking = new TempBooking({
-            name,
-            email,
-            phone,
-            cnic,
+            
             checkIn_date,
             checkOut_date,
             
@@ -77,6 +76,56 @@ router.post('/apply/:roomId',customerAuthentication, async(req,res) =>{
 
 
 
+// Confirm booking and move data from tempBooking to Booking
+router.post('/confirmBooking/:bookingId', authenticate, async (req, res) => {
+    const bookingId = req.params.bookingId;
+
+    try {
+        // Find the temp booking record
+        const tempBooking = await TempBooking.findById(bookingId);
+        
+        if (!tempBooking) {
+            return res.status(404).json({ error: 'Temp Booking not found' });
+        }
+
+        // Extract necessary data from tempBooking
+        const { checkIn_date, checkOut_date, rooms, users } = tempBooking;
+
+        // Create a new Booking
+        const booking = new Booking({
+            checkIn_date,
+            checkOut_date,
+            rooms,
+            users,
+            
+        });
+
+        // Save the booking document to the database
+        const savedBooking = await booking.save();
+
+        // Update room and user records accordingly
+        for (const roomId of rooms) {
+            // Find the room by ID
+            const room = await Room.findById(roomId);
+            
+            if (room) {
+                // Update remainingCapacity by -1
+                room.remainingCapacity -= 1;
+
+                // Save the changes to the room
+                await room.save();
+            }
+        }
+
+        // Remove the tempBooking record
+        await TempBooking.findByIdAndRemove(bookingId);
+
+        res.status(201).json({ message: 'Booking Confirmed' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'An error occurred while confirming the booking' });
+    }
+});
 
 //Booking a room
 router.post('/bookingroom/:roomId',customerAuthentication, async(req,res) =>{
@@ -97,12 +146,12 @@ router.post('/bookingroom/:roomId',customerAuthentication, async(req,res) =>{
         }
         
         // Checking if the room is fully booked
-        if (room.currentCapacity <= 0) {
+        if (room.remainingCapacity <= 0) {
             return res.status(422).json({ error: 'Room is fully booked' });
         }
 
         // Subtract 1 from the room's capacity
-        room.currentCapacity -= 1;
+        room.remainingCapacity -= 1;
        
         await room.save();
     

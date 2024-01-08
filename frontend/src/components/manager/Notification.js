@@ -34,7 +34,7 @@ export default function Notification() {
         const data = await res.json();
         console.log(`Manager data: ${JSON.stringify(data)}`);
         
-        // Ensuring that managerData has the correct structure
+        
         setManagerData({
           name: data.name,
           email: data.email, 
@@ -90,6 +90,7 @@ export default function Notification() {
     window.alert(`Accept clicked for bookingId: ${bookingId}`);
     console.log(`Accept clicked for bookingId: ${bookingId}`);
     console.log(`Manager's Email: ${managerData.email}`); 
+    console.log(`User's Email: ${userEmail}`); 
     
     try {
       
@@ -158,11 +159,36 @@ export default function Notification() {
     }
   };
 
-  const handleConfirm = (bookingId) => {
+ const handleConfirm = async (bookingId) => {
     window.alert(`Confirm clicked for bookingId: ${bookingId}`);
     console.log(`Confirm clicked for bookingId: ${bookingId}`);
-    
-  };
+
+    try {
+        const res = await fetch(`/confirmBooking/${bookingId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (res.status === 201) {
+            window.alert('Booking confirmed successfully');
+            console.log('Booking confirmed successfully');
+            setConfirmationStatus((prevStatus) => ({
+                ...prevStatus,
+                [bookingId]: true,
+            }));
+        } else {
+            const error = await res.json();
+            console.error('Error:', error);
+            window.alert('An error occurred while confirming the booking');
+        }
+    } catch (err) {
+        console.error(err);
+        window.alert('An error occurred while confirming the booking');
+    }
+};
+
 	
   return (
     <>

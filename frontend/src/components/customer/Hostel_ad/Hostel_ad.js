@@ -17,6 +17,7 @@ import { useParams } from 'react-router-dom';
 import {FaMapMarkerAlt,FaStar} from 'react-icons/fa';
 import "./Hostel_ad.css";
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../RoomsDisplay.css';
     
 
@@ -24,6 +25,7 @@ const BackendUrl = 'http://localhost:8000';
 
 const Hostel_ad = () => {
 
+    const navigate=useNavigate();
 
     const images = [
     // '/images/242009851.jpg',
@@ -108,7 +110,10 @@ const Hostel_ad = () => {
 //console.log('Hostel Coordinates in Hostel_ad:', hostelData.coordinates);
 console.log('Hostel Coordinates in Hostel_ad:', hostelData?.coordinates);
 
-    
+const bookVisitButton = () => 
+{
+   navigate(`/BookVisitForm/${hostelId}`);
+};
     return (
     <>
         <div>
@@ -155,11 +160,11 @@ console.log('Hostel Coordinates in Hostel_ad:', hostelData?.coordinates);
                     <Row>
                         <Col sm style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', paddingBottom: '5px' }}>
                             
-                        <NavLink to={`/BookVisitForm/${hostelId}`} >
-                        <Button  size="lg" style={{ width: '100%', backgroundColor: '#3C6B97' }}>
+                        {/* <NavLink to={`/BookVisitForm/${hostelId}`} > */}
+                        <Button  size="lg" style={{ width: '100%', backgroundColor: '#3C6B97' }} onClick={bookVisitButton}>
                             Book A Visit
                         </Button>
-                       </NavLink>
+                       
                        
                         </Col>
                         <Col sm style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: '5px' }}>
@@ -185,7 +190,7 @@ console.log('Hostel Coordinates in Hostel_ad:', hostelData?.coordinates);
                                     <p>Room No. {room.roomNumber}</p>
                                     <p>Room Type. {room.type}</p>
                                     <p>Total Capacity. {room.capacity}</p>
-                                    <p>Current Capacity. {room.currentCapacity}</p>
+                                    <p>Remaining Capacity. {room.currentCapacity}</p>
                                     <p>Price. {room.price}</p>
                                 
                                 </div>
