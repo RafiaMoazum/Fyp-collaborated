@@ -1,4 +1,3 @@
-//Manager Login Page
 
 import React, { useState, useContext} from 'react';
 import './LoginForm.css'
@@ -39,7 +38,9 @@ export default function LoginForm() {
   } else{
     console.log("Login Successful")
     console.log(`RoomId from LoginForm.js= ${roomId}`)
-    navigate(`/RoomDetail2/${roomId}`)
+    window.alert("Login Successful")
+
+    //navigate(`/RoomDetail2/${roomId}`)
   }
 }
 

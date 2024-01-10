@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
+
 const Reviews = () => {
   const { hostelId } = useParams();
   const [reviews, setReviews] = useState([]);
@@ -29,6 +30,19 @@ const Reviews = () => {
         if (res.status === 200) {
           const data = await res.json();
           setReviews(data);
+
+          // Fetch user information for each review
+          const reviewsWithUserNames = await Promise.all(data.map(async (review) => {
+            const userResponse = await fetch(`/getUser/${review.user}`);
+            if (userResponse.status === 200) {
+              const userData = await userResponse.json();
+              return { ...review, userName: userData.name };
+            } else {
+              return { ...review, userName: 'Unknown User' };
+            }
+          }));
+
+          setReviews(reviewsWithUserNames);
         } else {
           const error = new Error(res.error);
           throw error;
@@ -75,7 +89,7 @@ const Reviews = () => {
             <div key={index} className="embla__slide mx-2">
               <Card style={{ width: "18rem", borderRadius: "25px" }} className="mr-3">
                 <Card.Header style={card_title}>
-                  <h5>User</h5>
+                  <h5>{data.userName}</h5>
                 </Card.Header>
                 <Card.Body>
                   <div style={{ textAlign: "center" }}>
