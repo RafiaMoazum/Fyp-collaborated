@@ -11,29 +11,34 @@ const customerAuthentication = require("../middleware/customerAuthentication");
 
 
 // Create a new review
-router.post('/addReview/:hostelId',  async (req, res) => {
+router.post('/addReview/:hostelId', customerAuthentication, async (req, res) => {
 
     const hostelId=req.params.hostelId;
     const { rating, comment } = req.body;
 
   try {
     //const userId = req.rootUser._id;  //req.rootUser= user's complete complete record
+    const userId = req.userID;
     const newReview = new Review({ 
         rating, comment 
     });
 
+    console.log(`userId======${userId}`)
     const savedReview =await newReview.save();
 
       // Retrieve the booking ID
       const reviewId = savedReview._id;
         
       try{
-           await Review.findByIdAndUpdate(reviewId, 
-              {$push : { hostel: hostelId }, 
-          })
-        //   await Review.findByIdAndUpdate(reviewId, 
-        //       {$push : { users: userId }, 
-        //   })
+        await Review.findByIdAndUpdate(reviewId,
+          {
+              $push: {
+                  hostel: hostelId,
+                  user: userId
+              },
+          },
+          { new: true } // This option returns the modified document
+      );
       }catch(err){
            console.log(`Error in Booking🤞 ${err}`);
       }
@@ -49,20 +54,19 @@ router.post('/addReview/:hostelId',  async (req, res) => {
 
 // Display Reviews
 router.get('/showReviews/:hostelId', async (req, res) => {
-    try {
+  try {
       const hostelId = req.params.hostelId;
-  
+
       // Query the database to find reviews with matching hostelId
-      const reviews = await Review.find({ hostel: hostelId });
-  
+      const reviews = await Review.find({ hostel: hostelId }).populate('user', 'name');
+
       // Return the reviews as a JSON response
       res.json(reviews);
-    } catch (error) {
+  } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Server error' });
-    }
-  });
-  
+  }
+});
 
 router.get('/averageRating/:hostelId', async (req, res) => {
   try {
@@ -89,5 +93,20 @@ router.get('/averageRating/:hostelId', async (req, res) => {
   }
 });
 
-
+// GET user by ID
+router.get('/getUser/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId);
+    
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 module.exports = router;

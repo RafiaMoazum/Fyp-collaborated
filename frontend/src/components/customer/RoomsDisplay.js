@@ -54,9 +54,9 @@ export default function RoomsDisplay() {
             <div key={room._id} className="roomDisplay">
               <div>
                 <p>Room No. {room.roomNumber}</p>
-                <p>Room Type. {room.type}</p>
+                {/* <p>Room Type. {room.type}</p> */}
                 <p>Total Capacity. {room.capacity}</p>
-                <p>Remaining Capacity. {room.currentCapacity}</p>
+                <p>Remaining Capacity. {room.remainingCapacity}</p>
                 <p>Price. {room.price}</p>
                
               </div>

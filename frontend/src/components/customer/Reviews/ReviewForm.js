@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './ReviewForm.css'
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = () => {
 const{hostelId}= useParams();
+const navigate = useNavigate();
   const [formData, setFormData] = useState({
     rating: 1,
     comment: '',
@@ -18,10 +20,27 @@ const{hostelId}= useParams();
     event.preventDefault();
   };
 
+  const isAuthenticated = () => {
+    // Read the token from the cookie
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)jwtoken\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    console.log("Token from Cookie:", token);
+
+    // Check if the token exists and is not expired
+    return token ? true : false;
+};
+useEffect(() =>{
+  isAuthenticated();
+  
+},[]);
   const AddReview = async (e) => {
     e.preventDefault();
     const { rating,comment} = formData;
 
+  //   if (!isAuthenticated()) {
+  //     // Redirect to the login page
+  //    navigate("/loginPageC");
+  //     return;
+  // }
     const res = await fetch(`/addReview/${hostelId}`, {
         method: "POST",
         credentials: "include",

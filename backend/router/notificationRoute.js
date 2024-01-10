@@ -112,12 +112,18 @@ router.post('/acceptEmail', async (req, res) => {
 
 
 // Send email route -> Reject
-router.post('/rejectEmail', async (req, res) => {
+router.post('/rejectEmail/:bookingId', async (req, res) => {
+  const bookingId = req.params.bookingId;
   const { to, subject, text, sender } = req.body;
 
   try {
     
-
+   // Find the temp booking record
+   const tempBooking = await TempBooking.findById(bookingId);
+        
+   if (!tempBooking) {
+       return res.status(404).json({ error: 'Temp Booking not found' });
+   }
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -140,6 +146,9 @@ router.post('/rejectEmail', async (req, res) => {
 
     const result = await transporter.sendMail(mailOptions);
     console.log('Email sent:', result);
+
+      // Remove the tempBooking record
+        await TempBooking.findByIdAndRemove(bookingId);
 
     res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {

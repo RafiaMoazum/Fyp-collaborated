@@ -18,6 +18,16 @@ export default function Notification() {
   const[managerData, setManagerData]=useState({ name: 'Manager' });
   const navigate = useNavigate();
 
+  const [confirmationStatus, setConfirmationStatus] = useState(() => {
+    try {
+      const storedConfirmationStatus = localStorage.getItem('confirmationStatus');
+      return storedConfirmationStatus ? JSON.parse(storedConfirmationStatus) : {};
+    } catch (error) {
+      console.error('Error parsing confirmationStatus from localStorage:', error);
+      return {};
+    }
+  });
+  
 
   const fetchManagerData = async () => {
     try {
@@ -53,6 +63,7 @@ export default function Notification() {
       navigate("/loginPage");
     }
   };
+ 
   
   useEffect(() => {
     const fetchBookingDetails = async () => {
@@ -83,8 +94,11 @@ export default function Notification() {
     fetchManagerData();
   }, [hostelId]);
 
+  useEffect(() => {
+    localStorage.setItem('confirmationStatus', JSON.stringify(confirmationStatus));
+  }, [confirmationStatus]);
 
-  const [confirmationStatus, setConfirmationStatus] = useState({});
+  //const [confirmationStatus, setConfirmationStatus] = useState({});
 
   const handleAllow = async (bookingId, userEmail) => {
     window.alert(`Accept clicked for bookingId: ${bookingId}`);
@@ -132,7 +146,7 @@ export default function Notification() {
     
     try {
       
-      const res = await fetch('/rejectEmail', {
+      const res = await fetch(`/rejectEmail/${bookingId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

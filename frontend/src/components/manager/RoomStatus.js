@@ -283,9 +283,9 @@ const showConfirmationPopup = () => {
                                 <thead>
                                     <tr>
                                         <th>Room No.</th>
-                                        <th>Room Type</th>
+                                        {/* <th>Room Type</th> */}
                                         <th>Total Capacity</th>
-                                        <th>Current Capacity</th>
+                                        <th>Remaining Capacity</th>
                                         <th>Price</th>
                                         <th>Facilities</th>
                                     </tr>
@@ -294,9 +294,9 @@ const showConfirmationPopup = () => {
                                 {displayrooms.map((room) => room._id === selectedRoomId && (
   <tr key={room._id}>
     <td>{room.roomNumber}</td>
-    <td>{room.type}</td>
+    {/* <td>{room.type}</td> */}
     <td>{room.capacity}</td>
-    <td>{room.currentCapacity}</td>
+    <td>{room.remainingCapacity}</td>
     <td>{room.price}</td>
     <td>
       <ul>

@@ -184,13 +184,13 @@ const bookVisitButton = () =>
                         <h1 style={{padding: '30px' ,color: 'black' }}>Rooms</h1>
                         <div className="room-selector">
                             {displayrooms.map((room) => (
-                                <NavLink to={`/RoomDetail/${room._id}`} className='hostelNameLink'>
+                                <NavLink to={`/RoomDetail2/${room._id}`} className='hostelNameLink'>
                                 <div key={room._id} className="roomDisplay">
                                 <div>
                                     <p>Room No. {room.roomNumber}</p>
                                     <p>Room Type. {room.type}</p>
                                     <p>Total Capacity. {room.capacity}</p>
-                                    <p>Remaining Capacity. {room.currentCapacity}</p>
+                                    <p>Remaining Capacity. {room.remainingCapacity}</p>
                                     <p>Price. {room.price}</p>
                                 
                                 </div>
