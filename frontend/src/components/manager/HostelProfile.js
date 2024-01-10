@@ -114,6 +114,7 @@ const showConfirmationPopup = () => {
   setShowConfirmation(true);
 };
 
+
   return (
     <>
       <Navbar/>
@@ -122,7 +123,6 @@ const showConfirmationPopup = () => {
           <Row>
             <Col xs={4} sm={4} md={2} lg={2}>
               <div>
-             
               <div className='side'>
                 <nav>
                   <ul>
@@ -138,62 +138,98 @@ const showConfirmationPopup = () => {
                   </ul>
                 </nav>
                 </div>
-
               </div>
             </Col>
             <Col xs={8} sm={8} md={10} lg={10}>
-              <section className ="form-container">
-                <div className="container">
-                  <div className="image-container">
-                    <img src="/hostel1.png" alt="My Image" className="rounded-image" />
-                  </div>
-                  <div className="content-container">    
+              <Container fluid className ="form-container1">
+                <Row>
+                  <div className="content-container1">    
                     <Row>
-                      <Col>
-                      <h2>{hostelData.name}</h2>
+                      <Col xs={12} sm={12} md={4} lg={3} xl={2}>
+                      <div className="image-cont d-flex justify-content-center">
+                        <img src="/hostel1.png" alt="My Image" className="rounded-img img-fluid" />
+                      </div>
                       </Col>
-                      <Col style={{textAlign: "left", paddingTop: "10px",fontSize:"20px"}}>
+                      <Col xs={6} sm={6} md={3} lg={3} xl={2}>
+                      <h2>{hostelData.name} <br></br><span><p>{hostelData.city}</p></span> </h2>
+                      </Col>
+                      <Col xs={6} sm={6} md={2} lg={2} xl={4}
+                      style={{textAlign: "left", paddingTop: "10px",fontSize:"20px"}}>
                       <Link to={`/UpdateHostel/${hostelId}`} style={{color: "black"}}>
                         <FaEdit/>
                       </Link>
                       </Col>
+                      <Col xs={12} sm={6} md={3} lg={4} xl={4}>
+                      <Row>
+                        <Col>
+                          <button type="button" className="btn">
+                            <Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white", textAlign: "center"}}>
+                              See Rooms
+                            </Link>
+                          </button>
+                        </Col>
+                        <Col>
+                        <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
+                          onClick={showConfirmationPopup}
+                      >
+                          Delete Hostel
+                      </button>
+                      {showConfirmation && (
+                          <div className="confirmation-popup">
+                              <p>Please enter the following statement to confirm:</p>
+                              <p>I want to delete this hostel</p>
+                              <input
+                                  type="text"
+                                  value={confirmationText}
+                                  onChange={(e) => setConfirmationText(e.target.value)}
+                              />
+                              <button onClick={handleDelete}>Confirm</button>
+                              <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                          </div>
+                      )}
+                        </Col>
+                      </Row>
+                      </Col>
                     </Row>
-                    <p>{hostelData.city}</p>
-                    <br></br>
                   </div>
-                  <button type="button" className="btn">
-                    <Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white", textAlign: "center"}}>
-                      See Rooms
-                    </Link>
-                  </button>
-                </div>
+                </Row>
+                <Row className="image-row">
+                {hostelData.hostelImages && hostelData.hostelImages.length > 0 ? (
+                  hostelData.hostelImages.map((image, index) => (
+                    <Col key={index} xs={12} sm={6} md={4} lg={3}>
+                      <div className="image-container2">
+                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid" />
+                      </div>
+                    </Col>
+                  ))
+                ) : (
+                  <>
+                    <Col xs={12} sm={6} md={4} lg={3}>
+                      <div className="image-container2">
+                        <img src="/no_img.jpg" alt="Image 2" className="img-fluid" />
+                      </div>
+                    </Col>
+
+                  </>
+                )}
+              </Row>
+              <br></br>
                 <Row>
-                <Col lg = {1}></Col>
-                <Col lg = {7}>
                 <p className="text-container1">{hostelData.description}</p>
-                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
+                
                 <Row>
-                <Col>
-                  <p className="text-container2">Gender: {hostelData.customersGender}</p>
-                  </Col>
-                  <Col>
-                  <p className="text-container2">Floors: {hostelData.NoOfFloors}</p>
-                  </Col>
-                  <Col>
-                  <p className="text-container2">Total Rooms: {hostelData.NoOfRooms}</p>
-                </Col>
+                  <p className="text-container2"><FaMapMarkerAlt/>  {hostelData.address}</p>
+                 <br></br>
+                  <p className="text-container2"><FaPhone/>  {hostelData.phone}</p>
+                  <br></br>
+                  <p className="text-container2"><FaEnvelope/>  {hostelData.email}</p>
+                  <br></br>
                 </Row>
                 <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
                 <Row>
-                <Col>
-                  <p className="text-container2"><FaMapMarkerAlt/>  {hostelData.address}</p>
-                  </Col>
-                  <Col>
-                  <p className="text-container2"><FaPhone/>  {hostelData.phone}</p>
-                  </Col>
-                  <Col>
-                  <p className="text-container2"><FaEnvelope/>  {hostelData.email}</p>
-                  </Col>
+                  <p className="text-container2">Gender: {hostelData.customersGender}</p>
+                  <p className="text-container2">Floors: {hostelData.NoOfFloors}</p>
+                  <p className="text-container2">Total Rooms: {hostelData.NoOfRooms}</p>
                 </Row>
                 <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
                 <Row>
@@ -213,60 +249,10 @@ const showConfirmationPopup = () => {
                   </div>
                 </div>
                 </Row>
-                </Col>
-                <Col lg = {5}>
-                </Col>
                 </Row>
-                <br></br>
-                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
-                <Row className="image-row">
-                {hostelData.hostelImages && hostelData.hostelImages.length > 0 ? (
-                  hostelData.hostelImages.map((image, index) => (
-                    <Col key={index} xs={12} sm={6} md={4} lg={3}>
-                      <div className="image-container2">
-                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid" />
-                      </div>
-                    </Col>
-                  ))
-                ) : (
-                  <>
-                    <Col xs={12} sm={6} md={4} lg={3}>
-                      <div className="image-container2">
-                        <img src="/InHostel2.jpg" alt="Image 2" className="img-fluid" />
-                      </div>
-                    </Col>
-                    <Col xs={12} sm={6} md={4} lg={3}>
-                      <div className="image-container2">
-                        <img src="/InHostel3.jpg" alt="Image 3" className="img-fluid" />
-                      </div>
-                    </Col>
-                  </>
-                )}
-              </Row>
-                </section>
+              </Container>
             </Col>
           </Row>
-          <button
-                className="btn_sub"
-                onClick={showConfirmationPopup}
-                style={{ backgroundColor: 'red', color: 'white' }}
-            >
-                Delete Hostel
-            </button>
-
-            {showConfirmation && (
-                <div className="confirmation-popup">
-                    <p>Please enter the following statement to confirm:</p>
-                    <p>I want to delete this hostel</p>
-                    <input
-                        type="text"
-                        value={confirmationText}
-                        onChange={(e) => setConfirmationText(e.target.value)}
-                    />
-                    <button onClick={handleDelete}>Confirm</button>
-                    <button onClick={() => setShowConfirmation(false)}>Cancel</button>
-                </div>
-            )}
       </Container>  
     </>
   )

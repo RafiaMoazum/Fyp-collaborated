@@ -122,7 +122,7 @@ export default function HostelsPage() {
                 <Col>
                 <div className="d-flex justify-content-center ">
                     <Row>
-                      <div className='form-container1'>
+                      <div className='form-containerhp'>
                       <h4 className='title'>
                         <Link to="/hostel_AddForm" style={{ textDecoration: "none", color: "Black" }}>
                           <FaPlusCircle /> Add Hostel
@@ -135,32 +135,32 @@ export default function HostelsPage() {
                 <Col></Col>
               </Row>
               <Row>
-      {hostelData.map((hostel, index) => (
-        <Col key={index} xs={12} sm={6} md={4} lg={4}>
-          <div className="container" key={index}>
-            <div className="image-container">
-              {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
-                <img
-                  src={`${BackendUrl}/${hostel.hostelImages[0]}`}
-                  alt={`Hostel ${index + 1}`}
-                  className="rounded-image img-fluid"
-                />
-              ) : (
-                <img src="hostel1.png" alt="hostel" className="rounded-image img-fluid" />
-              )}
-            </div>
-            <div className="content-container">
-              <h2>
-                <NavLink to={`/HostelProfile/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
-                  {hostel.name}
-                </NavLink>
-              </h2>
-              <p>{hostel.city}</p>
-            </div>
-          </div>
-        </Col>
-      ))}
-    </Row>
+                {hostelData.map((hostel, index) => (
+                  <Col key={index} xs={12} sm={12} md={6} lg={4}>
+                    <div className="container" key={index}>
+                      <div className="image-contain d-flex justify-content-center">
+                        {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+                          <img
+                            src={`${BackendUrl}/${hostel.hostelImages[0]}`}
+                            alt={`Hostel ${index + 1}`}
+                            className="rounded-image1 img-fluid"
+                          />
+                        ) : (
+                          <img src="no_img.jpg" alt="hostel" className="rounded-image1 img-fluid" />
+                        )}
+                      </div>
+                      <div className="content-container">
+                        <h2 className="h5 mb-2">
+                          <NavLink to={`/HostelProfile/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
+                            {hostel.name}
+                          </NavLink>
+                        </h2>
+                        <p className="mb-0">{hostel.city}</p>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
               </div>
             </Container>
             </Col>

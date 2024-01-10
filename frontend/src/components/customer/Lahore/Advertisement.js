@@ -44,7 +44,13 @@ const  Advertisement= () => {
   },[]);
 
   
-  
+  const truncateDescription = (description, wordLimit) => {
+    const words = description.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return description;
+  };
 
   return (
     <div style={{paddingTop:'20px'}}>
@@ -68,24 +74,12 @@ const  Advertisement= () => {
                 )}
             </Col>
             <Col>
-            {/* <h2><NavLink to={`/HostelDetails/${hostel._id}`} key={hostel._id}className='hostelNameLink'>{hostel.name}</NavLink></h2> */}
-              <h2><b>{hostel.name}</b></h2>
-              {/* {Array.from({ length: item.stars }, (_, index) => (
-                <FaStar key={index} className = 'star1' />
-              ))} */}
+            <h2><b>{hostel.name}</b></h2>
               <Row style={{ paddingTop: "15px" }}>
-                {/* {hostel.features.map((feature, index) => (
-                  <Col xs key={index}>
-                    <p style={{ border: '1px solid black', padding: "5px" }}>
-                      <b>{feature}</b>
-                    </p>
-                  </Col>
-                ))} */}
               </Row>
-              <p style={{ textAlign: "left"}}>{hostel.description}</p>
+              <p style={{ textAlign: "left" }}>{truncateDescription(hostel.description, 15)}</p>
               <p style={{ textAlign: "left"}}><FaMapMarkerAlt/>   {hostel.address}</p>
               <p style={{ textAlign: "left"}}><FaPhone/>   {hostel.phone}</p>
-              {/* <p><b>{item.mapLink}</b></p> */}
             </Col>
           </Row>
           </NavLink>

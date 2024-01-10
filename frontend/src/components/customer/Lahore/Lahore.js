@@ -55,6 +55,7 @@ const Lahore = () => {
                     <Col xs={1} sm={2} md={3} lg={4}></Col>
                 </Row>
             </Container>
+            <br></br>
             <Container fluid>
                 <Row>
                     <Col class="col-sm-1">
