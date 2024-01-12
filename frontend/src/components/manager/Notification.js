@@ -210,7 +210,7 @@ export default function Notification() {
     <BlueHeader2/>
     <Container fluid>
       <Row>
-        <Col xs={4} sm={4} md={2} lg={2}>
+        <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
           <div className='side'>
               <nav>
                 <ul>
@@ -227,8 +227,103 @@ export default function Notification() {
               </nav>
             </div>
         </Col>
-        <Col xs={8} sm={8} md={10} lg={10}>
+        <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
           <Container fluid className="form-container">
+          <Row>
+            <Col>
+            <h5 className='head5'>
+              New Booking Request:
+            </h5>
+            </Col>
+          </Row>
+          <br></br>
+          <Row>
+            <Col>
+            <div className="booking-list-container">
+              {bookingDetails.map((booking, index) => (
+                <div className="booking-item" key={index}>
+                  <div className="booking-details">
+                    {booking.rooms.map((room, roomIndex) => (
+                      <div key={roomIndex}>
+                        <p> <b>Room No:</b> {room.roomNumber}</p>
+                      </div>
+                    ))}
+                    {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p><b>Name:</b> {user.name} </p>
+                        </div>
+                      </div>
+                    ))}
+                    {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p><b>CNIC:</b> {user.cnic}</p>
+                        </div>
+                      </div>
+                    ))}
+                      {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p> <b>Phone:</b> {user.phone}</p>
+                        </div>
+                      </div>
+                    ))}
+                      {booking.users.map((user, userIndex) => (
+                      <div key={userIndex}>
+                        <div>
+                          <p><b>Email:</b> {user.email}</p>
+                        </div>
+                      </div>
+                    ))}
+                    {booking.rooms.map((room, roomIndex) => (
+                      <div key={roomIndex}>
+                        <p><b>Rent:</b>  {room.price} </p>
+                      </div>
+                    ))}
+                    <div>
+                      <p><b>Check-in:</b> {booking.checkIn_date}</p>
+                    </div>
+                    <div>
+                      <p><b>Check-out:</b> {booking.checkOut_date} </p>
+                    </div>
+                  </div>
+                  <div >
+                    {confirmationStatus[booking.bookingId] ? (
+                      <button onClick={() => handleConfirm(booking.bookingId)} className="confirmed">
+                        Confirmed
+                      </button>
+                    ) : (
+                      <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email)} className="accepted">
+                        Accept
+                      </button>
+                    )}
+                    <button onClick={() => handleReject(booking.bookingId, booking.users[0].email)} className="rejected">
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            </Col>
+          </Row>
+          <br></br>
+          <br></br>
+          <Row>
+            <Col>
+              <h5 className='head5'>Pending Visit Requests</h5>
+            </Col>
+          </Row>
+          <br></br>
+          <Row>
+            <Col>
+              <PendingVisitReq/>
+            </Col>
+          </Row>
+          </Container>
+        </Col>
+        <Col className="d-lg-none">
+          <Container fluid className="form-container1">
           <Row>
             <Col>
             <h5 className='head5'>

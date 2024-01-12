@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
-import SideMenu from './SideMenu';
 import {FaMapMarkerAlt,FaPhone, FaEnvelope, FaCircleNotch, FaEdit} from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
 
@@ -121,7 +120,7 @@ const showConfirmationPopup = () => {
       <BlueHeader2/>
       <Container fluid>
           <Row>
-            <Col xs={4} sm={4} md={2} lg={2}>
+            <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
               <div>
               <div className='side'>
                 <nav>
@@ -140,7 +139,119 @@ const showConfirmationPopup = () => {
                 </div>
               </div>
             </Col>
-            <Col xs={8} sm={8} md={10} lg={10}>
+            <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
+              <Container fluid className ="form-container1">
+                <Row>
+                  <div className="content-container1">    
+                    <Row>
+                      <Col xs={12} sm={12} md={4} lg={3} xl={2}>
+                      <div className="image-cont d-flex justify-content-center">
+                        <img src="/hostel1.png" alt="My Image" className="rounded-img img-fluid" />
+                      </div>
+                      </Col>
+                      <Col xs={6} sm={6} md={3} lg={3} xl={2}>
+                      <h2>{hostelData.name} <br></br><span><p>{hostelData.city}</p></span> </h2>
+                      </Col>
+                      <Col xs={6} sm={6} md={2} lg={2} xl={4}
+                      style={{textAlign: "left", paddingTop: "10px",fontSize:"20px"}}>
+                      <Link to={`/UpdateHostel/${hostelId}`} style={{color: "black"}}>
+                        <FaEdit/>
+                      </Link>
+                      </Col>
+                      <Col xs={12} sm={6} md={3} lg={4} xl={4}>
+                      <Row>
+                        <Col>
+                          <button type="button" className="btn">
+                            <Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white", textAlign: "center"}}>
+                              See Rooms
+                            </Link>
+                          </button>
+                        </Col>
+                        <Col>
+                        <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
+                          onClick={showConfirmationPopup}
+                      >
+                          Delete Hostel
+                      </button>
+                      {showConfirmation && (
+                          <div className="confirmation-popup">
+                              <p>Please enter the following statement to confirm:</p>
+                              <p>I want to delete this hostel</p>
+                              <input
+                                  type="text"
+                                  value={confirmationText}
+                                  onChange={(e) => setConfirmationText(e.target.value)}
+                              />
+                              <button onClick={handleDelete}>Confirm</button>
+                              <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                          </div>
+                      )}
+                        </Col>
+                      </Row>
+                      </Col>
+                    </Row>
+                  </div>
+                </Row>
+                <Row className="image-row">
+                {hostelData.hostelImages && hostelData.hostelImages.length > 0 ? (
+                  hostelData.hostelImages.map((image, index) => (
+                    <Col key={index} xs={12} sm={6} md={4} lg={3}>
+                      <div className="image-container2">
+                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid" />
+                      </div>
+                    </Col>
+                  ))
+                ) : (
+                  <>
+                    <Col xs={12} sm={6} md={4} lg={3}>
+                      <div className="image-container2">
+                        <img src="/no_img.jpg" alt="Image 2" className="img-fluid" />
+                      </div>
+                    </Col>
+
+                  </>
+                )}
+              </Row>
+              <br></br>
+                <Row>
+                <p className="text-container1">{hostelData.description}</p>
+                
+                <Row>
+                  <p className="text-container2"><FaMapMarkerAlt/>  {hostelData.address}</p>
+                 <br></br>
+                  <p className="text-container2"><FaPhone/>  {hostelData.phone}</p>
+                  <br></br>
+                  <p className="text-container2"><FaEnvelope/>  {hostelData.email}</p>
+                  <br></br>
+                </Row>
+                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
+                <Row>
+                  <p className="text-container2">Gender: {hostelData.customersGender}</p>
+                  <p className="text-container2">Floors: {hostelData.NoOfFloors}</p>
+                  <p className="text-container2">Total Rooms: {hostelData.NoOfRooms}</p>
+                </Row>
+                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
+                <Row>
+                <p className="text-container1">Facilities:</p>
+                <div className="container">
+                  <div className="row">
+                    {hostelData.facilities &&
+                      Object.keys(hostelData.facilities).length > 0 &&
+                      Object.entries(hostelData.facilities).map(([facility, value]) => (
+                        value && (
+                          <div key={facility} className="col-md-4">
+                            <div><FaCircleNotch/>   {facility}</div>
+                            <br></br>
+                          </div>
+                        )
+                      ))}
+                  </div>
+                </div>
+                </Row>
+                </Row>
+              </Container>
+            </Col>
+            <Col className="d-lg-none">
               <Container fluid className ="form-container1">
                 <Row>
                   <div className="content-container1">    

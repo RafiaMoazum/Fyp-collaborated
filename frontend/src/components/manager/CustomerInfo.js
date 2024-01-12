@@ -1,14 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Navbar from './Navbar';
+import Navbar from './Navbar'
 import BlueHeader2 from './BlueHeader2'
 import './CustomerInfo.css'
 import { useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { Container } from 'react-bootstrap';
 export default function CustomerInfo() {
   const { hostelId } = useParams();
   const [bookingDetails, setBookingDetails] = useState([]);
@@ -78,39 +79,34 @@ export default function CustomerInfo() {
     fetchBookingDetails();
   }, [hostelId]);
 
-	
   return (
     <>
     <Navbar/>
     <BlueHeader2/>
-    <div>
+    <Container fluid>
       <Row>
-        <Col xs={4} sm={4} md={2} lg={2}>
-          <div>
+      <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
+        <div >
             <div className='side'>
-              <nav>
+              <nav >
                 <ul>
-                  <li>{userData && <h2>{userData.name}</h2>}</li>
-                  <li><Link to="/hostelsPage" style={{textDecoration: "none", color: "white"}} >Home</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Rooms</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "white"}} >Customer Information</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Notification</Link> </li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Messages</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "white"}} >Logout</Link></li>
-                  <div style={{ border: "1px solid white", margin: "10px 0" }}></div>
+                  {userData && <h2>{userData.name}</h2>}
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
+                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                 </ul>
               </nav>
             </div>
           </div>
         </Col>
         <Col xs={8} sm={8} md={10} lg={10}>
-        <section className="form-container">
-        <table>
+        <div className="form-cont table-responsive">
+        <table className='table'>
         <thead>
           <tr>
               <th>Room</th>
@@ -125,42 +121,38 @@ export default function CustomerInfo() {
           </tr>
         </thead>
         <tbody>
-    {bookingDetails.map((booking, index) => (
-      <tr key={index}>
-        {booking.rooms.map((room, roomIndex) => (
-          <React.Fragment key={roomIndex}>
-            <td>{room.roomNumber}</td>
-            
-          </React.Fragment>
-        ))}
-        {booking.users.map((user, userIndex) => (
-          <React.Fragment key={userIndex}>
-            <td>{user.name}</td>
-            <td>{user.cnic}</td>
-            <td>{user.phone}</td>
-          </React.Fragment>
-        ))}
-        {booking.rooms.map((room, roomIndex) => (
-          <React.Fragment key={roomIndex}>
-            <td>{room.price}</td>
-            <td>{room.capacity}</td>
-            <td>{room.currentCapacity}</td>
-          </React.Fragment>
-        ))}
-        <td>{booking.checkIn_date}</td>
-        <td>{booking.checkOut_date}</td>
-      </tr>
-    ))}
-
-          
+          {bookingDetails.map((booking, index) => (
+            <tr key={index}>
+              {booking.rooms.map((room, roomIndex) => (
+                <React.Fragment key={roomIndex}>
+                  <td>{room.roomNumber}</td>
+                  
+                </React.Fragment>
+              ))}
+          {booking.users.map((user, userIndex) => (
+            <React.Fragment key={userIndex}>
+              <td>{user.name}</td>
+              <td>{user.cnic}</td>
+              <td>{user.phone}</td>
+            </React.Fragment>
+          ))}
+          {booking.rooms.map((room, roomIndex) => (
+            <React.Fragment key={roomIndex}>
+              <td>{room.price}</td>
+              <td>{room.capacity}</td>
+              <td>{room.currentCapacity}</td>
+            </React.Fragment>
+          ))}
+          <td>{booking.checkIn_date}</td>
+          <td>{booking.checkOut_date}</td>
+          </tr>
+          ))}  
         </tbody>
-      </table>
-
-        </section>
-
+        </table>
+        </div>
         </Col>
       </Row>  
-    </div>             
-    </>
+    </Container>           
+  </> 
   )
 }

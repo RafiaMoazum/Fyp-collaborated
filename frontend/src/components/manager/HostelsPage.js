@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import './HostelsPage.css'
 import Navbar from './Navbar';
 import BlueHeader2 from './BlueHeader2';
-import SideMenu from './SideMenu'
 import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
@@ -95,7 +94,7 @@ export default function HostelsPage() {
       <BlueHeader2/>
       <Container fluid>
         <Row>
-          <Col xs={4} sm={4} md={2} lg={2}>
+          <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
             <div>
               <div className='side'>
               <nav>
@@ -114,7 +113,7 @@ export default function HostelsPage() {
               </div>
             </div>
           </Col>
-          <Col xs={8} sm={8} md={10} lg={10}>
+          <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
           <Container fluid>
             <div className='form-container1'>
               <Row>
@@ -163,6 +162,56 @@ export default function HostelsPage() {
               </Row>
               </div>
             </Container>
+            </Col>
+            <Col className="d-lg-none">
+            <Container fluid>
+            <div className='form-container1'>
+              <Row>
+                
+                <Col>
+                <div className="d-flex justify-content-center ">
+                    <Row>
+                      <div className='form-containerhp'>
+                      <h4 className='title'>
+                        <Link to="/hostel_AddForm" style={{ textDecoration: "none", color: "Black" }}>
+                          <FaPlusCircle /> Add Hostel
+                        </Link>
+                      </h4>
+                      </div>
+                    </Row>
+                  </div>
+                </Col>
+                
+              </Row>
+              <Row>
+                {hostelData.map((hostel, index) => (
+                  <Col key={index} xs={12} sm={12} md={6} lg={4}>
+                    <div className="container" key={index}>
+                      <div className="image-contain d-flex justify-content-center">
+                        {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+                          <img
+                            src={`${BackendUrl}/${hostel.hostelImages[0]}`}
+                            alt={`Hostel ${index + 1}`}
+                            className="rounded-image1 img-fluid"
+                          />
+                        ) : (
+                          <img src="no_img.jpg" alt="hostel" className="rounded-image1 img-fluid" />
+                        )}
+                      </div>
+                      <div className="content-container">
+                        <h2 className="h5 mb-2">
+                          <NavLink to={`/HostelProfile/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
+                            {hostel.name}
+                          </NavLink>
+                        </h2>
+                        <p className="mb-0">{hostel.city}</p>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+              </div>
+            </Container>    
             </Col>
           </Row>
       </Container>
