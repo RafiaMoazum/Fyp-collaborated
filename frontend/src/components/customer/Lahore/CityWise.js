@@ -10,21 +10,27 @@ import Paginations from './Paginations';
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import './Lahore.css';
-import { useLocation } from 'react-router-dom';
+import {useNavigate, useLocation } from 'react-router-dom';
 
 
-const Lahore = () => {
+const CityWise = () => {
+    const navigate = useNavigate();  // Use useNavigate to get the navigate function
+    const location = useLocation();
+    const { city, imageSrc } = location.state || {};
 
+  console.log('city========', city);
+  console.log('imageSrc========', imageSrc);
+    
 
     return (
         <>
             <Header/>
             <Navbar/>
             <div>
-            <img src="./images/minare.jpg" width="100%" height="650" alt="Logo" className="d-inline-block align-text-top"></img>  
+            <img src={imageSrc} width="100%" height="650" alt="Logo" className="d-inline-block align-text-top"></img>  
             </div>
             <h1 className='h_style'>
-                Best Hostels in Lahore
+                Best Hostels in {city || 'City'}
             </h1 >
             <div>
                 <Container fluid >
@@ -43,7 +49,7 @@ const Lahore = () => {
                 <Container >
                     <Row >
                         <Col  xs={12} md={8}>
-                            <Advertisement/>
+                            <Advertisement city={city}/>
                         </Col>
                     </Row>
                 </Container>
@@ -75,4 +81,4 @@ const Lahore = () => {
     );
 }
 
-export default Lahore;
+export default CityWise;

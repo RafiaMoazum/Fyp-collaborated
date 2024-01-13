@@ -67,7 +67,7 @@ export default function RoomDetail2() {
   return (
     <>
       <Navbar/>
-      <BlueHeader2/>
+      {/* <BlueHeader2/> */}
       <section>
         <div className="container">
           <div>

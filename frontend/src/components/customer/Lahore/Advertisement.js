@@ -8,11 +8,11 @@ import {FaMapMarkerAlt,FaPhone,FaStar} from 'react-icons/fa';
 
 const BackendUrl = 'http://localhost:8000';
 
-const  Advertisement= () => {
+const  Advertisement= ({city}) => {
   const [hostelData, setHostelData] = useState([]);
-  const lahoreHostels = async () => {
+  const allHostels = async () => {
     try {
-      const res = await fetch('/hostelsInLahore', {
+      const res = await fetch('/allHostels', {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -25,8 +25,10 @@ const  Advertisement= () => {
         const data = await res.json();
         console.log(`hostels✌: ${data.hostels}`);
         console.log(`hostels✌: ${data}`);
-        setHostelData(data.hostels);
-       
+
+          // Filter hostels based on the city
+          const filteredHostels = data.hostels.filter((hostel) => hostel.city === city);
+          setHostelData(filteredHostels);       
       }else {
         const error = new Error(res.error);
         throw error;
@@ -40,7 +42,7 @@ const  Advertisement= () => {
 
 
   useEffect(() =>{
-      lahoreHostels();
+      allHostels();
   },[]);
 
   

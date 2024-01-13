@@ -50,7 +50,7 @@ export default function RoomsDisplay() {
 
         <div className="room-selector">
           {displayrooms.map((room) => (
-            <NavLink to={`/RoomDetail/${room._id}`} className='hostelNameLink'>
+            <NavLink to={`/RoomDetail2/${room._id}`} className='hostelNameLink'>
             <div key={room._id} className="roomDisplay">
               <div>
                 <p>Room No. {room.roomNumber}</p>

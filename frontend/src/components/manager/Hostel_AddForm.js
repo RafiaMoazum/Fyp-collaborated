@@ -29,6 +29,9 @@ function Hostel_AddForm() {
         mess:false,
         livingArea:false,
         hostelImages: [], // Array to store selected image files
+        bankAcc:'',
+        easyPaisa:'',
+        jazzCash:'',
     });
 
     const [coordinates, setCoordinates] = useState(null);
@@ -308,6 +311,20 @@ function Hostel_AddForm() {
                         <Col>
                         <div className="form-group">
                           <label className="form-label">
+                            Email:  
+                            <input
+                              className="input_box"
+                              type="email"
+                              name="email"
+                              value={hostelData.email}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>  
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
                             No of Floors:
                             <input
                               className="input_box"
@@ -347,7 +364,7 @@ function Hostel_AddForm() {
                                 </label>
                               </div> 
                         </Col>
-                        <Col></Col>
+                        
                         </Row>
                         <Col>
                         <div className="form-group">
@@ -436,6 +453,52 @@ function Hostel_AddForm() {
                         </label>
                         </div>
                         </Col>
+                        <Row>
+                          <h1>Payment Details</h1>
+                          <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Bank Account Number
+                            <input
+                              className="input_box"
+                              type="text"
+                              name="bankAcc"
+                              value={hostelData.bankAcc}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            EasyPaisa Number
+                            <input
+                              className="input_box"
+                              type="text"
+                              name="easyPaisa"
+                              value={hostelData.easyPaisa}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            JazzCash No.
+                            <input
+                              className="input_box"
+                              type="text"
+                              name="jazzCash"
+                              value={hostelData.jazzCash}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+
+                        </Row>
                         <input className="btn_sub" type="submit" value="Submit" />
                       </form>
                       </div>
