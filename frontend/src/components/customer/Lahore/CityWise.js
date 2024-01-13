@@ -11,6 +11,7 @@ import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import './Lahore.css';
 import {useNavigate, useLocation } from 'react-router-dom';
+import { useState,useEffect} from 'react';
 
 
 const CityWise = () => {
@@ -18,9 +19,59 @@ const CityWise = () => {
     const location = useLocation();
     const { city, imageSrc } = location.state || {};
 
+    const [hostels, setHostels] = useState([]);
   console.log('city========', city);
   console.log('imageSrc========', imageSrc);
     
+    const [selectedGender, setSelectedGender] = useState('');
+    const [selectedFacilities, setSelectedFacilities] = useState('');
+ const GetHostels = async () => {
+        try {
+          const response = await fetch('/getAllHostels', {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
+      
+          if (response.status === 200) {
+            const data = await response.json();
+            //console.log(`data.hostels == ${JSON.stringify(data.hostels)}`);
+
+            setHostels(data.hostels);
+          } else {
+            throw new Error('Failed to fetch hostels');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          throw error;
+        }
+      };
+      useEffect(() => {
+        GetHostels();
+      }, []);
+
+     // Function to update the selected city when it changes in Filters component
+    
+    
+    const handleGenderSelect = (gender) => {
+      console.log('Selected Gender:', gender);
+      setSelectedGender(gender);
+    };
+    const handleFacilitiesSelect = (facility) => {
+      console.log('Selected Facility:', facility);
+      setSelectedFacilities(facility);
+    };
+ // Filter
+ const filteredHostels = hostels.filter((hostel) => {
+  const genderFilter = selectedGender === '' || hostel.customersGender === selectedGender;
+  const facilitiesFilter =selectedFacilities === '' || hostel.facilities[selectedFacilities] === true;
+
+  return genderFilter && facilitiesFilter;
+});
+
 
     return (
         <>
@@ -39,8 +90,12 @@ const CityWise = () => {
                         
                         </Col>
                         <Col xs={8} sm={8} md={8} lg={8} style={{marginLeft: '25px'}}>
-                            <Filters/>
-                        </Col>
+                        <Filters
+                         onGenderSelect={handleGenderSelect}
+                         onFacilitiesSelect={handleFacilitiesSelect}
+                         />
+                    
+                     </Col>
                         <Col xs={2} sm={2} md={2} lg={2}>
                         
                         </Col>
@@ -49,7 +104,13 @@ const CityWise = () => {
                 <Container >
                     <Row >
                         <Col  xs={12} md={8}>
-                            <Advertisement city={city}/>
+                        <Advertisement
+        city={city}
+        hostels={filteredHostels}
+        selectedGender={selectedGender}
+        selectedFacilities={selectedFacilities}
+      />                          
+
                         </Col>
                     </Row>
                 </Container>
