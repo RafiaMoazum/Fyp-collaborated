@@ -157,6 +157,26 @@ router.post('/rejectEmail/:bookingId', async (req, res) => {
   }
 });
 
+router.get('/getHostelByRoomId/:roomId', async (req, res) => {
+  try {
+    const roomId = req.params.roomId;
+
+    // Find the hostel that has the specified room ID
+    
+    const hostel = await Hostel.findOne({ rooms: roomId });
+
+    if (!hostel) {
+      return res.status(404).json({ error: 'Hostel not found for the given room ID' });
+    }
+
+    // You can customize the response based on your requirements
+    res.json({ hostel });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;
 
 

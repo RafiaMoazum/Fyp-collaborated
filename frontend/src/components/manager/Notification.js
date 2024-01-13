@@ -16,6 +16,8 @@ export default function Notification() {
   const { hostelId } = useParams();
   const [bookingDetails, setBookingDetails] = useState([]);
   const[managerData, setManagerData]=useState({ name: 'Manager' });
+  const[hostelData, setHostelData]=useState();
+
   const navigate = useNavigate();
 
   const [confirmationStatus, setConfirmationStatus] = useState(() => {
@@ -63,6 +65,7 @@ export default function Notification() {
       navigate("/loginPage");
     }
   };
+  
  
   
   useEffect(() => {
@@ -81,6 +84,7 @@ export default function Notification() {
           const data = await res.json();
           console.log(`Booking details: ${JSON.stringify(data)}`);
           setBookingDetails(data.bookings);
+          
         } else {
           const error = new Error(res.error);
           throw error;
@@ -98,15 +102,41 @@ export default function Notification() {
     localStorage.setItem('confirmationStatus', JSON.stringify(confirmationStatus));
   }, [confirmationStatus]);
 
-  //const [confirmationStatus, setConfirmationStatus] = useState({});
+  
 
-  const handleAllow = async (bookingId, userEmail) => {
+  const handleAllow = async (bookingId, userEmail,userName,roomId) => {
     window.alert(`Accept clicked for bookingId: ${bookingId}`);
     console.log(`Accept clicked for bookingId: ${bookingId}`);
     console.log(`Manager's Email: ${managerData.email}`); 
     console.log(`User's Email: ${userEmail}`); 
     
+    console.log('roomId:', roomId);
+   
+
+    
     try {
+       // Fetch hostel information based on room ID
+    const hostelResponse = await fetch(`/getHostelByRoomId/${roomId}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+   
+    
+    if (hostelResponse.status === 200) {
+      const hostelData = await hostelResponse.json();
+      console.log('hostelData:', hostelData);
+      console.log('hostelData.hostel:', JSON.stringify(hostelData.hostel))
+      if (hostelData && hostelData.hostel) {
+        const { name, address, phone, email } = hostelData.hostel;
+      }
+    }
+      
+      setHostelData(hostelData.hostel);
+    
       
       const res = await fetch('/acceptEmail', {
         method: 'POST',
@@ -116,10 +146,33 @@ export default function Notification() {
         body: JSON.stringify({
           to: userEmail,
           subject: 'Booking Accepted',
-          text: `Your booking has been approved!>💌 ${managerData.email}`,
+          text: `Dear ${userName},
+
+          Congratulations! We are delighted to inform you that your hostel room application has been accepted. We appreciate your choice in staying with us.
+          
+          To confirm your booking, kindly submit the required payment within the next 24 hours. Once we receive your payment, your booking will be officially confirmed, and you can look forward to a comfortable stay with us.
+          
+          Payment Details:
+          Amount: [Specify the amount]
+          Payment Method: [Provide payment instructions]
+          
+          Please note that if we do not receive your payment within the specified timeframe, your application will be canceled, and the room will be made available to other applicants.
+          
+          We look forward to welcoming you to our hostel. If you have any questions or need further assistance, feel free to contact us at ${hostelData.phone} or email at ${hostelData.email}.
+          
+          Thank you for choosing ${hostelData.name}.
+          
+          Best regards,
+          
+          ${managerData.name}
+          ${hostelData.name}
+          ${hostelData.address}
+          ${managerData.email}`,
           sender: managerData.email,
+        
         }),
       });
+    
   
       if (res.status === 200) {
         window.alert('Email sent successfully');
@@ -137,6 +190,7 @@ export default function Notification() {
       console.error(err);
       window.alert('An error occurred while sending the email');
     }
+    
   };
   
   const handleReject =  async (bookingId, userEmail)=> {
@@ -145,6 +199,7 @@ export default function Notification() {
     console.log(`Manager's Email: ${managerData.email}`); 
     
     try {
+      
       
       const res = await fetch(`/rejectEmail/${bookingId}`, {
         method: 'POST',
@@ -294,7 +349,7 @@ export default function Notification() {
                         Confirmed
                       </button>
                     ) : (
-                      <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email)} className="accepted">
+                      <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email,booking.users[0].name,booking.rooms[0]._id)} className="accepted">
                         Accept
                       </button>
                     )}

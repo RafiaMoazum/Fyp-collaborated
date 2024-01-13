@@ -113,7 +113,7 @@ export default function PendingVisitReq() {
     console.log(`Reject clicked for bookingId: ${bookingId}`);
     try {
       
-      const res = await fetch('/rejectVisit', {
+      const res = await fetch(`/rejectVisit/${bookingId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
