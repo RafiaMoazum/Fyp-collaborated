@@ -20,3 +20,40 @@
     height: 50%;
 
 }
+.room-selector1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    text-decoration: none;
+
+  }
+  @media only screen and (max-width: 576px) {
+    .map-container {
+      width: 100%;
+      height: 300px; 
+    }
+  }
+  
+
+  @media only screen and (min-width: 576px) {
+    .map-container {
+      width: 100%;
+      height: 350px; 
+    }
+  }
+  
+
+  @media only screen and (min-width: 768px) {
+    .map-container {
+      width: 100%;
+      height: 60%;
+    }
+  }
+  
+
+  @media only screen and (min-width: 992px) {
+    .map-container {
+      width: 100%;
+      height: 60%; 
+    }
+  }

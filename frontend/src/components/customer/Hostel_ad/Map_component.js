@@ -56,9 +56,12 @@ export default function SimpleMap({ hostelCoordinates }) {
   }, [hostelCoordinates]);
 
   return (
-    <div
+    <>
+      <div className="map-container"
       id="map"
-      style={{ height: "50vh", width: "100%", backgroundColor: "skyblue" }}
+      style={{ backgroundColor: "skyblue" }}
     ></div>
+    
+    </>
   );
 }

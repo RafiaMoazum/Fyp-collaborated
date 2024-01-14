@@ -16,7 +16,7 @@ const ImageSlider = ({ images }) => {
     };
 
     if (!images || images.length === 0) {
-      return <p>No images available</p>; 
+      return <img src="/no_img.jpg" alt="no image avail"></img>; 
     }
   return (
     <div style={style1}>

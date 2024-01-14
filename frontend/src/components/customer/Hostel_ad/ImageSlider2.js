@@ -7,21 +7,26 @@ const ImageSlider = ({ images }) => {
   
     const style1 =
     {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "80%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      height: "100%"
     };
 
     if (!images || images.length === 0) {
-      return <p>No images available</p>; // You can adjust this fallback message
+      return <img src="/no_img.jpg" alt="no image avail"></img>; 
     }
   return (
     <div style={style1}>
       <Carousel>
       {images.map((image, index) => (
           <div key={index}>
-            <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="slider-image" />
+            <img 
+              className="d-block w-100 " 
+              src={`${BackendUrl}/${image}`} 
+              alt={`Image ${index + 1}`}  
+            />
           </div>
         ))}
     </Carousel>

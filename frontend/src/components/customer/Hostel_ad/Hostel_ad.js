@@ -120,7 +120,7 @@ const bookVisitButton = () =>
             <Header/>
             <Navbar/>
             <div>
-                <Container>
+                <Container fluid>
                     <Row>
                     <Col xs={12} sm={2} md={2} lg={2}>
                         
@@ -182,9 +182,9 @@ const bookVisitButton = () =>
                 {isDivVisible && (
                     <div>
                         <h1 style={{padding: '30px' ,color: 'black' }}>Rooms</h1>
-                        <div className="room-selector">
+                        <div className="room-selector1">
                             {displayrooms.map((room) => (
-                                <NavLink to={`/RoomDetail2/${room._id}`} className='hostelNameLink'>
+                                <NavLink to={`/RoomDetail/${room._id}`} className='hostelNameLink'>
                                 <div key={room._id} className="roomDisplay">
                                 <div>
                                     <p>Room No. {room.roomNumber}</p>
@@ -226,10 +226,7 @@ const bookVisitButton = () =>
                             </Row>
                         </Col>
                         <Col xs={12} md={4} style={{ marginTop: "20px" }}>
-
-                        {/* <Map_component hostelCoordinates={hostelData.coordinates[0]} /> */}
-                        <Map_component hostelCoordinates={hostelData?.coordinates?.[0]} />
-
+                            <Map_component hostelCoordinates={hostelData?.coordinates?.[0]} />
                         </Col>
                     </Row>
                     <br></br><br></br>

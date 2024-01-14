@@ -18,14 +18,13 @@ export default function RoomDetail() {
   
   
   const images = [
-   
-   
+
     '/images/242009851.jpg',
     '/roompic.jpg',
     '/hallway.webp',
-   
-   
   ];
+  const [isDivVisible, setDivVisible] = useState(false);
+
 
   const { roomId: contextRoomId, setRoomId } = useRoomContext();
   const { roomId } = useParams();
@@ -72,16 +71,16 @@ export default function RoomDetail() {
       <BlueHeader2/>
       <section>
         <div className="container">
-                <Container> 
+                <Container fluid> 
                     <Row>
-                    <Col xs={0} sm={1} md={1} lg={1}>
+                    <Col xs={12} sm={12} md={1} lg={1}>
                         
                     </Col>
-                    <Col xs={6} sm={6} md={7} lg={8}>
+                    <Col xs={12} sm={12} md={7} lg={8}>
                       
                     <ImageSlider2 images={roomData.roomImages} />
                     </Col>
-                    <Col xs={6} sm={5} md={4} lg={3}>
+                    <Col xs={12} sm={12} md={4} lg={3}>
                     <div style = {{textAlign: "left"}} >
                       {roomData ? (
                         <>
@@ -105,6 +104,13 @@ export default function RoomDetail() {
                       ) : (
                         <p>Loading room details...</p>
                       )}
+                      <div>
+                        {isDivVisible && (
+                            <div>
+                              <BookingForm/>
+                            </div>
+                        )}
+                    </div>
                       </div>
                     </Col>
                     </Row>

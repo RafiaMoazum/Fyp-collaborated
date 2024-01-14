@@ -250,32 +250,32 @@ useEffect(() => {
             </Container>
             <Container fluid style = {{padding: "150px"}}>
                 <Row className='general'>
-                    <Col sm ={3}>
+                    <Col xs={12} sm={12} md={1} lg={1} xl={3}>
                     
                     </Col>
-                    <Col sm ={2}>
+                    <Col xs={12} sm={12} md={3} lg={3} xl={2}>
                         <div className ='style-stats'>
                             <h1 className='stats-heading'>
                                 10+ <br></br> Cities
                             </h1>
                         </div>
                     </Col>
-                    <Col sm ={2}>
+                    <Col xs={12} sm={12} md={4} lg={4} xl={2}>
                         <div className ='style-stats'>
                             <h1 className='stats-heading2'>
                                 300+ <br></br> Happy Customers
                             </h1>
                         </div>
                     </Col>
-                    <Col sm ={2}>
+                    <Col xs={12} sm={12} md={3} lg={3} xl={2}>
                         <div className ='style-stats'>
                             <h1 className='stats-heading'>
                                 100+ <br></br> Hostels
                             </h1>
                         </div>
                     </Col>
-                    <Col sm ={3}>
-                    
+                    <Col xs={12} sm={12} md={1} lg={1} xl={3}>
+                   
                     </Col>
 
                 </Row>
