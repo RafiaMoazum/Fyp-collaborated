@@ -11,6 +11,9 @@ import { Link } from 'react-router-dom';
 import {FaEdit,FaTrash} from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
 import RoomForm from './RoomForm';
+import ImageSlider from '../customer/Hostel_ad/ImageSlider2';
+
+const BackendUrl = 'http://localhost:8000';
 
 export default function RoomStatus() {
     const { hostelId } = useParams();
@@ -315,13 +318,13 @@ const showConfirmationPopup = () => {
                                     <th >Room Images</th>
                                 </tr>
                             </thead>
-                                <tbody>
-                                  {displayrooms.map((room) => (
-                                    <tr key={room._id}>
-                                    <td>{room.roomNumber}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
+                            {roomData.roomImages.map((image, index) => (
+                             <tr key={index}>
+                             <td>
+                              <img src={`${BackendUrl}/${image}`}  alt={`Room Image ${index + 1}`} />
+                             </td>
+                            </tr>
+                            ))}
                           </table>
                         </div>
                     </div>

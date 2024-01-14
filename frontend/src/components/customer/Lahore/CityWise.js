@@ -105,11 +105,11 @@ const CityWise = () => {
                     <Row >
                         <Col  xs={12} md={8}>
                         <Advertisement
-        city={city}
-        hostels={filteredHostels}
-        selectedGender={selectedGender}
-        selectedFacilities={selectedFacilities}
-      />                          
+                       city={city}
+                       hostels={filteredHostels}
+                      selectedGender={selectedGender}
+                      selectedFacilities={selectedFacilities}
+                      />                          
 
                         </Col>
                     </Row>
