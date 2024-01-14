@@ -10,6 +10,8 @@ import Paginations from './Paginations';
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import './Lahore.css';
+import { useLocation } from 'react-router-dom';
+
 
 const Lahore = () => {
 

@@ -59,6 +59,18 @@ const hostelSchema = new mongoose.Schema({
             type: String// Array of image URLs
         }
     ],
+    bankAcc: {
+        type: String,
+       
+    },
+    easyPaisa: {
+        type: String,
+        
+    },
+    jazzCash: {
+        type: String,
+        
+    },
     averageRating: { type: Number, default: 0.0 }
 });
 

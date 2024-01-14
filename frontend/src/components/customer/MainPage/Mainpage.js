@@ -12,11 +12,15 @@ import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import "./Mainpage.css";
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const BackendUrl = 'http://localhost:8000';
 
 
 const Mainpage = () => {
+    const navigate = useNavigate();
+
     const image = 
     {
         width: "100%",
@@ -69,6 +73,9 @@ const Mainpage = () => {
   const [address, setAddress] = useState('');
   const [hostels, setHostels] = useState(null);
 
+  const handleClick = ({ city, imageSrc }) => {
+     
+    navigate('/cityWise', { state: { city, imageSrc } });  };
   const searchHostels = async () => {
     try {
         console.log('Search terms:', { name, address });
@@ -319,35 +326,35 @@ useEffect(() => {
                         <div>
                         <img className='img-city' src="./images/Minar_e_Pakistan.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{ paddingTop: "20px"}}><b><Link to="./lahore" style={{textDecoration:'none', color:'black'}}>Lahore</Link></b></h3>
+                        <h3 style = {{ paddingTop: "20px"}}><b>   <div onClick={() => handleClick({ city: "Lahore", imageSrc: "./images/minare.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Lahore</div></b></h3>
                         </div>                            
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
                         <div>
                         <img className='img-city' src="./images/mazaarquaid.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingTop: "20px"}}><b>Karachi</b></h3>
+                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Karachi", imageSrc: "./images/minare.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Karachi</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
                         <div>
                         <img className='img-city' src="./images/pakmonument.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingTop: "20px"}}><b>Islamabad</b></h3>
+                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Islamabad", imageSrc: "./images/minare.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Islamabad</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
                         <div >
                         <img className='img-city' src="./images/ghntaaghar.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingTop: "20px"}}><b>Faisalabad</b></h3>
+                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Faislabad", imageSrc: "./images/minare.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Faislabad</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
                         <div>
                         <img className='img-city' src="./images/multan.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingLeft: "30px", paddingTop: "20px"}}><b><Link to="./allHostels" style={{textDecoration:'none', color:'black'}}>Multan</Link></b></h3>
+                        <h3 style = {{paddingLeft: "30px", paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Multan", imageSrc: "./images/minare.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Multan</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
@@ -361,7 +368,6 @@ useEffect(() => {
                         </h3>
                         </div>
                     </Col>
-                
                 </Row>
             </Container>
             <Container fluid >

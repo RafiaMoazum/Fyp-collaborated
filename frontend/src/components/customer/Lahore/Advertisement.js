@@ -1,49 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import './Lahore.css';
-import {FaMapMarkerAlt,FaPhone,FaStar} from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 
 const BackendUrl = 'http://localhost:8000';
 
-const  Advertisement= () => {
+const Advertisement = ({ city, hostels, selectedGender, selectedFacilities }) => {
   const [hostelData, setHostelData] = useState([]);
-  const lahoreHostels = async () => {
-    try {
-      const res = await fetch('/hostelsInLahore', {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-  
-      if (res.status === 200) {
-        const data = await res.json();
-        console.log(`hostels✌: ${data.hostels}`);
-        console.log(`hostels✌: ${data}`);
-        setHostelData(data.hostels);
-       
-      }else {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.error(err);
-      //navigate('/loginPage');
-    }
-  };
 
+  useEffect(() => {
+    const filteredHostels = hostels.filter(
+      (hostel) =>
+        (!selectedGender || hostel.customersGender === selectedGender) &&
+        (!city || hostel.city === city) &&
+        (!selectedFacilities || hostel.facilities[selectedFacilities] === true)
+    );
+    setHostelData(filteredHostels);
+  }, [selectedGender, hostels, city, selectedFacilities]);
 
-
-  useEffect(() =>{
-      lahoreHostels();
-  },[]);
-
-  
   const truncateDescription = (description, wordLimit) => {
     const words = description.split(' ');
     if (words.length > wordLimit) {
@@ -53,41 +27,41 @@ const  Advertisement= () => {
   };
 
   return (
-    <div style={{paddingTop:'20px'}}>
-     
+    <div style={{ paddingTop: '20px' }}>
       {hostelData.map((hostel, index) => (
-        <>
         <div key={index} className='add_style'>
-          <NavLink to={`/Hostel_ad/${hostel._id}`} key={hostel._id}className='hostelNameLink'>
-          <Row>
-            <Col>
-            {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+          <NavLink to={`/Hostel_ad/${hostel._id}`} key={hostel._id} className='hostelNameLink'>
+            <Row>
+              <Col>
+                {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
                   <img
                     src={`${BackendUrl}/${hostel.hostelImages[0]}`}
                     alt={`Image 1`}
-                    className="img-fluid"
-                    width="100%"
-                    height="100%"
+                    className='img-fluid'
+                    width='100%'
+                    height='100%'
                   />
                 ) : (
-                  <img alt="" src='./images/242009851.jpg' width="100%" height="100%" />
+                  <img alt='' src='./images/242009851.jpg' width='100%' height='100%' />
                 )}
-            </Col>
-            <Col>
-            <h2><b>{hostel.name}</b></h2>
-              <Row style={{ paddingTop: "15px" }}>
-              </Row>
-              <p style={{ textAlign: "left" }}>{truncateDescription(hostel.description, 15)}</p>
-              <p style={{ textAlign: "left"}}><FaMapMarkerAlt/>   {hostel.address}</p>
-              <p style={{ textAlign: "left"}}><FaPhone/>   {hostel.phone}</p>
-            </Col>
-          </Row>
+              </Col>
+              <Col>
+                <h2><b>{hostel.name}</b></h2>
+                <Row style={{ paddingTop: '15px' }}></Row>
+                <p style={{ textAlign: 'left' }}>{truncateDescription(hostel.description, 15)}</p>
+                <p style={{ textAlign: 'left' }}>
+                  <FaMapMarkerAlt /> {hostel.address}
+                </p>
+                <p style={{ textAlign: 'left' }}>
+                  <FaPhone /> {hostel.phone}
+                </p>
+              </Col>
+            </Row>
           </NavLink>
         </div>
-        <br></br>
-      </>
-      ))}  
+      ))}
     </div>
   );
 };
+
 export default Advertisement;

@@ -11,6 +11,7 @@ import Hostel_AddForm from './components/manager/Hostel_AddForm';
 import Footer from './components/customer/Footer/Footer';
 import Mainpage from './components/customer/MainPage/Mainpage';
 import Lahore from './components/customer/Lahore/Lahore';
+import CityWise from './components/customer/Lahore/CityWise';
 import About from './components/customer/About/About';
 import LoginPageC from './components/customer/LoginPage/LoginPageC';
 import Hostel_ad from './components/customer/Hostel_ad/Hostel_ad';
@@ -49,6 +50,7 @@ function App() {
           <Route path="/contact_us" element={<ContactUs/>} />
           <Route path="/hostel_ad" exact element={<Hostel_ad />} /> 
           <Route path="/lahore" element={<Lahore />} /> 
+          <Route path="/cityWise" element={<CityWise/>} /> 
           <Route path="/signupPage" exact element={<SignupPage />} />
           <Route path="/loginPage" element={<LoginPage />} />
           <Route path="/userSignupPage" exact element={<UserSignupPage />} />

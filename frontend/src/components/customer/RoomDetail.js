@@ -97,7 +97,7 @@ export default function RoomDetail() {
                                   value && <li key={facility}> <FaCheck/> {facility} </li> 
                                 ))}
                           </ul>
-                          <Link to='/LoginPageC'>
+                          <Link to=''>
                             <button onClick={handleBookNowClick} className='btn_link'>Book Now</button>
                           </Link>
                         </>

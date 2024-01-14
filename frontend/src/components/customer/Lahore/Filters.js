@@ -2,45 +2,25 @@ import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import './Filters.css';
 
-const ResponsiveDropdowns = ({ onCitySelect,onGenderSelect }) => { // Pass a callback to update the selected city
-  const [selectedCity, setSelectedCity] = useState(''); // Add state to manage selected city
+const ResponsiveDropdowns = ({ onGenderSelect, onFacilitiesSelect }) => {
   const [selectedGender, setSelectedGender] = useState('');
+  const [selectedFacilities, setSelectedFacilities] = useState('');
 
-  const cities = ['Lahore', 'Karachi', 'Islamabad', 'Faislabad'];
-const genders = ['Male', 'Female'];
-
-  const handleCitySelect = (city) => {
-    setSelectedCity(city);
-    onCitySelect(city); // Call the callback to update the selected city in the parent component
-  };
+  const genders = ['Male', 'Female'];
+  const facilities = ['parking', 'wifi', 'laundry', 'Elevator', 'mess', 'livingArea'];
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
     onGenderSelect(gender);
   };
 
+  const handleFacilitiesSelect = (facility) => {
+    setSelectedFacilities(facility);
+    onFacilitiesSelect(facility);
+  };
 
   return (
     <div className="horizontal-dropdowns">
-      <Dropdown className="mb-3">
-        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: 'white', color: 'black' }}>
-          {selectedCity || 'City'}
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={() => handleCitySelect('')}>All Cities</Dropdown.Item>
-          {cities.map((city) => (
-            <Dropdown.Item
-              key={city}
-              onClick={() => handleCitySelect(city)}
-            >
-              {city}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
-      
-
       {/* Gender */}
       <Dropdown className="mb-3">
         <Dropdown.Toggle variant="secondary" style={{ backgroundColor: 'white', color: 'black' }}>
@@ -48,18 +28,31 @@ const genders = ['Male', 'Female'];
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => handleGenderSelect('')}>All </Dropdown.Item>
+          <Dropdown.Item onClick={() => handleGenderSelect('')}>All</Dropdown.Item>
           {genders.map((gender) => (
-            <Dropdown.Item
-              key={gender}
-              onClick={() => handleGenderSelect(gender)}
-            >
+            <Dropdown.Item key={gender} onClick={() => handleGenderSelect(gender)}>
               {gender}
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>
       </Dropdown>
-      
+
+      {/* Facilities */}
+       
+       <Dropdown className="mb-3">
+        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: 'white', color: 'black' }}>
+          {selectedFacilities || 'Facilities'}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => handleFacilitiesSelect('')}>All</Dropdown.Item>
+          {facilities.map((facility) => (
+            <Dropdown.Item key={facility} onClick={() => handleFacilitiesSelect(facility)}>
+              {facility}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
   );
 };

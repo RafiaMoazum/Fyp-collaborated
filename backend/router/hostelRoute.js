@@ -27,7 +27,8 @@ router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req
         laundry,
         Elevator,
         mess,
-        livingArea } = req.body;
+        livingArea,
+        bankAcc,easyPaisa,jazzCash} = req.body;
 
     try {
         const coordinatesString = req.body.coordinates;
@@ -52,7 +53,8 @@ router.post('/addHostel', authenticate, upload.array('hostelImages'), async (req
                 livingArea,
             },
             coordinates: `${latitude}, ${longitude}`, // Storing coordinates as a string
-            hostelImages
+            hostelImages,
+            bankAcc,easyPaisa,jazzCash
         });
 
         // Save the hostel document to the database

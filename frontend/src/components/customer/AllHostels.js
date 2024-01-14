@@ -9,8 +9,9 @@ const BackendUrl = 'http://localhost:8000';
 export default function HostelsDisplay() {
 
     const [hostels, setHostels] = useState([]);
-    const [selectedCity, setSelectedCity] = useState(''); // Add state to manage selected city
     const [selectedGender, setSelectedGender] = useState('');
+    const [selectedFacilities, setSelectedFacilities] = useState('');
+
     const GetHostels = async () => {
         try {
           const response = await fetch('/getAllHostels', {
@@ -42,20 +43,22 @@ export default function HostelsDisplay() {
 
       
   // Function to update the selected city when it changes in Filters component
-  const handleCitySelect = (city) => {
-    setSelectedCity(city);
-  };
+ 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
   };
 
-
+  const handleFacilitiesSelect = (facility) => {
+    setSelectedFacilities(facility);
+  };
+  
 
   // Filter 
   const filteredHostels = hostels.filter((hostel) => {
-    const cityFilter = selectedCity === '' || hostel.city === selectedCity;
     const genderFilter = selectedGender === '' || hostel.customersGender === selectedGender;
-    return cityFilter && genderFilter;
+    const facilitiesFilter =
+      selectedFacilities === '' || hostel.facilities[selectedFacilities] === true;
+    return genderFilter && facilitiesFilter;
   });
 
   return (
@@ -66,12 +69,14 @@ export default function HostelsDisplay() {
       
       <section className="mainSec">
       <Filters
-          onCitySelect={handleCitySelect}
           onGenderSelect={handleGenderSelect}
-        />                                  {/* Pass the callback to update selected city */}      <h1 style={{ color: 'black' }}>Hostels</h1>
+          onFacilitiesSelect={handleFacilitiesSelect}
+
+        />                                   
+          <h1 style={{ color: 'black' }}>Hostels</h1>
       <div className="room-selector">
       {filteredHostels.map((hostel) => (
-            <NavLink to={`/HostelDetails/${hostel._id}`} className='hostelNameLink'>
+            <NavLink to={`/Hostel_ad/${hostel._id}`} className='hostelNameLink'>
             <div className="roomDisplay">
             <div>
               {hostel.hostelImages && hostel.hostelImages.length > 0 ? (

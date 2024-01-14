@@ -1,3 +1,4 @@
+//my code
 import React from 'react'
 import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
@@ -104,13 +105,15 @@ export default function Notification() {
 
   
 
-  const handleAllow = async (bookingId, userEmail,userName,roomId) => {
+  const handleAllow = async (bookingId, userEmail,userName,roomId,roomPrice) => {
     window.alert(`Accept clicked for bookingId: ${bookingId}`);
     console.log(`Accept clicked for bookingId: ${bookingId}`);
     console.log(`Manager's Email: ${managerData.email}`); 
     console.log(`User's Email: ${userEmail}`); 
     
     console.log('roomId:', roomId);
+    console.log('roomPrice:', roomPrice);
+
    
 
     
@@ -133,9 +136,10 @@ export default function Notification() {
       if (hostelData && hostelData.hostel) {
         const { name, address, phone, email } = hostelData.hostel;
       }
+    
     }
-      
       setHostelData(hostelData.hostel);
+    
     
       
       const res = await fetch('/acceptEmail', {
@@ -153,12 +157,19 @@ export default function Notification() {
           To confirm your booking, kindly submit the required payment within the next 24 hours. Once we receive your payment, your booking will be officially confirmed, and you can look forward to a comfortable stay with us.
           
           Payment Details:
-          Amount: [Specify the amount]
-          Payment Method: [Provide payment instructions]
+          Amount: ${roomPrice}
+          Payment Method: Please submit the amount in any of the accounts mentioned below and send the receipt on
+          this email address: ${hostelData.email}
+
+          Accounts:
+          Bank Account No. ${hostelData.bankAcc}
+          EasyPaisa No. ${hostelData.easyPaisa}
+          JazzCashNo. ${hostelData.jazzCash}
           
           Please note that if we do not receive your payment within the specified timeframe, your application will be canceled, and the room will be made available to other applicants.
           
-          We look forward to welcoming you to our hostel. If you have any questions or need further assistance, feel free to contact us at ${hostelData.phone} or email at ${hostelData.email}.
+          We look forward to welcoming you to our hostel. If you have any questions or need further assistance, feel free to contact us at ${hostelData.phone} or email at
+           ${hostelData.email}.
           
           Thank you for choosing ${hostelData.name}.
           
@@ -193,13 +204,34 @@ export default function Notification() {
     
   };
   
-  const handleReject =  async (bookingId, userEmail)=> {
+  const handleReject =  async (bookingId, userEmail,userName,roomId)=> {
     window.alert(`Reject clicked for bookingId: ${bookingId}`)
     console.log(`Reject clicked for bookingId: ${bookingId}`);
     console.log(`Manager's Email: ${managerData.email}`); 
     
     try {
-      
+      // Fetch hostel information based on room ID
+    const hostelResponse = await fetch(`/getHostelByRoomId/${roomId}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+   
+    
+    if (hostelResponse.status === 200) {
+      const hostelData = await hostelResponse.json();
+      console.log('hostelData:', hostelData);
+      console.log('hostelData.hostel:', JSON.stringify(hostelData.hostel))
+      if (hostelData && hostelData.hostel) {
+        const { name, address, phone, email } = hostelData.hostel;
+      }
+    
+    }
+      setHostelData(hostelData.hostel);
+    
       
       const res = await fetch(`/rejectEmail/${bookingId}`, {
         method: 'POST',
@@ -208,8 +240,24 @@ export default function Notification() {
         },
         body: JSON.stringify({
           to: userEmail,
-          subject: 'Booking Not Accepted',
-          text: `Your booking has not been accepted! Try again later>💌 ${managerData.email}`,
+          subject: 'Regarding Your Hostel Room Application',
+          text: `Dear ${userName},
+
+          Thank you for applying for a room at ${hostelData.name}. We appreciate your interest in staying with us.
+          
+          After careful consideration, we regret to inform you that your hostel room application has not been accepted at this time. 
+          We understand that this news may be disappointing, and we appreciate your understanding.
+          
+          We value your interest in our hostel and hope that you find suitable accommodation for your stay.
+          
+          Thank you for your consideration.
+          
+          Best regards,
+          
+          ${hostelData.name}
+          ${hostelData.address}
+          ${hostelData.phone}
+          ${hostelData.email}`,
           sender: managerData.email,
         }),
       });
@@ -265,7 +313,7 @@ export default function Notification() {
     <BlueHeader2/>
     <Container fluid>
       <Row>
-        <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
+        <Col xs={4} sm={4} md={2} lg={2}>
           <div className='side'>
               <nav>
                 <ul>
@@ -282,7 +330,7 @@ export default function Notification() {
               </nav>
             </div>
         </Col>
-        <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
+        <Col xs={8} sm={8} md={10} lg={10}>
           <Container fluid className="form-container">
           <Row>
             <Col>
@@ -349,106 +397,11 @@ export default function Notification() {
                         Confirmed
                       </button>
                     ) : (
-                      <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email,booking.users[0].name,booking.rooms[0]._id)} className="accepted">
+                      <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email,booking.users[0].name,booking.rooms[0]._id,booking.rooms[0].price)} className="accepted">
                         Accept
                       </button>
                     )}
-                    <button onClick={() => handleReject(booking.bookingId, booking.users[0].email)} className="rejected">
-                      Reject
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            </Col>
-          </Row>
-          <br></br>
-          <br></br>
-          <Row>
-            <Col>
-              <h5 className='head5'>Pending Visit Requests</h5>
-            </Col>
-          </Row>
-          <br></br>
-          <Row>
-            <Col>
-              <PendingVisitReq/>
-            </Col>
-          </Row>
-          </Container>
-        </Col>
-        <Col className="d-lg-none">
-          <Container fluid className="form-container1">
-          <Row>
-            <Col>
-            <h5 className='head5'>
-              New Booking Request:
-            </h5>
-            </Col>
-          </Row>
-          <br></br>
-          <Row>
-            <Col>
-            <div className="booking-list-container">
-              {bookingDetails.map((booking, index) => (
-                <div className="booking-item" key={index}>
-                  <div className="booking-details">
-                    {booking.rooms.map((room, roomIndex) => (
-                      <div key={roomIndex}>
-                        <p> <b>Room No:</b> {room.roomNumber}</p>
-                      </div>
-                    ))}
-                    {booking.users.map((user, userIndex) => (
-                      <div key={userIndex}>
-                        <div>
-                          <p><b>Name:</b> {user.name} </p>
-                        </div>
-                      </div>
-                    ))}
-                    {booking.users.map((user, userIndex) => (
-                      <div key={userIndex}>
-                        <div>
-                          <p><b>CNIC:</b> {user.cnic}</p>
-                        </div>
-                      </div>
-                    ))}
-                      {booking.users.map((user, userIndex) => (
-                      <div key={userIndex}>
-                        <div>
-                          <p> <b>Phone:</b> {user.phone}</p>
-                        </div>
-                      </div>
-                    ))}
-                      {booking.users.map((user, userIndex) => (
-                      <div key={userIndex}>
-                        <div>
-                          <p><b>Email:</b> {user.email}</p>
-                        </div>
-                      </div>
-                    ))}
-                    {booking.rooms.map((room, roomIndex) => (
-                      <div key={roomIndex}>
-                        <p><b>Rent:</b>  {room.price} </p>
-                      </div>
-                    ))}
-                    <div>
-                      <p><b>Check-in:</b> {booking.checkIn_date}</p>
-                    </div>
-                    <div>
-                      <p><b>Check-out:</b> {booking.checkOut_date} </p>
-                    </div>
-                  </div>
-                  <div >
-                    {confirmationStatus[booking.bookingId] ? (
-                      <button onClick={() => handleConfirm(booking.bookingId)} className="confirmed">
-                        Confirmed
-                      </button>
-                    ) : (
-                      <button onClick={() => handleAllow(booking.bookingId, booking.users[0].email)} className="accepted">
-                        Accept
-                      </button>
-                    )}
-                    <button onClick={() => handleReject(booking.bookingId, booking.users[0].email)} className="rejected">
+                    <button onClick={() => handleReject(booking.bookingId, booking.users[0].email,booking.users[0].name,booking.rooms[0]._id)} className="rejected">
                       Reject
                     </button>
                   </div>
