@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
-const temporaryVisitSchema = new mongoose.Schema({
+const confirmedVisitSchema = new mongoose.Schema({
   name:{  type: String  },
   email: {  type: String },
   phone: {  type: String },
   cnic: {  type: String },
   date: { type: Date},
+   time: { type: String },
   hostelId: {type: String}
 });
 
-const TempVisitBooking = mongoose.model('TempVisitBooking', temporaryVisitSchema);
+const ConfirmedVisit = mongoose.model('Confirmedvisit', confirmedVisitSchema);
 
-module.exports = TempVisitBooking;
+module.exports = ConfirmedVisit;

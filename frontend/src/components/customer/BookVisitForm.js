@@ -15,6 +15,7 @@ function BookVisitForm() {
     phone: '',
     cnic:'',
     date: '',
+    time:'',
     
   });
 
@@ -33,7 +34,7 @@ function BookVisitForm() {
   //Fetch Data from form using Fetch API
  const bookVisit = async (e) => {
     e.preventDefault();
-    const { name, email,phone,cnic,date} = UserData;
+    const { name, email,phone,cnic,date,time} = UserData;
 
     const res = await fetch(`/applyVisit/${hostelId}`, {
         method: "POST",
@@ -42,7 +43,7 @@ function BookVisitForm() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name, email, phone, cnic, date
+            name, email, phone, cnic, date,time
         })
     });
 
@@ -122,6 +123,20 @@ function BookVisitForm() {
             type="date"
             name="date"
             value={UserData.date}
+            onChange={handleInputChange}
+          />
+        </label>
+      </div>
+
+      
+      <div className="form-group">
+        <label className="form-label">
+          Select Time:
+          <input
+            className="form-input"
+            type="time"
+            name="time"
+            value={UserData.time}
             onChange={handleInputChange}
           />
         </label>
