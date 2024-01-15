@@ -16,13 +16,6 @@ const BackendUrl = 'http://localhost:8000';
 
 export default function RoomDetail() {
   
-  
-  const images = [
-
-    '/images/242009851.jpg',
-    '/roompic.jpg',
-    '/hallway.webp',
-  ];
   const [isDivVisible, setDivVisible] = useState(false);
 
 
@@ -32,7 +25,9 @@ export default function RoomDetail() {
 
   const handleBookNowClick = () => {
     // Update the roomId using setRoomId from the context
-    
+    {
+      setDivVisible(!isDivVisible);
+    };
     setRoomId(roomId);
   };
 

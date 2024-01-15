@@ -115,6 +115,7 @@ useEffect(() => {
   
     return (
         <>
+        <Container fluid style={{paddingLeft: "0px", paddingRight: "0px"}}>
         <Header/>
         <Navbar/>
             <Container fluid style={{ paddingBottom: "50px" }}>
@@ -310,7 +311,7 @@ useEffect(() => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid style = {{padding: "200px"}}>
+            <Container fluid style = {{padding: "150px"}}>
                 <Row>
                     <Col sm={12}>
                     <h2 style = {{paddingBottom: "70px", display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -333,28 +334,28 @@ useEffect(() => {
                         <div>
                         <img className='img-city' src="./images/mazaarquaid.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Karachi", imageSrc: "./images/minare.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Karachi</div></b></h3>
+                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Karachi", imageSrc: "./images/karachii.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Karachi</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
                         <div>
                         <img className='img-city' src="./images/pakmonument.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Islamabad", imageSrc: "./images/minare.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Islamabad</div></b></h3>
+                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Islamabad", imageSrc: "./images/isl.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Islamabad</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
                         <div >
                         <img className='img-city' src="./images/ghntaaghar.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Faislabad", imageSrc: "./images/minare.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Faislabad</div></b></h3>
+                        <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Faislabad", imageSrc: "./images/fsl.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Faislabad</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
                         <div>
                         <img className='img-city' src="./images/multan.jpg" alt= "Logo"></img> 
                         <br></br>
-                        <h3 style = {{paddingLeft: "30px", paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Multan", imageSrc: "./images/minare.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Multan</div></b></h3>
+                        <h3 style = {{paddingLeft: "30px", paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Multan", imageSrc: "./images/mltn.jpeg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Multan</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
@@ -487,7 +488,7 @@ useEffect(() => {
                     </Col>
                 </Row>
             </div>
-
+            </Container>
         </>
     );
 }

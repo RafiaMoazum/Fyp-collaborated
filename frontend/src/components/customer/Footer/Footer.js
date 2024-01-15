@@ -18,6 +18,7 @@ const Footer = () => {
         justifyContent: "center"
     };
   return (
+    <Container fluid style={{paddingLeft: "0px", paddingRight: "0px"}}>    
     <div className="pt-4">
     <div className="text-center py-5" style={s_footerstyle}>
       <h1 className="mb-4">
@@ -103,6 +104,7 @@ const Footer = () => {
       </Container>
     </div>
   </div>
+  </Container>
   );
 };
 

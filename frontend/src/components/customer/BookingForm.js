@@ -63,7 +63,7 @@ function BookingForm() {
 
 
   return (
-    <form method="POST" className="form" onSubmit={handleSubmit}>
+    <form method="POST" className="form1" onSubmit={handleSubmit}>
       
      
       

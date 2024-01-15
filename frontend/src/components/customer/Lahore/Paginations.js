@@ -2,30 +2,45 @@ import React, { useState } from 'react';
 import { Pagination, Container } from 'react-bootstrap';
 import './Lahore.css';
 
-const Pagination_1 = () => {
-  const [activePage, setActivePage] = useState(4); // Default active page
+const Pagination_1 = ({ itemsPerPage, totalItems, onPageChange }) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (page) => {
-    setActivePage(page);
+    setCurrentPage(page);
+    onPageChange(page);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
+          <button className="page-link" onClick={() => handlePageChange(i)}>
+            {i}
+          </button>
+        </li>
+      );
+    }
+    return pageNumbers;
   };
 
   return (
-    <Container >
-      <Pagination className="pagination" style={{ paddingTop: '45px' }}>
-        <Pagination.First />
-        <Pagination.Prev />
-        <Pagination.Item onClick={() => handlePageChange(1)}>{1}</Pagination.Item>
-        <Pagination.Item onClick={() => handlePageChange(2)}>{2}</Pagination.Item>
-        <Pagination.Item onClick={() => handlePageChange(3)}>{3}</Pagination.Item>
-        <Pagination.Item active={activePage === 4} onClick={() => handlePageChange(4)}>
-          {4}
-        </Pagination.Item>
-        <Pagination.Ellipsis />
-        <Pagination.Item onClick={() => handlePageChange(10)}>{10}</Pagination.Item>
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
-  </Container>
+    <nav>
+      <ul className="pagination">
+        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+          <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
+            Previous
+          </button>
+        </li>
+        {renderPageNumbers()}
+        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+          <button className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
+            Next
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

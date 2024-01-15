@@ -64,21 +64,33 @@ const CityWise = () => {
       console.log('Selected Facility:', facility);
       setSelectedFacilities(facility);
     };
- // Filter
- const filteredHostels = hostels.filter((hostel) => {
-  const genderFilter = selectedGender === '' || hostel.customersGender === selectedGender;
-  const facilitiesFilter =selectedFacilities === '' || hostel.facilities[selectedFacilities] === true;
+      const [currentPage, setCurrentPage] = useState(1);
 
-  return genderFilter && facilitiesFilter;
-});
+      // Filtering hostels based on selected criteria
+     
+      const filteredHostels = hostels.filter((hostel) => {
+        const genderFilter = selectedGender === '' || hostel.customersGender === selectedGender;
+        const facilitiesFilter =selectedFacilities === '' || hostel.facilities[selectedFacilities] === true;
+      
+        return genderFilter && facilitiesFilter;
+      });
+      
+      const itemsPerPage = 8;
+      const totalItems = filteredHostels.length;
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const paginatedHostels = filteredHostels.slice(startIndex, endIndex);
 
-
+      const handlePageChange = (page) => {
+        setCurrentPage(page);
+      };
     return (
         <>
             <Header/>
             <Navbar/>
             <div>
-            <img src={imageSrc} width="100%" height="650" alt="Logo" className="d-inline-block align-text-top"></img>  
+            <img src={imageSrc} width="100%" height="100%" alt="Logo" style={{objectFit: "cover"}}
+            className="d-inline-block align-text-top img-responsive"></img>  
             </div>
             <h1 className='h_style'>
                 Best Hostels in {city || 'City'}
@@ -106,7 +118,7 @@ const CityWise = () => {
                         <Col  xs={12} md={8}>
                         <Advertisement
                        city={city}
-                       hostels={filteredHostels}
+                       hostels={paginatedHostels}
                       selectedGender={selectedGender}
                       selectedFacilities={selectedFacilities}
                       />                          
@@ -119,7 +131,7 @@ const CityWise = () => {
                 <Row>
                     <Col xs={1} sm={2} md={3} lg={4} ></Col>
                     <Col xs={10} sm={8} md={6} lg={4}>
-                        <Paginations/>
+                        <Paginations itemsPerPage={itemsPerPage} totalItems={totalItems} onPageChange={handlePageChange} />
                     </Col>
                     <Col xs={1} sm={2} md={3} lg={4}></Col>
                 </Row>
