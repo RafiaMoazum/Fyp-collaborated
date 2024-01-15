@@ -209,7 +209,8 @@ export default function Notification() {
     console.log(`Reject clicked for bookingId: ${bookingId}`);
     console.log(`Manager's Email: ${managerData.email}`); 
     
-    try {
+    try 
+    {
       // Fetch hostel information based on room ID
     const hostelResponse = await fetch(`/getHostelByRoomId/${roomId}`, {
       method: 'GET',

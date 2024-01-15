@@ -98,7 +98,7 @@ router.get('/getHostel/:hostelId', authenticate, async (req, res) => {
     const { hostelId } = req.params;
 
     try {
-        // Assuming Hostel is your Mongoose model
+        
         const hostel = await Hostel.findById(hostelId);
 
         if (!hostel) {
