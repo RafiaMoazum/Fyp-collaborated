@@ -5,7 +5,7 @@ import { FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 
 const BackendUrl = 'http://localhost:8000';
 
-const Advertisement = ({ city, hostels, selectedGender, selectedFacilities }) => {
+const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selectedRating }) => {
   const [hostelData, setHostelData] = useState([]);
 
   useEffect(() => {
@@ -13,10 +13,11 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities }) =>
       (hostel) =>
         (!selectedGender || hostel.customersGender === selectedGender) &&
         (!city || hostel.city === city) &&
-        (!selectedFacilities || hostel.facilities[selectedFacilities] === true)
+        (!selectedFacilities || hostel.facilities[selectedFacilities] === true) &&
+        filterHostelByRating(hostel, selectedRating)
     );
     setHostelData(filteredHostels);
-  }, [selectedGender, hostels, city, selectedFacilities]);
+  }, [selectedGender, hostels, city, selectedFacilities,selectedRating]);
 
   const truncateDescription = (description, wordLimit) => {
     const words = description.split(' ');
@@ -24,6 +25,31 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities }) =>
       return words.slice(0, wordLimit).join(' ') + '...';
     }
     return description;
+  };
+
+  // Function to filter hostels by rating
+  const filterHostelByRating = (hostel, selectedRating) => {
+    if (!selectedRating) {
+      return true; // No rating filter selected, so hostel passes the filter
+    }
+
+    const hostelRating = hostel.averageRating || 0;
+
+    // Compare the hostel's rating based on the selected rating filter
+    switch (selectedRating) {
+      case '5':
+        return hostelRating === 5;
+      case '4+':
+        return hostelRating >= 4;
+      case '3+':
+        return hostelRating >= 3;
+      case '2+':
+        return hostelRating >= 2;
+      case '1+':
+        return hostelRating >= 1;
+      default:
+        return true; // Default case, no rating filter selected
+    }
   };
 
   return (

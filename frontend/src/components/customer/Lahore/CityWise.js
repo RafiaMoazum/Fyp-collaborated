@@ -13,6 +13,31 @@ import './Lahore.css';
 import {useNavigate, useLocation } from 'react-router-dom';
 import { useState,useEffect} from 'react';
 
+// Function to filter hostels by rating
+const filterHostelByRating = (hostel, selectedRatingFilter) => {
+  if (!selectedRatingFilter) {
+    return true; // No rating filter selected, so hostel passes the filter
+  }
+
+  const hostelRating = hostel.averageRating || 0;
+
+  // Compare the hostel's rating based on the selected rating filter
+  switch (selectedRatingFilter) {
+    case '5':
+      return hostelRating === 5;
+    case '4+':
+      return hostelRating >= 4;
+    case '3+':
+      return hostelRating >= 3;
+    case '2+':
+      return hostelRating >= 2;
+    case '1+':
+      return hostelRating >= 1;
+    default:
+      return true; // Default case, no rating filter selected
+  }
+};
+
 
 const CityWise = () => {
     const navigate = useNavigate();  // Use useNavigate to get the navigate function
@@ -25,6 +50,8 @@ const CityWise = () => {
     
     const [selectedGender, setSelectedGender] = useState('');
     const [selectedFacilities, setSelectedFacilities] = useState('');
+    const [selectedRatingFilter, setSelectedRatingFilter] = useState('');
+
  const GetHostels = async () => {
         try {
           const response = await fetch('/getAllHostels', {
@@ -64,12 +91,19 @@ const CityWise = () => {
       console.log('Selected Facility:', facility);
       setSelectedFacilities(facility);
     };
+
+    const handleRatingFilterSelect = (ratingFilter) => {
+      console.log('Selected Rating Filter:', ratingFilter);
+      setSelectedRatingFilter(ratingFilter);
+    };
+
  // Filter
  const filteredHostels = hostels.filter((hostel) => {
   const genderFilter = selectedGender === '' || hostel.customersGender === selectedGender;
   const facilitiesFilter =selectedFacilities === '' || hostel.facilities[selectedFacilities] === true;
+ const ratingFilter = filterHostelByRating(hostel, selectedRatingFilter);
 
-  return genderFilter && facilitiesFilter;
+  return genderFilter && facilitiesFilter && ratingFilter;
 });
 
 
@@ -93,6 +127,7 @@ const CityWise = () => {
                         <Filters
                          onGenderSelect={handleGenderSelect}
                          onFacilitiesSelect={handleFacilitiesSelect}
+                         onRatingFilterSelect={handleRatingFilterSelect}
                          />
                     
                      </Col>
@@ -109,6 +144,7 @@ const CityWise = () => {
                        hostels={filteredHostels}
                       selectedGender={selectedGender}
                       selectedFacilities={selectedFacilities}
+                      selectedRatingFilter={selectedRatingFilter}
                       />                          
 
                         </Col>
