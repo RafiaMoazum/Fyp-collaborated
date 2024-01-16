@@ -102,10 +102,7 @@ export default function HostelsPage() {
                   {userData && <h2>{userData.name}</h2>}
                   <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
-                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
-                  <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
+                
                   <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                 </ul>
@@ -185,7 +182,7 @@ export default function HostelsPage() {
               </Row>
               <Row>
                 {hostelData.map((hostel, index) => (
-                  <Col key={index} xs={12} sm={12} md={6} lg={4}>
+                  <Col key={index} xs={12} sm={12} md={6} lg={6} >
                     <div className="container" key={index}>
                       <div className="image-contain d-flex justify-content-center">
                         {hostel.hostelImages && hostel.hostelImages.length > 0 ? (

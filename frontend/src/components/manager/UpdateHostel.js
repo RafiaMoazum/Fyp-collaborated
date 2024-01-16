@@ -175,7 +175,7 @@ fetchHostelData();
           <BlueHeader2/>
           <Container fluid>
             <Row>
-                <Col xs={4} sm={4} md={2} lg={2}>
+                <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
                     <div>
                         <div className='side'>
                             <nav>
@@ -185,8 +185,6 @@ fetchHostelData();
                                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                                     <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
                                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
-                                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                                     <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
                                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                                 </ul>
@@ -194,7 +192,7 @@ fetchHostelData();
                         </div>
                   </div>
                 </Col>
-                <Col xs={8} sm={8} md={10} lg={10}>
+                <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
                 <div className="form-container">
                     <div className="container">
                       <form method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
@@ -263,7 +261,7 @@ fetchHostelData();
                           </Col>
                         </Row>
                         <Row>
-                        <Col>
+                        <Col xs={6} sm={6} md={5} lg={5}>
                         <div className="form-group">
                           <label className="form-label">
                             Description:<br></br>
@@ -277,7 +275,270 @@ fetchHostelData();
                           </label>
                         </div>
                         </Col>
+                        <Col xs={6} sm={6} md={7} lg={7}>
+                        <div className="form-group">
+                          <label className="form-label">Customers Gender:</label>
+                          <div className="radio-group">
+                              <Row>
+                              <Col>
+                              <label>
+                                  <input
+                                      type="radio"
+                                      name="customersGender"
+                                      value="Male"
+                                      checked={hostelData.customersGender === 'Male'}
+                                      onChange={handleInputChange}
+                                  /> Male
+                              </label>
+                              </Col>
+                              <Col>
+                              <label>
+                                  <input
+                                      type="radio"
+                                      name="customersGender"
+                                      value="Female"
+                                      checked={hostelData.customersGender === 'Female'}
+                                      onChange={handleInputChange}
+                                  /> Female
+                              </label>
+                              </Col>
+                              <Col>
+                              <label>
+                                  <input
+                                      type="radio"
+                                      name="customersGender"
+                                      value="Other"
+                                      checked={hostelData.customersGender === 'Other'}
+                                      onChange={handleInputChange}
+                                  /> Other
+                              </label>
+                              </Col>
+                              </Row>
+                          </div>
+                        </div>
+                        </Col>
+                        </Row>
+                        <Row>
                         <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            No of Floors:
+                            <input
+                              className="input_box"
+                              type="number"
+                              name="NoOfFloors"
+                              value={hostelData.NoOfFloors}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            No of Rooms:
+                            <input
+                              className="input_box"
+                              type="number"
+                              name="NoOfRooms"
+                              value={hostelData.NoOfRooms}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col>
+                        <div className="form-group">
+                                <label className="form-label">
+                                  Images:
+                                  <input
+                                      className="input_box"
+                                      type="file"
+                                      name="hostelImages"
+                                      onChange={handleImageChange}
+                                      multiple
+                                  />
+                                </label>
+                              </div> 
+                        </Col>
+                        <Col></Col>
+                        </Row>
+                        <Col>
+                        <div className="form-group">
+                        <label>
+                        <b>Facilities:</b>
+                        <div className="facilities">
+                        <Row>
+                            <Col>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="parking"
+                                        checked={hostelData.parking}
+                                        onChange={handleInputChange}
+                                        style={{marginRight: "8px"}}
+                                    />
+                                    Parking
+                                </label>
+                            </Col>
+                            <Col>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="wifi"
+                                        checked={hostelData.wifi}
+                                        onChange={handleInputChange}
+                                        style={{marginRight: "8px"}}
+                                    />
+                                    Wifi
+                                </label>
+                            </Col>
+                            <Col>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="laundry"
+                                        checked={hostelData.laundry}
+                                        onChange={handleInputChange}
+                                        style={{marginRight: "8px"}}
+                                      />
+                                      Laundry
+                                </label>
+                      
+                            </Col>
+                        </Row>
+                        <Row>
+                        <Col>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="Elevator"
+                                        checked={hostelData.Elevator}
+                                        onChange={handleInputChange}
+                                        style={{marginRight: "8px"}}
+                                      />
+                                      Elevator
+                                </label>
+                            </Col>
+                          <Col>
+                              <label>
+                                  <input
+                                      type="checkbox"
+                                      name="mess"
+                                      checked={hostelData.mess}
+                                      onChange={handleInputChange}
+                                      style={{marginRight: "8px"}}
+                                    />
+                                    Mess
+                              </label>  
+                          </Col>
+                          <Col>
+                              <label>
+                                  <input
+                                  type="checkbox"
+                                  name="livingArea"
+                                  checked={hostelData.livingAreaArea}
+                                  onChange={handleInputChange}
+                                  style={{marginRight: "8px"}}
+                              />
+                              Living Area
+                                  </label>
+                              </Col>
+                              
+                        </Row>   
+                        </div>
+                        </label>
+                        </div>
+                        </Col>
+                        <input className="btn_sub" type="submit" value="Submit" />
+                      </form>
+                      </div>
+                    </div>
+                </Col>
+                <Col  className="d-lg-none">
+                <div className="form-container">
+                    <div className="container">
+                      <form method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
+                        <Row>
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Name:
+                            <input
+                              className="input_box"
+                              type="text"
+                              name="name"
+                              value={hostelData.name}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Address:
+                            <input
+                              className="input_box"
+                              type="address"
+                              name="address"
+                              value={hostelData.address}
+                              onChange={(e) => setHostelData({ ...hostelData, address: e.target.value })}
+                              onBlur={geocodeAddress}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            City:
+                            <input
+                              className="input_box"
+                              type="text"
+                              name="city"
+                              value={hostelData.city}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Phone:  
+                            <input
+                              className="input_box"
+                              type="text"
+                              name="phone"
+                              value={hostelData.phone}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>  
+                        </Row>
+                        <Row>
+                          <Col>
+                            
+                          </Col>
+                        </Row>
+                        <Row>
+                        <Col xs={6} sm={6} md={5} lg={5}>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Description:<br></br>
+                            <textarea
+                              className="input_box_desc"
+                              type="text"
+                              name="description"
+                              value={hostelData.description}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        </Col>
+                        <Col xs={6} sm={6} md={7} lg={7}>
                         <div className="form-group">
                           <label className="form-label">Customers Gender:</label>
                           <div className="radio-group">

@@ -3,28 +3,14 @@ import React from 'react'
 import UserSignupForm from './UserSignupForm';
 import './UserSignupPage.css';
 import Navbar from './Navbar/Navbar';
-import BlueHeader2 from '../manager/BlueHeader2';
+import BlueHeader from '../manager/BlueHeader';
 import { useRoomContext } from './RoomContext';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import {FaCheck} from 'react-icons/fa';
 
 export default function SignupPage() {
-    const headingStyle = {
-        color: 'white',
-        textAlign: 'left'
-      };
-      const sectionStyle = {
-        height:'450px'
-      };
-      const style1 = 
-    {
-        width: "100%",
-        height: "5vh",
-        className:"d-inline-block align-text-top",
-        objectFit: "cover",
-        backgroundColor: "#87B5E0"
-    };
+   
     const image = 
     {
         width: "100%",
@@ -43,8 +29,8 @@ export default function SignupPage() {
     const overlay = {
       position: "absolute",
       top: "120%",    // Position the overlay vertically centered
-      width: "40%", // Make the overlay full width
-      transform: "translateY(-50%)", // Adjust to center vertically
+      width: "50%", // Make the overlay full width
+      transform: "translateY(-30%)", // Adjust to center vertically
       border: "1px solid black"
     };
     const features = [
@@ -61,38 +47,39 @@ export default function SignupPage() {
       return (
         <>
        <Navbar/>
-       <BlueHeader2/>
+       <BlueHeader/>
         <div style={{ position: "relative" }}>
           <img src="./images/SignUPimg.png" alt="img" style={image}></img> 
           <Row>
-                <Col xs={2} sm={3} md={4} lg={4}></Col>
-                <Col xs={8} sm={6} md={4} lg={4}>
+          <Col xs={3} sm={2} md={3} lg={3}>
+          </Col>
+          <Col xs={7} sm={8} md={6} lg={6}>
                   <div style={overlay}>
                     <div style={style2}></div>
                     <div style={{backgroundColor: "#FCF8F8"}}>
                       <UserSignupForm/>
                     </div>
                   </div>
-                </Col>
-                <Col xs={2} sm={3} md={4} lg={4}></Col>
+          </Col>
+          <Col xs={2} sm={2} md={3} lg={3}></Col>
               </Row>
         </div>
         <div className="row-border" style={{height: "100px"}}></div>
           <div style={{padding:"100px"}}>
-            <Row style={{height:"50vh"}}></Row>
+            <Row style={{height:"80vh"}}></Row>
             {features.map((feature, index) => (
-              <Row key={index}>
-                <Col xs={0} sm={4} md={4} lg={4}></Col>
-                <Col xs={2} sm={1} md={1} lg={1} style={{ textAlign: "center" }}>
-                  <FaCheck />
-                </Col>
-                <Col xs={10} sm={5} md={5} lg={5}>
-                  <p style={{ textAlign: "left"}}>
-                    <b>{feature.text}</b>
-                  </p>
-                </Col>
-                <Col xs={0} sm={2} md={2} lg={2}></Col>
-              </Row>
+               <Row key={index}>
+               <Col xs={2} sm={2} md={2} lg={2} xl={3}></Col>
+                  <Col xs={1} sm={1} md={1} lg={1} xl={1} style={{ textAlign: "center" }}>
+                    <FaCheck />
+                  </Col>
+                  <Col xs={7} sm={7} md={8} lg={7} xl={6}>
+                    <p style={{ textAlign: "left"}}>
+                      <b>{feature.text}</b>
+                    </p>
+                  </Col>
+                  <Col xs={2} sm={2} md={2} lg={2} xl={2}></Col>
+            </Row>
             ))}
           </div> 
         </>

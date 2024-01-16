@@ -256,15 +256,9 @@ const showConfirmationPopup = () => {
                             </button>
                             {confirmationVisible && (
                               <div className="confirmation-popup">
-                                <p>Please enter the following statement to confirm:</p>
-                                <p>I want to delete this Room</p>
-                                <input
-                                  type="text"
-                                  value={confirmationText}
-                                  onChange={(e) => setConfirmationText(e.target.value)}
-                                />
-                                <button onClick={handleDelete}>Confirm</button>
-                                <button onClick={() => setConfirmationVisible(false)}>Cancel</button>
+                                <p style={{color: "white"}}>Are you sure you want to delete this room?</p>
+                                <button className='btn_link' onClick={handleDelete}>Confirm</button>
+                                <button className='btn_link' onClick={() => setConfirmationVisible(false)}>Cancel</button>
                               </div>
                             )}
                             <button
@@ -280,7 +274,6 @@ const showConfirmationPopup = () => {
                             <thead>
                                 <tr>
                                     <th>Room No.</th>
-                                    {/* <th>Room Type</th> */}
                                     <th>Total Capacity</th>
                                     <th>Remaining Capacity</th>
                                     <th>Price</th>
@@ -372,16 +365,10 @@ const showConfirmationPopup = () => {
                             </button>
                             {confirmationVisible && (
                               <div className="confirmation-popup">
-                                <p>Please enter the following statement to confirm:</p>
-                                <p>I want to delete this Room</p>
-                                <input
-                                  type="text"
-                                  value={confirmationText}
-                                  onChange={(e) => setConfirmationText(e.target.value)}
-                                />
-                                <button onClick={handleDelete}>Confirm</button>
-                                <button onClick={() => setConfirmationVisible(false)}>Cancel</button>
-                              </div>
+                              <p style={{color: "white"}}>Are you sure you want to delete this room?</p>
+                              <button className='btn_link' onClick={handleDelete}>Confirm</button>
+                              <button className='btn_link' onClick={() => setConfirmationVisible(false)}>Cancel</button>
+                            </div>
                             )}
                             <button
                              style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}}
@@ -391,12 +378,11 @@ const showConfirmationPopup = () => {
                             </button>
                             <button style={{ color: "white", backgroundColor: "#3C6B97", border: "none", fontWeight: "bold"}} onClick={closeModal}>x</button>
                           </div>
-                          <div className="roomTable">
+                          <div className="roomTable table-responsive">
                           <table>
                             <thead>
                                 <tr>
                                     <th>Room No.</th>
-                                    {/* <th>Room Type</th> */}
                                     <th>Total Capacity</th>
                                     <th>Remaining Capacity</th>
                                     <th>Price</th>
@@ -434,13 +420,14 @@ const showConfirmationPopup = () => {
                                     <th >Room Images</th>
                                 </tr>
                             </thead>
-                                <tbody>
-                                  {displayrooms.map((room) => (
-                                    <tr key={room._id}>
-                                    <td>{room.roomNumber}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
+                            {roomData.roomImages.map((image, index) => (
+                              <tr key={index}>
+                              <td>
+                                <img src={`${BackendUrl}/${image}`}  alt={`Room Image ${index + 1}`} />
+                              </td>
+                              </tr>
+                              ))}
+                                
                           </table>
                         </div>
                     </div>

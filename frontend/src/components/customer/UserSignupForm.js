@@ -125,7 +125,7 @@ function UserSignupForm() {
               onChange={(handleInputChange)}/>
           </div>
           <div className="forget-password">
-            <p>Forget Password?</p>
+          <Link style={{textDecoration:"none"}} to="/">Forget Password?</Link>
           </div>
           <input className="form-register" type="submit" value="Register" onClick={signUp} />
         </form>

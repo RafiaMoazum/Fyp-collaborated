@@ -95,7 +95,7 @@ export default function CustomerInfo() {
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                   <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                  <li><Link to="" style={{textDecoration: "none", color: "black"}} ></Link></li>
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                   <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
@@ -104,7 +104,8 @@ export default function CustomerInfo() {
             </div>
           </div>
         </Col>
-        <Col xs={8} sm={8} md={10} lg={10}>
+        <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
+        <section className="form-container">
         <div className="form-cont table-responsive">
         <table className='table'>
         <thead>
@@ -150,6 +151,56 @@ export default function CustomerInfo() {
         </tbody>
         </table>
         </div>
+        </section>
+        </Col>
+        <Col className="d-lg-none">
+        <section className="form-container">
+        <div className="form-cont table-responsive">
+        <table className='table'>
+        <thead>
+          <tr>
+              <th>Room</th>
+            <th>Name</th>
+            <th>CNIC Number</th>
+            <th>Phone</th>
+            <th>Price</th>
+            <th>Total Capacity</th>
+            <th>Remaining Capacity</th>
+            <th>Check In date</th>
+            <th>Check Out date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {bookingDetails.map((booking, index) => (
+            <tr key={index}>
+              {booking.rooms.map((room, roomIndex) => (
+                <React.Fragment key={roomIndex}>
+                  <td>{room.roomNumber}</td>
+                  
+                </React.Fragment>
+              ))}
+          {booking.users.map((user, userIndex) => (
+            <React.Fragment key={userIndex}>
+              <td>{user.name}</td>
+              <td>{user.cnic}</td>
+              <td>{user.phone}</td>
+            </React.Fragment>
+          ))}
+          {booking.rooms.map((room, roomIndex) => (
+            <React.Fragment key={roomIndex}>
+              <td>{room.price}</td>
+              <td>{room.capacity}</td>
+              <td>{room.currentCapacity}</td>
+            </React.Fragment>
+          ))}
+          <td>{booking.checkIn_date}</td>
+          <td>{booking.checkOut_date}</td>
+          </tr>
+          ))}  
+        </tbody>
+        </table>
+        </div>
+        </section>
         </Col>
       </Row>  
     </Container>           

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
-import {FaMapMarkerAlt,FaPhone, FaEnvelope, FaCircleNotch, FaEdit} from 'react-icons/fa';
+import {FaMapMarkerAlt,FaPhone, FaEnvelope, FaCircleNotch, FaEdit, FaMale, FaDoorClosed, FaDoorOpen, FaBuilding} from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
 
 const BackendUrl = 'http://localhost:8000';
@@ -130,7 +130,7 @@ const showConfirmationPopup = () => {
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                     <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
+                    <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Customer Info</Link></li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                     <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
@@ -167,26 +167,7 @@ const showConfirmationPopup = () => {
                             </Link>
                           </button>
                         </Col>
-                        <Col>
-                        <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
-                          onClick={showConfirmationPopup}
-                      >
-                          Delete Hostel
-                      </button>
-                      {showConfirmation && (
-                          <div className="confirmation-popup">
-                              <p>Please enter the following statement to confirm:</p>
-                              <p>I want to delete this hostel</p>
-                              <input
-                                  type="text"
-                                  value={confirmationText}
-                                  onChange={(e) => setConfirmationText(e.target.value)}
-                              />
-                              <button onClick={handleDelete}>Confirm</button>
-                              <button onClick={() => setShowConfirmation(false)}>Cancel</button>
-                          </div>
-                      )}
-                        </Col>
+                        
                       </Row>
                       </Col>
                     </Row>
@@ -223,12 +204,12 @@ const showConfirmationPopup = () => {
                   <br></br>
                   <p className="text-container2"><FaEnvelope/>  {hostelData.email}</p>
                   <br></br>
-                </Row>
-                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
-                <Row>
-                  <p className="text-container2">Gender: {hostelData.customersGender}</p>
-                  <p className="text-container2">Floors: {hostelData.NoOfFloors}</p>
-                  <p className="text-container2">Total Rooms: {hostelData.NoOfRooms}</p>
+                  <p className="text-container2"><FaMale/> {hostelData.customersGender}</p>
+                  <br></br>
+                  <p className="text-container2"><FaBuilding/> {hostelData.NoOfFloors}</p>
+                  <br></br>
+                  <p className="text-container2"><FaDoorOpen/> {hostelData.NoOfRooms}</p>
+                  <br></br>
                 </Row>
                 <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
                 <Row>
@@ -249,6 +230,24 @@ const showConfirmationPopup = () => {
                 </div>
                 </Row>
                 </Row>
+                <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
+                          onClick={showConfirmationPopup}
+                      >
+                          Delete Hostel
+                      </button>
+                      {showConfirmation && (
+                          <div className="confirmation-popup">
+                              <p>Please enter the following statement to confirm:</p>
+                              <p>I want to delete this hostel</p>
+                              <input
+                                  type="text"
+                                  value={confirmationText}
+                                  onChange={(e) => setConfirmationText(e.target.value)}
+                              />
+                              <button onClick={handleDelete}>Confirm</button>
+                              <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                          </div>
+                      )}
               </Container>
             </Col>
             <Col className="d-lg-none">
@@ -258,13 +257,13 @@ const showConfirmationPopup = () => {
                     <Row>
                       <Col xs={12} sm={12} md={4} lg={3} xl={2}>
                       <div className="image-cont d-flex justify-content-center">
-                        <img src="/hostel1.png" alt="My Image" className="rounded-img img-fluid" />
+                        <img src="/hostel1.png" alt="My Image" className="rounded-img img-fluid " />
                       </div>
                       </Col>
-                      <Col xs={6} sm={6} md={3} lg={3} xl={2}>
+                      <Col xs={9} sm={6} md={3} lg={3} xl={2}>
                       <h2>{hostelData.name} <br></br><span><p>{hostelData.city}</p></span> </h2>
                       </Col>
-                      <Col xs={6} sm={6} md={2} lg={2} xl={4}
+                      <Col xs={3} sm={6} md={2} lg={2} xl={4}
                       style={{textAlign: "left", paddingTop: "10px",fontSize:"20px"}}>
                       <Link to={`/UpdateHostel/${hostelId}`} style={{color: "black"}}>
                         <FaEdit/>
@@ -279,26 +278,7 @@ const showConfirmationPopup = () => {
                             </Link>
                           </button>
                         </Col>
-                        <Col>
-                        <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
-                          onClick={showConfirmationPopup}
-                      >
-                          Delete Hostel
-                      </button>
-                      {showConfirmation && (
-                          <div className="confirmation-popup">
-                              <p>Please enter the following statement to confirm:</p>
-                              <p>I want to delete this hostel</p>
-                              <input
-                                  type="text"
-                                  value={confirmationText}
-                                  onChange={(e) => setConfirmationText(e.target.value)}
-                              />
-                              <button onClick={handleDelete}>Confirm</button>
-                              <button onClick={() => setShowConfirmation(false)}>Cancel</button>
-                          </div>
-                      )}
-                        </Col>
+                       
                       </Row>
                       </Col>
                     </Row>
@@ -308,8 +288,8 @@ const showConfirmationPopup = () => {
                 {hostelData.hostelImages && hostelData.hostelImages.length > 0 ? (
                   hostelData.hostelImages.map((image, index) => (
                     <Col key={index} xs={12} sm={6} md={4} lg={3}>
-                      <div className="image-container2">
-                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid" />
+                      <div className="image-container2 ">
+                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid img-responsive" />
                       </div>
                     </Col>
                   ))
@@ -335,12 +315,12 @@ const showConfirmationPopup = () => {
                   <br></br>
                   <p className="text-container2"><FaEnvelope/>  {hostelData.email}</p>
                   <br></br>
-                </Row>
-                <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
-                <Row>
-                  <p className="text-container2">Gender: {hostelData.customersGender}</p>
-                  <p className="text-container2">Floors: {hostelData.NoOfFloors}</p>
-                  <p className="text-container2">Total Rooms: {hostelData.NoOfRooms}</p>
+                  <p className="text-container2"><FaMale/> {hostelData.customersGender}</p>
+                  <br></br>
+                  <p className="text-container2"><FaBuilding/> {hostelData.NoOfFloors}</p>
+                  <br></br>
+                  <p className="text-container2"><FaDoorOpen/> {hostelData.NoOfRooms}</p>
+                  <br></br>
                 </Row>
                 <div style={{border:"1px solid gray", margin: "20px 0"}}></div>
                 <Row>
@@ -361,6 +341,24 @@ const showConfirmationPopup = () => {
                 </div>
                 </Row>
                 </Row>
+                <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
+                          onClick={showConfirmationPopup}
+                      >
+                          Delete Hostel
+                      </button>
+                      {showConfirmation && (
+                          <div className="confirmation-popup">
+                              <p>Please enter the following statement to confirm:</p>
+                              <p>I want to delete this hostel</p>
+                              <input
+                                  type="text"
+                                  value={confirmationText}
+                                  onChange={(e) => setConfirmationText(e.target.value)}
+                              />
+                              <button onClick={handleDelete}>Confirm</button>
+                              <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                          </div>
+                      )}
               </Container>
             </Col>
           </Row>

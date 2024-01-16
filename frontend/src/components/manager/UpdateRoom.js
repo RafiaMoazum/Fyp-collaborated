@@ -5,6 +5,8 @@ import './RoomStatus.css'
 import { useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
+import BlueHeader2 from './BlueHeader2';
+import Navbar from './Navbar'
 
 export default function UpdateRoom() {
     const { hostelId,roomId } = useParams();
@@ -89,6 +91,9 @@ export default function UpdateRoom() {
   
   return (
    <>
+   <Navbar/>
+   <BlueHeader2/>
+   <section className='form-container'>
         <form method="POST" id="form" onSubmit={handleSubmit}>
                             <div>
                                 <Row>
@@ -275,7 +280,9 @@ export default function UpdateRoom() {
                                     </Col>
                                 </Row>
                             </div>
-                            <input className="btn_sub" type="submit" value="Update Room" />                        </form>
+                            <input className="btn_sub" type="submit" value="Update Room" />  
+                                                  </form>
+                                                  </section>
     </>
   )
 }
