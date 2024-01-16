@@ -27,7 +27,7 @@ export default function BlueHeader2() {
       });
       
        const data= await res.json();
-       console.log(`name= ${data.name}`);
+       //console.log(`name= ${data.name}`);
        //console.log(`data=: ${data}`);
 
        setUserData(data);
@@ -60,7 +60,7 @@ export default function BlueHeader2() {
 
         if (res.status === 200) {
           const data = await res.json();
-          console.log(`Booking details: ${JSON.stringify(data)}`);
+          //console.log(`Booking details: ${JSON.stringify(data)}`);
           setBookingDetails(data.bookings);
         } else {
           const error = new Error(res.error);

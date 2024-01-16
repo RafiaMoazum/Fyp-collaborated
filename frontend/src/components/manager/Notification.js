@@ -15,6 +15,8 @@ import PendingVisitReq from './PendingVisitReq';
 import Sidebar from './Sidebar'
 
 
+
+
 export default function Notification() {
   const { hostelId } = useParams();
   const [bookingDetails, setBookingDetails] = useState([]);
@@ -47,7 +49,7 @@ export default function Notification() {
   
       if (res.status === 200) {
         const data = await res.json();
-        console.log(`Manager data: ${JSON.stringify(data)}`);
+        //console.log(`Manager data: ${JSON.stringify(data)}`);
         
         
         setManagerData({
@@ -85,7 +87,7 @@ export default function Notification() {
 
         if (res.status === 200) {
           const data = await res.json();
-          console.log(`Booking details: ${JSON.stringify(data)}`);
+          //console.log(`Booking details: ${JSON.stringify(data)}`);
           setBookingDetails(data.bookings);
           
         } else {
@@ -109,12 +111,12 @@ export default function Notification() {
 
   const handleAllow = async (bookingId, userEmail,userName,roomId,roomPrice) => {
     window.alert(`Accept clicked for bookingId: ${bookingId}`);
-    console.log(`Accept clicked for bookingId: ${bookingId}`);
-    console.log(`Manager's Email: ${managerData.email}`); 
-    console.log(`User's Email: ${userEmail}`); 
+    //console.log(`Accept clicked for bookingId: ${bookingId}`);
+    //console.log(`Manager's Email: ${managerData.email}`); 
+    //console.log(`User's Email: ${userEmail}`); 
     
-    console.log('roomId:', roomId);
-    console.log('roomPrice:', roomPrice);
+    //console.log('roomId:', roomId);
+    //console.log('roomPrice:', roomPrice);
 
    
 
@@ -133,8 +135,8 @@ export default function Notification() {
     
     if (hostelResponse.status === 200) {
       const hostelData = await hostelResponse.json();
-      console.log('hostelData:', hostelData);
-      console.log('hostelData.hostel:', JSON.stringify(hostelData.hostel))
+      //console.log('hostelData:', hostelData);
+      //console.log('hostelData.hostel:', JSON.stringify(hostelData.hostel))
       if (hostelData && hostelData.hostel) {
         const { name, address, phone, email } = hostelData.hostel;
       }
@@ -208,8 +210,8 @@ export default function Notification() {
   
   const handleReject =  async (bookingId, userEmail,userName,roomId)=> {
     window.alert(`Reject clicked for bookingId: ${bookingId}`)
-    console.log(`Reject clicked for bookingId: ${bookingId}`);
-    console.log(`Manager's Email: ${managerData.email}`); 
+    //console.log(`Reject clicked for bookingId: ${bookingId}`);
+    //console.log(`Manager's Email: ${managerData.email}`); 
     
     try 
     {
@@ -226,8 +228,8 @@ export default function Notification() {
     
     if (hostelResponse.status === 200) {
       const hostelData = await hostelResponse.json();
-      console.log('hostelData:', hostelData);
-      console.log('hostelData.hostel:', JSON.stringify(hostelData.hostel))
+      //console.log('hostelData:', hostelData);
+      //console.log('hostelData.hostel:', JSON.stringify(hostelData.hostel))
       if (hostelData && hostelData.hostel) {
         const { name, address, phone, email } = hostelData.hostel;
       }
@@ -281,7 +283,7 @@ export default function Notification() {
 
  const handleConfirm = async (bookingId) => {
     window.alert(`Confirm clicked for bookingId: ${bookingId}`);
-    console.log(`Confirm clicked for bookingId: ${bookingId}`);
+    //console.log(`Confirm clicked for bookingId: ${bookingId}`);
 
     try {
         const res = await fetch(`/confirmBooking/${bookingId}`, {

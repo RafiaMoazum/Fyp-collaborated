@@ -12,11 +12,13 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
 import Sidebar from './Sidebar'
 
+
 export default function CustomerInfo() {
   const { hostelId } = useParams();
   const [bookingDetails, setBookingDetails] = useState([]);
   const[userData, setUserData]=useState({ name: 'Manager' });
   const navigate = useNavigate();
+
 
 
   const fetchManagerData = async () =>{
@@ -33,8 +35,7 @@ export default function CustomerInfo() {
       });
       
        const data= await res.json();
-       console.log(`name= ${data.name}`);
-       //console.log(`data=: ${data}`);
+       
 
        setUserData(data);
        
@@ -90,7 +91,7 @@ export default function CustomerInfo() {
       <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
       <Sidebar opt1="Hostel Profile" opt2="Notifications" opt3="Customer Info" opt4="Logout" />
 
-        {/* <div >
+         {/* <div >
             <div className='side'>
               <nav >
                 <ul>
@@ -107,55 +108,6 @@ export default function CustomerInfo() {
               </nav>
             </div>
           </div> */}
-        </Col>
-        <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
-        <section className="form-container">
-        <div className="form-cont table-responsive">
-        <table className='table'>
-        <thead>
-          <tr>
-              <th>Room</th>
-            <th>Name</th>
-            <th>CNIC Number</th>
-            <th>Phone</th>
-            <th>Price</th>
-            <th>Total Capacity</th>
-            <th>Remaining Capacity</th>
-            <th>Check In date</th>
-            <th>Check Out date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookingDetails.map((booking, index) => (
-            <tr key={index}>
-              {booking.rooms.map((room, roomIndex) => (
-                <React.Fragment key={roomIndex}>
-                  <td>{room.roomNumber}</td>
-                  
-                </React.Fragment>
-              ))}
-          {booking.users.map((user, userIndex) => (
-            <React.Fragment key={userIndex}>
-              <td>{user.name}</td>
-              <td>{user.cnic}</td>
-              <td>{user.phone}</td>
-            </React.Fragment>
-          ))}
-          {booking.rooms.map((room, roomIndex) => (
-            <React.Fragment key={roomIndex}>
-              <td>{room.price}</td>
-              <td>{room.capacity}</td>
-              <td>{room.currentCapacity}</td>
-            </React.Fragment>
-          ))}
-          <td>{booking.checkIn_date}</td>
-          <td>{booking.checkOut_date}</td>
-          </tr>
-          ))}  
-        </tbody>
-        </table>
-        </div>
-        </section>
         </Col>
         <Col className="d-lg-none">
         <section className="form-container">
