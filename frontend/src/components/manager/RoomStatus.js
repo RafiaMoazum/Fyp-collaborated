@@ -159,10 +159,17 @@ const handleRoomClick = (roomId) => {
 
 
 const handleUpdateButton = () => {
+  try {
     if (selectedRoomId) {
-        navigate(`/UpdateRoom/${selectedRoomId}`);
+      navigate(`/UpdateRoom/${selectedRoomId}`);
+    } else {
+      throw new Error('Selected room ID is null or undefined.');
     }
+  } catch (error) {
+    console.error('Error navigating to update room:', error);
+  }
 };
+
 const handleDelete = async () => {
     if (confirmationText.toLowerCase() !== 'i want to delete this room') {
     window.alert('Please enter the correct confirmation statement.');

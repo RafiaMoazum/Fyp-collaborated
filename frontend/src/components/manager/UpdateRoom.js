@@ -16,7 +16,7 @@ export default function UpdateRoom() {
         roomNumber: '',
         type: '',
         capacity: '',
-        currentCapacity:'',
+        remainingCapacity:'',
         price: '',
         ac: false,
         workingDesk: false,
@@ -35,6 +35,16 @@ export default function UpdateRoom() {
         const newValue = type === 'checkbox' ? checked : value;
         setRoomData({ ...roomData, [name]: newValue });
     }
+
+    const handleImageChange = (event) => {
+        const selectedImages = event.target.files;
+        // Convert the FileList to an array
+        const selectedImagesArray = Array.from(selectedImages);
+        // If roomImages is not an array, convert it to an array before spreading
+        const roomImagesArray = Array.isArray(roomData.roomImages) ? roomData.roomImages : [roomData.roomImages];
+        // Concatenate the new images to the existing array
+        setRoomData({ ...roomData, roomImages: [...roomImagesArray, ...selectedImagesArray] });
+    };
 
 
     const handleSubmit = async (event) => {
@@ -129,8 +139,8 @@ export default function UpdateRoom() {
                                             <input
                                                 className="input_box_room"
                                                 type="text"
-                                                name="currentCapacity"
-                                                value={roomData.currentCapacity}
+                                                name="remainingCapacity"
+                                                value={roomData.remainingCapacity}
                                                 onChange={handleInputChange}
                                             />
                                         </div>
@@ -157,8 +167,9 @@ export default function UpdateRoom() {
                                                         className="input_box_room1"
                                                         type="file"
                                                         name="roomImages"
-                                                        value={roomData.roomImages}
-                                                        onChange={handleInputChange}
+                                                        // value={roomData.roomImages}
+                                                        onChange={handleImageChange}
+                                                        multiple
                                                     />
                                                    
                                         </div>
