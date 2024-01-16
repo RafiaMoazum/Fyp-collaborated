@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 
@@ -53,6 +53,8 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selec
   };
 
   return (
+    <>
+    <Container fluid style={{paddingLeft:"0px", paddingRight:"0px"}}>
     <div style={{ paddingTop: '20px' }}>
       {hostelData.map((hostel, index) => (
         <div key={index} className='add_style'>
@@ -87,6 +89,8 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selec
         </div>
       ))}
     </div>
+    </Container>
+    </>
   );
 };
 

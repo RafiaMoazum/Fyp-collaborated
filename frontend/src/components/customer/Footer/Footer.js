@@ -18,7 +18,6 @@ const Footer = () => {
         justifyContent: "center"
     };
   return (
-    <Container fluid style={{paddingLeft: "0px", paddingRight: "0px"}}>    
     <div className="pt-4">
     <div className="text-center py-5" style={s_footerstyle}>
       <h1 className="mb-4">
@@ -26,14 +25,14 @@ const Footer = () => {
       </h1>
       <Form className="d-flex justify-content-center">
         <Row className="justify-content-center">
-          <Col xs={12} sm={8} md={8} lg={8}>
+          <Col xs={10} sm={8} md={8} lg={8}>
             <Form.Control
               placeholder="Enter your Email Address"
               size="lg"
               className="mb-3 mb-sm-0"
             />
           </Col>
-          <Col xs={12} sm={4} md={4} lg={4}>
+          <Col xs={10} sm={4} md={4} lg={4}>
             <Button size="lg" style={{ width: '100%' }}>
               Subscribe
             </Button>
@@ -104,7 +103,6 @@ const Footer = () => {
       </Container>
     </div>
   </div>
-  </Container>
   );
 };
 

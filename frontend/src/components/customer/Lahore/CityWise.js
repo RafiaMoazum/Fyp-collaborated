@@ -116,6 +116,7 @@ const CityWise = () => {
       };
     return (
         <>
+        <Container fluid style = {{paddingLeft : "0px", paddingRight: "0px"}}>
             <Header/>
             <Navbar/>
             <div>
@@ -128,18 +129,18 @@ const CityWise = () => {
             <div>
                 <Container fluid >
                     <Row className='top_style'>
-                        <Col xs={2} sm={2} md={2} lg={2} >
+                        <Col xs={1} sm={4} md={3} lg={4} xl={4}>
                         
                         </Col>
-                        <Col xs={8} sm={8} md={8} lg={8} style={{marginLeft: '25px'}}>
+                        <Col xs={9} sm={4} md={5} lg={4} xl={4}>
                         <Filters
                          onGenderSelect={handleGenderSelect}
                          onFacilitiesSelect={handleFacilitiesSelect}
                          onRatingFilterSelect={handleRatingFilterSelect}
                          />
                     
-                     </Col>
-                        <Col xs={2} sm={2} md={2} lg={2}>
+                     </Col >
+                        <Col xs={2} sm={4} md={4} lg={4} xl={4} >
                         
                         </Col>
                         </Row>
@@ -161,11 +162,11 @@ const CityWise = () => {
             </div>
             <Container fluid>
                 <Row>
-                    <Col xs={1} sm={2} md={3} lg={4} ></Col>
-                    <Col xs={10} sm={8} md={6} lg={4}>
+                    <Col xs={12} sm={2} md={3} lg={3} ></Col>
+                    <Col xs={12} sm={8} md={6} lg={6}>
                         <Paginations itemsPerPage={itemsPerPage} totalItems={totalItems} onPageChange={handlePageChange} />
                     </Col>
-                    <Col xs={1} sm={2} md={3} lg={4}></Col>
+                    <Col xs={12} sm={2} md={3} lg={3}></Col>
                 </Row>
             </Container>
             <br></br>
@@ -182,6 +183,7 @@ const CityWise = () => {
                     </Col>
                 </Row>
             </Container>
+          </Container>
         </>
     );
 }

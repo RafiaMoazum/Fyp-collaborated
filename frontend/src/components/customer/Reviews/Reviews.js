@@ -4,6 +4,7 @@ import { FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import { Container } from 'react-bootstrap';
 
 
 const Reviews = () => {
@@ -82,7 +83,7 @@ const Reviews = () => {
   };
 
   return (
-    <div>
+    <Container fluid>
       <div className="embla" ref={emblaRef}>
         <div className="embla__container d-flex">
           {reviews.map((data, index) => (
@@ -108,7 +109,7 @@ const Reviews = () => {
           ))}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

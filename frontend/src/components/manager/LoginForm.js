@@ -60,10 +60,10 @@ export default function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}/>
           </div>
           <div className="forget-password">
-            <p>Forget Password?</p>
+          <Link style={{textDecoration:"none"}} to="/">Forget Password?</Link>
           </div>
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
-          <input type="submit" name="signin" value="Log In" onClick={Login} />
+          <input className='btn_link' type="submit" name="signin" value="Log In" onClick={Login} />
           </div>
         </form>
       </div>

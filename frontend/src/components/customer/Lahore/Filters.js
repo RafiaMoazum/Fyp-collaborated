@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Container, Dropdown } from 'react-bootstrap';
 import './Filters.css';
 
 const ResponsiveDropdowns = ({ onGenderSelect, onFacilitiesSelect,onRatingFilterSelect }) => {
@@ -28,10 +28,12 @@ const ResponsiveDropdowns = ({ onGenderSelect, onFacilitiesSelect,onRatingFilter
   };
 
   return (
+    
+    <Container fluid style={{paddingLeft:"0px", paddingRight: "0px"}}>
     <div className="horizontal-dropdowns">
       {/* Gender */}
       <Dropdown className="mb-3">
-        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: 'white', color: 'black' }}>
+        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: '#3C6B97', color: 'white' }}>
           {selectedGender || 'Gender'}
         </Dropdown.Toggle>
 
@@ -48,7 +50,7 @@ const ResponsiveDropdowns = ({ onGenderSelect, onFacilitiesSelect,onRatingFilter
       {/* Facilities */}
        
        <Dropdown className="mb-3">
-        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: 'white', color: 'black' }}>
+        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: '#3C6B97', color: 'white' }}>
           {selectedFacilities || 'Facilities'}
         </Dropdown.Toggle>
 
@@ -64,7 +66,7 @@ const ResponsiveDropdowns = ({ onGenderSelect, onFacilitiesSelect,onRatingFilter
 
        {/* Rating Filter */}
        <Dropdown className="mb-3">
-        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: 'white', color: 'black' }}>
+        <Dropdown.Toggle variant="secondary" style={{ backgroundColor: '#3C6B97', color: 'white' }}>
           {selectedRatingFilter || 'Rating'}
         </Dropdown.Toggle>
 
@@ -77,6 +79,7 @@ const ResponsiveDropdowns = ({ onGenderSelect, onFacilitiesSelect,onRatingFilter
         </Dropdown.Menu>
       </Dropdown>
     </div>
+    </Container>
   );
 };
 

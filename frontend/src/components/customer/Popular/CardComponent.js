@@ -9,19 +9,6 @@ import { Link } from 'react-router-dom';
 const BackendUrl = 'http://localhost:8000';
 
 const CardComponent = ({ title, content,image,hostelId}) => { 
-  const star1 = {
-    color: '#FFD600',
-    width: '8%',
-    height: '8%',
-  };
-  const card_title = {
-    color: 'white',
-    backgroundColor: '#3C6B97',
-    borderRadius: '15px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
 
   return (
     <>

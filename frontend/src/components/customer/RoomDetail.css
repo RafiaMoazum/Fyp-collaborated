@@ -50,6 +50,10 @@
     height: 40px;
   }
 
+  .btn_link:hover{
+    background-color: #5a8cbb;
+  }
+
   .edit-button {
     display: flex;
     justify-content: space-between;

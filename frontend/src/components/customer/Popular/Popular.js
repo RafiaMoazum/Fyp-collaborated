@@ -40,10 +40,6 @@ const Popular = () => {
     fetchPopularHostels();
   },[]);
 
-  const cardData = [
-  
-  ];
-
   const getHostelImage = (hostel) => {
     return hostel.hostelImages.length > 0
       ? `${BackendUrl}/${hostel.hostelImages[0]}`
@@ -105,12 +101,6 @@ const Popular = () => {
               <CardComponent title={hostel.name} content={hostel.address}  image={getHostelImage(hostel)} hostelId={hostel._id} />
             </div>
           ))}
-          {cardData.map((card, index) => (
-            <div key={index}>
-              <CardComponent title={card.title} content={card.content} />
-            </div>
-          ))}
-        
         </Slider>
       </div>
       

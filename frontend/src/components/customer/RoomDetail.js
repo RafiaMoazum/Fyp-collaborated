@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { useRoomContext } from './RoomContext'; 
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar/Navbar';
-import BlueHeader2 from '../manager/BlueHeader2';
+import BlueHeader from '../manager/BlueHeader';
 import { Link } from 'react-router-dom';
 import ImageSlider2 from './Hostel_ad/ImageSlider2';
 import Row from 'react-bootstrap/esm/Row';
@@ -63,7 +63,7 @@ export default function RoomDetail() {
   return (
     <>
       <Navbar/>
-      <BlueHeader2/>
+      <BlueHeader/>
       <section>
         <div className="container">
                 <Container fluid> 

@@ -137,12 +137,12 @@ const bookVisitButton = () =>
             <div>
                 <Container fluid className='ad_style'>
                     <Row className="flex-row">
-                        <Col sm style = {{alignItems: "left",justifyContent: "left",display: "flex", paddingTop : "8px" }}>
+                        <Col xs={9} style = {{alignItems: "left",justifyContent: "left",display: "flex", paddingTop : "8px" }}>
                             <h5>
                                 <b>{hostelData.name}</b>
                             </h5>
                         </Col>
-                        <Col sm style = {{alignItems: "right",justifyContent: "right",display: "flex"}}>
+                        <Col xs={3} style = {{alignItems: "right",justifyContent: "right",display: "flex"}}>
                             <Row >
                                 <Col className="d-flex align-items-center " >
                                 {hostelData.averageRating}
@@ -224,7 +224,9 @@ const bookVisitButton = () =>
                             <Row style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Reviews />
                             </Row>
+                            <br></br>
                         </Col>
+                        
                         <Col xs={12} md={4} style={{ marginTop: "20px" }}>
                             <Map_component hostelCoordinates={hostelData?.coordinates?.[0]} />
                         </Col>

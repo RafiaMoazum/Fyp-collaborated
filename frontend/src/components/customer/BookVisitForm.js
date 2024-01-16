@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useRoomContext } from './RoomContext';
 import { useParams } from 'react-router-dom';
+import Navbar from './Navbar/Navbar';
+import BlueHeader from '../manager/BlueHeader';
+import { Container } from 'react-bootstrap';
 
 
 function BookVisitForm() {
@@ -64,7 +67,10 @@ function BookVisitForm() {
 
 
   return (
-    <form method="POST" className="form" onSubmit={handleSubmit}>
+    <>
+      <Navbar/>
+      <BlueHeader/>
+      <form method="POST" className="form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label className="form-label">
           Name:
@@ -146,7 +152,7 @@ function BookVisitForm() {
       <input className="form-register" type="submit" value="Book Visit" onClick={bookVisit} />
       
     </form>
-    
+    </>
   );
 }
 

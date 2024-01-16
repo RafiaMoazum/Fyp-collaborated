@@ -66,20 +66,25 @@ const ContactUs = () => {
             </div>
             <div style = {{padding: "20px"}}>
                 <Row>
-                    <Col xs = {6} style = {{ alignItems: "center",justifyContent: "center", display: "flex",}}>
-                        <img src="./images/mobapp.jpg" width="100%" height="450" alt="Logo" className="d-inline-block align-text-top"></img>  
+                <Col xs={6} className='general'>
+                    <img
+                        src="./images/mobapp.jpg"
+                        alt="Logo"
+                        className="d-inline-block align-text-top img-responsive"
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
                     </Col>
-                    <Col xs = {6} style = {{ alignItems: "center",justifyContent: "center", display: "flex",}}>
-                        <Row>
+                    <Col xs={6} style={{ alignItems: "center", justifyContent: "center", display: "flex" }}>
+                    <Row>
                         <h3>
-                            <b style={{alignItems: "center",justifyContent: "center", display: "flex", paddingBottom: "30px"}}>Download the App now!</b>
-                            <p>
+                        <b className='general' style={{ paddingBottom: "30px" }}>Download the App now!</b>
+                        <div className="row-border"></div>
+                        <p>
                             Best hostels considering your safety and comfort
-                            -all at your fingertips. Download the app for an improved experience. 
-                            </p>
+                            -all at your fingertips. Download the app for an improved experience.
+                        </p>
                         </h3>
-                        
-                        </Row>
+                    </Row>
                     </Col>
                 </Row>
             </div>

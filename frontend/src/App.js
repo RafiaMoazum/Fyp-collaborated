@@ -25,12 +25,12 @@ import AllHostels from './components/customer/AllHostels';
 import Reviews from './components/customer/Reviews/Reviews';
 import ReviewForm from './components/customer/Reviews/ReviewForm';
 import ContactUs from './components/customer/Contact_us/Contact_us';
-import RoomDetail2 from './components/customer/RoomDetail2';
 import Notification from './components/manager/Notification';
 import BookVisitForm from './components/customer/BookVisitForm';
 import PendingVisitReq from './components/manager/PendingVisitReq';
 import UpdateHostel from './components/manager/UpdateHostel';
 import UpdateRoom from './components/manager/UpdateRoom';
+import { Container } from 'react-bootstrap';
 
 
  
@@ -67,7 +67,6 @@ function App() {
           <Route path='/Hostel_ad/:hostelId' element={<Hostel_ad/>} />
           <Route path='/RoomsDisplay/:hostelId' element={<RoomsDisplay/>} />
           <Route path='/RoomDetail/:roomId' element={<RoomDetail/>} />
-          <Route path='/RoomDetail2/:roomId' element={<RoomDetail2/>} />
           <Route path='/BookingPage/:roomId' element={<BookingPage/>} />
           <Route path='/allHostels' element={<AllHostels/>} />
           <Route path='/allHostels' element={<AllHostels/>} />
@@ -80,7 +79,9 @@ function App() {
 
         </Routes>
         </RoomProvider>
+        <Container fluid>
         <Footer/>
+        </Container>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import './ReviewForm.css'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 const ReviewForm = () => {
 const{hostelId}= useParams();
@@ -68,6 +69,8 @@ useEffect(() =>{
 }
 
   return (
+   <>
+   <Container fluid>
     <div className="review-form-container">
       <h2>Write a Review</h2>
       <div className="review-form">
@@ -99,6 +102,8 @@ useEffect(() =>{
         <button className ="btn_style" type="button" onClick={AddReview}>Submit</button>
       </div>
     </div>
+    </Container>
+   </>
   );
 };
 
