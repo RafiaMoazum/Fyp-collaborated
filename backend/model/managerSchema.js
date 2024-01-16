@@ -12,7 +12,10 @@ const managerSchema= new mongoose.Schema({
         type:String,
         required:true
     },
-  
+    cnic: {
+        type: String,
+        
+      },
     phone:{
         type:String,
         required:true
@@ -37,7 +40,7 @@ const managerSchema= new mongoose.Schema({
         {
          token:{
             type:String,
-            required:true
+            
          }
         }
     ]

@@ -13,6 +13,7 @@ function RegisterForm() {
     phone: '',
     city: '',
     email: '',
+    cnic:'',
     password: '',
     confirmPassword: ''
   });
@@ -32,7 +33,7 @@ function RegisterForm() {
   //Fetch Data from form using Fetch API
  const registerData = async (e) => {
     e.preventDefault();
-    const { name, phone, city, email, password, confirmPassword } = ManagerData;
+    const { name, phone, city, email,cnic, password, confirmPassword } = ManagerData;
 
     const res = await fetch("/register", {
         method: "POST",
@@ -41,7 +42,7 @@ function RegisterForm() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name, phone, city, email, password, confirmPassword
+            name, phone, city, email,cnic, password, confirmPassword
         })
     });
 
@@ -95,6 +96,14 @@ function RegisterForm() {
                 name="email"
                 placeholder="Email"
                 value={ManagerData.email}
+                onChange={(handleInputChange)}/>
+          </div>
+          <div className="input-row">
+              <input
+                type="cnic"
+                name="cnic"
+                placeholder="CNIC"
+                value={ManagerData.cnic}
                 onChange={(handleInputChange)}/>
           </div>
           <div className="input-row">

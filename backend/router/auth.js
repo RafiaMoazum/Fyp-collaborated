@@ -23,11 +23,11 @@ router.get('/', (req,res) => {
 //Registration
 router.post('/register',async (req,res) => {
     
-    const {name,email,phone,city,password,confirmPassword} = req.body;
+    const {name,email,cnic,phone,city,password,confirmPassword} = req.body;
     //now req.body.name === name
 
     //Validation
-    if(!name || !email || !phone || !city || !password || !confirmPassword)
+    if(!name || !email || !cnic || !phone || !city || !password || !confirmPassword)
     {
         return res.status(422).json({error:"Fill all the fields"})
     }
@@ -42,7 +42,7 @@ router.post('/register',async (req,res) => {
         }
         else{
 
-        const manager= new Manager({name,email,phone,city,password,confirmPassword}) //Behind the scene= name:name  => name variable/db fiels = name user entered
+        const manager= new Manager({name,email,cnic,phone,city,password,confirmPassword}) //Behind the scene= name:name  => name variable/db fiels = name user entered
         
         //Password Hashing, middleware is defined in managerSchema.js
 

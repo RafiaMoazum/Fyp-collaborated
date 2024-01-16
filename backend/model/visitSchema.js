@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const visitSchema = new mongoose.Schema({
-  name:{  type: String  },
-  email: {  type: String },
-  phone: {  type: String },
-  cnic: {  type: String },
-  date: { type: Date},
-  time: { type: String },
+  name:{  type: String,required:true  },
+  email: {  type: String,required:true },
+  phone: {  type: String,required:true },
+  cnic: {  type: String,required:true },
+  date: { type: Date,required:true},
+  time: { type: String,required:true },
   hostelId: {type: String}
 });
 
