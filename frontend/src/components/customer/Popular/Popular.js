@@ -7,9 +7,9 @@ import {FaMapMarkerAlt,FaPhone,FaStar} from 'react-icons/fa';
 
 const BackendUrl = 'http://localhost:8000';
 
-const Popular = () => {
+const Popular = ({city}) => {
   const [hostelData, setHostelData] = useState([]);
-  const fetchPopularHostels = async () => {
+  const fetchPopularHostels = async (city) => {
     try {
       const res = await fetch('/popularHostels', {
         method: 'GET',
@@ -37,7 +37,7 @@ const Popular = () => {
   };
 
   useEffect(() => {
-    fetchPopularHostels();
+    fetchPopularHostels(city);
   },[]);
 
   const cardData = [
@@ -95,12 +95,14 @@ const Popular = () => {
       
   };
 
+  const filteredHostels = hostelData.filter(hostel => hostel.city === city);
+
   return (
     <>
     <div className='form-containerpop'>
-      <h1 style={h_style}><b>Popular Hostels</b></h1>
+      <h1 style={h_style}><b>Popular Hostels in {city}</b></h1>
         <Slider {...settings}> 
-          {hostelData.map((hostel, index) => (
+          {filteredHostels.map((hostel, index) => (
             <div key={index}>
               <CardComponent title={hostel.name} content={hostel.address}  image={getHostelImage(hostel)} hostelId={hostel._id} />
             </div>

@@ -235,7 +235,7 @@ const bookVisitButton = () =>
                     <br></br><br></br>
                     <ReviewForm/>
                     <br></br><br></br>
-                    <Popular />
+                    <Popular city={hostelData.city}/>
                     
                 </Container>
         </div>

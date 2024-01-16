@@ -167,7 +167,7 @@ const CityWise = () => {
                         
                     </Col>
                     <Col class="col-sm-10">
-                        <Popular/>
+                        <Popular city={city}/>
                     </Col>
                     <Col class="col-sm-1">
 
