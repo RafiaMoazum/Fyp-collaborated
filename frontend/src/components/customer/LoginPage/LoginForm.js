@@ -40,7 +40,7 @@ export default function LoginForm() {
     console.log(`RoomId from LoginForm.js= ${roomId}`)
     window.alert("Login Successful")
 
-    //navigate(`/RoomDetail2/${roomId}`)
+    navigate("/")
   }
 }
 
