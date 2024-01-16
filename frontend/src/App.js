@@ -31,6 +31,7 @@ import PendingVisitReq from './components/manager/PendingVisitReq';
 import UpdateHostel from './components/manager/UpdateHostel';
 import UpdateRoom from './components/manager/UpdateRoom';
 import { Container } from 'react-bootstrap';
+import UpdateProfile from './components/manager/updateProfile';
 
 
  
@@ -74,6 +75,7 @@ function App() {
           <Route path='/reviewsForm' element={<ReviewForm/>} />
           <Route path='/updateHostel/:hostelId' element={<UpdateHostel/>} />
           <Route path='/updateRoom/:roomId' element={<UpdateRoom/>} />
+          <Route path='/updateProfile/:managerId' element={<UpdateProfile/>} />
 
           
 

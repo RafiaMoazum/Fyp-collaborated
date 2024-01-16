@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import {FaMapMarkerAlt,FaPhone, FaEnvelope, FaCircleNotch, FaEdit, FaMale, FaDoorClosed, FaDoorOpen, FaBuilding} from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
+import Sidebar from './Sidebar'
+
 
 const BackendUrl = 'http://localhost:8000';
 
@@ -121,7 +123,9 @@ const showConfirmationPopup = () => {
       <Container fluid>
           <Row>
             <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
-              <div>
+            <Sidebar opt1="Hostel Profile" opt2="Notifications" opt3="Customer Info" opt4="Logout" />
+
+              {/* <div>
               <div className='side'>
                 <nav>
                   <ul>
@@ -137,7 +141,7 @@ const showConfirmationPopup = () => {
                   </ul>
                 </nav>
                 </div>
-              </div>
+              </div> */}
             </Col>
             <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
               <Container fluid className ="form-container1">

@@ -35,9 +35,7 @@ export default function HostelsPage() {
         });
         
          const data= await res.json();
-         console.log(`name= ${data.name}`);
-         //console.log(`data=: ${data}`);
-
+         
          setUserData(data);
          
          
@@ -67,7 +65,7 @@ export default function HostelsPage() {
   
       if (res.status === 200) {
         const data = await res.json();
-        console.log(`hostels✌: ${data.hostels}`);
+        //console.log(`hostels✌: ${data.hostels}`);
         setHostelData(data.hostels);
        
       }else {
@@ -87,6 +85,33 @@ export default function HostelsPage() {
       fetchHostelData();
   },[]);
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/signout', {
+        method: 'POST', 
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        // Clear any local user data or tokens stored in your state
+        setUserData({ name: 'Manager' });
+        window.alert("Logout Successfully");
+
+        // Redirect the user to the login page
+        navigate('/');
+      } else {
+        const errorData = await response.json();
+        console.error(`Error during logout: ${errorData.error}`);
+        window.alert(`Error during logout: ${errorData.error}`);
+
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+      window.alert('Error during logout:', error);
+
+    }
+  };
+  
    
   return (
     <>
@@ -100,10 +125,10 @@ export default function HostelsPage() {
               <nav>
                 <ul>
                   {userData && <h2>{userData.name}</h2>}
-                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
+                  <li><Link to={`/updateProfile/${userData._id}`} style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                
-                  <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
+                  
+                  <li> <Link to="" onClick={handleLogout} style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
                   <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                 </ul>
               </nav>
@@ -182,7 +207,7 @@ export default function HostelsPage() {
               </Row>
               <Row>
                 {hostelData.map((hostel, index) => (
-                  <Col key={index} xs={12} sm={12} md={6} lg={6} >
+                  <Col key={index} xs={12} sm={12} md={6} lg={4}>
                     <div className="container" key={index}>
                       <div className="image-contain d-flex justify-content-center">
                         {hostel.hostelImages && hostel.hostelImages.length > 0 ? (

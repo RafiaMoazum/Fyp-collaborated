@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import "./Notification.css"
 import PendingVisitReq from './PendingVisitReq';
+import Sidebar from './Sidebar'
+
 
 export default function Notification() {
   const { hostelId } = useParams();
@@ -315,7 +317,9 @@ export default function Notification() {
     <Container fluid>
       <Row>
         <Col xs={4} sm={4} md={2} lg={2}>
-          <div className='side'>
+        <Sidebar opt1="Hostel Profile" opt2="Notifications" opt3="Customer Info" opt4="Logout" />
+
+          {/* <div className='side'>
               <nav>
                 <ul>
                   <li>{managerData && <h2>{managerData.name}</h2>}</li>
@@ -329,7 +333,7 @@ export default function Notification() {
                     <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
                     </ul>
               </nav>
-            </div>
+            </div> */}
         </Col>
         <Col xs={8} sm={8} md={10} lg={10}>
           <Container fluid className="form-container">

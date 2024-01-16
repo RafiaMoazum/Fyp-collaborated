@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
+import Sidebar from './Sidebar'
+
 export default function CustomerInfo() {
   const { hostelId } = useParams();
   const [bookingDetails, setBookingDetails] = useState([]);
@@ -86,7 +88,9 @@ export default function CustomerInfo() {
     <Container fluid>
       <Row>
       <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
-        <div >
+      <Sidebar opt1="Hostel Profile" opt2="Notifications" opt3="Customer Info" opt4="Logout" />
+
+        {/* <div >
             <div className='side'>
               <nav >
                 <ul>
@@ -102,7 +106,7 @@ export default function CustomerInfo() {
                 </ul>
               </nav>
             </div>
-          </div>
+          </div> */}
         </Col>
         <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
         <section className="form-container">

@@ -111,6 +111,62 @@ router.post("/signin",async (req,res) =>{
     }
 })
 
+// Logout Route
+router.post("/signout", authenticate, async (req, res) => {
+    try {
+        // Remove the user's token from the database (optional)
+        req.rootUser.tokens = req.rootUser.tokens.filter((token) => {
+            return token.token !== req.token;
+        });
+        await req.rootUser.save();
+
+        // Clear the cookie containing the JWT
+        res.clearCookie("jwtoken");
+
+        res.status(200).json({ message: "User signed out successfully" });
+    } catch (error) {
+        console.error('Error during signout:', error);
+        res.status(500).json({ error: "Unable to sign out" });
+    }
+});
+
+//Update Manager Info
+router.put('/updateManager/:managerId', async (req, res) => {
+    const managerId = req.params.managerId;
+    const { name, email, cnic, phone, city, password, confirmPassword } = req.body;
+
+    
+
+    try {
+        // Check if the manager with the given ID exists
+        const manager = await Manager.findById(managerId);
+        if (!manager) {
+            return res.status(404).json({ error: "Manager not found" });
+        }
+
+        // Update manager information
+        manager.name = name;
+        manager.email = email;
+        manager.cnic = cnic;
+        manager.phone = phone;
+        manager.city = city;
+
+        // // Optionally update password if provided
+        // if (password && confirmPassword && password === confirmPassword) {
+        //     manager.password = password;
+        //     manager.confirmPassword = confirmPassword;
+        // }
+
+        // Save the updated manager information
+        await manager.save();
+
+        res.status(200).json({ message: "Manager information updated successfully" });
+    } catch (err) {
+        console.error(`Error occurred: ${err}`);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
 
 module.exports= router; 
