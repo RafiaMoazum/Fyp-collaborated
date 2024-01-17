@@ -23,11 +23,7 @@
   margin-top: 5px;
 }
 
-.forget-password {
-  margin: 10px 0;
-  text-align: right;
-  color: blue;
-}
+
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -57,3 +53,6 @@
 }
 
 /* Adjust other styles as needed for responsiveness */
+.error-message {
+  color: red;
+  margin-top: 5px; }

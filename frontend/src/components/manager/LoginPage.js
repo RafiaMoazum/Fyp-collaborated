@@ -4,7 +4,7 @@ import LoginForm from './LoginForm'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import {FaCheck} from 'react-icons/fa';
-import Navbar from '../customer/Navbar/Navbar';
+import Navbar from './Navbar';
 import BlueHeader from './BlueHeader';
 
 export default function LoginPage() {

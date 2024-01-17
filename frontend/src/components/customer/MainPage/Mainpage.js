@@ -43,7 +43,7 @@ const Mainpage = () => {
         border : "1px solid black",
         borderRadius: "25px",
         padding: "15px",
-        backgroundColor : "white"
+        backgroundColor : "white",
     };
     const align_style1 =
     {
@@ -58,16 +58,6 @@ const Mainpage = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
       };
-    const reviewData = [
-    {
-          text: "Start with stress, ended with satisfaction.\nThank you HostelExplorer",
-          author: "~Ali Hassan from Pindi"
-    },
-    {
-            text: "Start with stress, ended with satisfaction.\nThank you HostelExplorer",
-            author: "~Ali Hassan from Pindi"
-    },
-  ];
     
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
@@ -120,7 +110,7 @@ useEffect(() => {
         <Navbar/>
             <Container fluid style={{ paddingBottom: "50px" }}>
             <img src="./images/home.jpg" alt="Logo" style={image}></img>
-            <Row style={{ paddingTop: "25px" }}>
+            <Row style={{ marginTop: "5%" }}>
                 <Col xs={1} sm={3} md={2} lg={3} xl={3}></Col>
                 <Col xs={10} sm={6} md={8} lg={6} xl={6}>
                     <div style = {align_style}>
@@ -153,7 +143,7 @@ useEffect(() => {
                 </Col>
                 <Col xs={1} sm={3} md={2} lg={3} xl={3}></Col>
             </Row>
-            <Row style={{ paddingTop: "10px" }}>
+            <Row style={{ paddingTop: "10px", marginBottom: "5%" }}>
                 <Col xs={1} sm={3} md={2} lg={3} xl={3}></Col>
                 <Col xs={10} sm={6} md={8} lg={6} xl={6}>
                     <div style = {align_style}>
@@ -257,61 +247,6 @@ useEffect(() => {
                 </Row>
             </Container>
             <Container fluid style = {{padding: "150px"}}>
-                <Row className='general'>
-                    <Col xs={12} sm={12} md={1} lg={1} xl={3}>
-                    
-                    </Col>
-                    <Col xs={12} sm={12} md={3} lg={3} xl={2}>
-                        <div className ='style-stats'>
-                            <h1 className='stats-heading'>
-                                10+ <br></br> Cities
-                            </h1>
-                        </div>
-                    </Col>
-                    <Col xs={12} sm={12} md={4} lg={4} xl={2}>
-                        <div className ='style-stats'>
-                            <h1 className='stats-heading2'>
-                                300+ <br></br> Happy Customers
-                            </h1>
-                        </div>
-                    </Col>
-                    <Col xs={12} sm={12} md={3} lg={3} xl={2}>
-                        <div className ='style-stats'>
-                            <h1 className='stats-heading'>
-                                100+ <br></br> Hostels
-                            </h1>
-                        </div>
-                    </Col>
-                    <Col xs={12} sm={12} md={1} lg={1} xl={3}>
-                   
-                    </Col>
-
-                </Row>
-            </Container>
-            <Container fluid style={{ backgroundImage: "url(./images/Website.png)", backgroundSize: "cover", padding: "150px 20px", color: "white" }}>
-                <h2 className="text-center">
-                    <b>
-                    One stop to cut down all the hustle
-                    </b>
-                </h2>
-                <h5 className="text-center">
-                    Moving to a new city not knowing where to find a suitable hostel?
-                </h5>
-                <h5 className="text-center">
-                    Don't worry! We got you.
-                </h5>
-                <h5 className="text-center">
-                    Find the best hostels in your preferred city within a few minutes.
-                </h5>
-                <Row className="justify-content-center">
-                    <Col sm={10} style={{ paddingTop: "20px" }}>
-                    <Button size="lg" style={{ width: "auto", backgroundColor: "#3C6B97", color: "white", border: "1px solid white" }}>
-                        <b>Explore Popular Hostels</b>
-                    </Button>
-                    </Col>
-                </Row>
-            </Container>
-            <Container fluid style = {{padding: "150px"}}>
                 <Row>
                     <Col sm={12}>
                     <h2 style = {{paddingBottom: "70px", display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -323,7 +258,7 @@ useEffect(() => {
                 </Row>
                 <Row className="text-center">
             
-                    <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
+                    <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={3}>
                         <div>
                         <img className='img-city' src="./images/Minar_e_Pakistan.jpg" alt= "Logo"></img> 
                         <br></br>
@@ -351,24 +286,14 @@ useEffect(() => {
                         <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Faislabad", imageSrc: "./images/fsl.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Faislabad</div></b></h3>
                         </div>
                     </Col>
-                    <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
+                    <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={3}>
                         <div>
                         <img className='img-city' src="./images/multan.jpg" alt= "Logo"></img> 
                         <br></br>
                         <h3 style = {{paddingLeft: "30px", paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Multan", imageSrc: "./images/mltn.jpeg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Multan</div></b></h3>
                         </div>
                     </Col>
-                    <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
-                        <div>
-                        <img className='img-city' src="./images/seeAll.png" alt= "Logo"></img> 
-                        <br></br>
-                        <h3 style = {{paddingLeft: "30px", paddingTop: "20px"}}><b>
-                            <Link to="./allHostels" style={{textDecoration:'none', color:'black'}}>
-                               See All Cities
-                             </Link></b>
-                        </h3>
-                        </div>
-                    </Col>
+                    
                 </Row>
             </Container>
             <Container fluid >
@@ -445,25 +370,53 @@ useEffect(() => {
                     </Col>
                 </Row>
             </Container>
-            <div className='slider'>
-                <Slider {...sliderSettings}>
-                    {reviewData.map((review, index) => (
-                    <div key={index} style={{ textAlign: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-                            <h3>
-                                <b>What Our Users Have To Say</b>
-                            </h3>
-                            <p>
-                                {review.text}
-                            </p>
-                            <p>
-                                {review.author}
-                            </p>
+            <div className="text-center py-5 orng_banner">
+            <Row className="general">
+                <Col sm={10} style={{ paddingTop: "10px" }}>
+                <section class="layout-pt-md layout-pb-md bg-light-2">
+                    <Container fluid>
+                        <div class="row y-gap-30">
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="d-flex pr-30 general">
+                                    <img class="img_styles" src="./images/price.png" alt="image">
+                                    </img>
+                                    
+                                </div>
+                                <br></br>
+                                <div class="ml-15">
+                                        <h4 class="text-18 fw-500"><b>Best Price </b></h4>
+                                    </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="d-flex pr-30 general">
+                                    <img class="img_styles" src="./images/booking.jpg" alt="image">
+                                    </img>
+                                </div>
+                                <br></br>
+                                <div class="ml-15">
+                                        <h4 class="text-18 fw-500"><b>Easy &amp; Quick Booking</b></h4>
+                                    </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="d-flex pr-30 general">
+                                <img class="img_styles" src="./images/CC.png" alt="image">
+                                    </img>
+                                </div>
+                                <br></br>
+                                <div class="ml-15">
+                                        <h4 class="text-18 fw-500"><b>Customer Care 24/7 </b></h4>
+                                    </div>
+                            </div>
+
                         </div>
-                    </div>
-                    ))}
-                </Slider>
-            </div>
+                    </Container>
+                </section>
+                </Col>
+            </Row>
+        </div>
             <div style={{ padding: "20px" }}>
                 <Row>
                     <Col xs={6} className='general'>

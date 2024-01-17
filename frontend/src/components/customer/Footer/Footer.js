@@ -8,39 +8,10 @@ import { FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
 import {BrowserRouter as Router,Link} from "react-router-dom";
 
 const Footer = () => {
-    const s_footerstyle =
-    {
-        color: "Black",
-        backgroundColor: "#EEAD4B",
-        fontFamily: "Sans-Serif",
-        height:"100%",
-        alignItems: "center",
-        justifyContent: "center"
-    };
   return (
-    <div className="pt-4">
-    <div className="text-center py-5" style={s_footerstyle}>
-      <h1 className="mb-4">
-        <b>Stay tuned with updates</b>
-      </h1>
-      <Form className="d-flex justify-content-center">
-        <Row className="justify-content-center">
-          <Col xs={10} sm={8} md={8} lg={8}>
-            <Form.Control
-              placeholder="Enter your Email Address"
-              size="lg"
-              className="mb-3 mb-sm-0"
-            />
-          </Col>
-          <Col xs={10} sm={4} md={4} lg={4}>
-            <Button size="lg" style={{ width: '100%' }}>
-              Subscribe
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </div>
-    <div className="bg-white text-center py-5">
+    <div className="pt-4" style={{boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)"}}>
+    
+    <div className="text-center py-5" >
       <Container fluid>
         <Row>
           <Col xs={12} sm={4} className="mb-4 mb-sm-0">

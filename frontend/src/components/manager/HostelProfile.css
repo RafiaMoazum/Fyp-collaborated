@@ -45,8 +45,10 @@
     font-weight: bold;
   }
   
-  .btn{
+  .btn1{
     background-color: #3C6B97;
+    justify-content: left;
+    display: flex;
   
   }
 

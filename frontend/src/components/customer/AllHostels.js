@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import Navbar from '../manager/Navbar';
+import Navbar from './Navbar/Navbar';
 import Filters from './Lahore/Filters';
 import './AllHostels.css';
+import { Container } from 'react-bootstrap';
 
 const BackendUrl = 'http://localhost:8000';
 
@@ -85,17 +86,13 @@ export default function HostelsDisplay() {
 
   return (
     <>
-      <Navbar option1="About Us" option2="Contact Us" option3="" />
-
-      <section className="nameSec"></section>
-
-      <section className="mainSec">
+      <Navbar/>
+      <Container fluid className ='form-container' >
         <Filters
           onGenderSelect={handleGenderSelect}
           onFacilitiesSelect={handleFacilitiesSelect}
           onRatingFilterSelect={handleRatingFilterSelect}
         />
-        <h1 style={{ color: 'black' }}>Hostels</h1>
         <div className="room-selector">
           {filteredHostels.map((hostel) => (
             <NavLink to={`/Hostel_ad/${hostel._id}`} className="hostelNameLink" key={hostel._id}>
@@ -118,7 +115,7 @@ export default function HostelsDisplay() {
             </NavLink>
           ))}
         </div>
-      </section>
+        </Container>
     </>
   );
 }

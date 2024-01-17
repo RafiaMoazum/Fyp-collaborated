@@ -124,36 +124,18 @@ const showConfirmationPopup = () => {
           <Row>
             <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">
             <Sidebar opt1="Hostel Profile" opt2="Notifications" opt3="Customer Info" opt4="Logout" />
-
-              {/* <div>
-              <div className='side'>
-                <nav>
-                  <ul>
-                    <li>{userData && <h2>{userData.name}</h2>}</li>
-                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
-                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                    <li><Link to={`/Notification/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
-                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                    <li><Link to={`/CustomerInfo/${hostelId}`} style={{textDecoration: "none", color: "black"}} >Customer Info</Link></li>
-                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
-                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                  </ul>
-                </nav>
-                </div>
-              </div>  */}
             </Col>
             <Col xs={8} sm={8} md={10} lg={10} className="d-none d-lg-block">
               <Container fluid className ="form-container1">
                 <Row>
                   <div className="content-container1">    
                     <Row>
-                      <Col xs={12} sm={12} md={4} lg={3} xl={2}>
+                      <Col xs={12} sm={12} md={3} lg={3} xl={2}>
                       <div className="image-cont d-flex justify-content-center">
                         <img src="/hostel1.png" alt="My Image" className="rounded-img img-fluid" />
                       </div>
                       </Col>
-                      <Col xs={6} sm={6} md={3} lg={3} xl={2}>
+                      <Col xs={6} sm={6} md={4} lg={3} xl={2}>
                       <h2>{hostelData.name} <br></br><span><p>{hostelData.city}</p></span> </h2>
                       </Col>
                       <Col xs={6} sm={6} md={2} lg={2} xl={4}
@@ -165,7 +147,7 @@ const showConfirmationPopup = () => {
                       <Col xs={12} sm={6} md={3} lg={4} xl={4}>
                       <Row>
                         <Col>
-                          <button type="button" className="btn">
+                          <button type="button" className="btn1">
                             <Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white", textAlign: "center"}}>
                               See Rooms
                             </Link>
@@ -182,7 +164,7 @@ const showConfirmationPopup = () => {
                   hostelData.hostelImages.map((image, index) => (
                     <Col key={index} xs={12} sm={6} md={4} lg={3}>
                       <div className="image-container2">
-                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid" />
+                        <img src={`${BackendUrl}/${image}`} alt={`Image ${index + 1}`} className="img-fluid  img-responsive" />
                       </div>
                     </Col>
                   ))
@@ -276,7 +258,7 @@ const showConfirmationPopup = () => {
                       <Col xs={12} sm={6} md={3} lg={4} xl={4}>
                       <Row>
                         <Col>
-                          <button type="button" className="btn">
+                          <button type="button" className="btn1">
                             <Link to={`/RoomStatus/${hostelId}`} style={{textDecoration: "none", color: "white", textAlign: "center"}}>
                               See Rooms
                             </Link>

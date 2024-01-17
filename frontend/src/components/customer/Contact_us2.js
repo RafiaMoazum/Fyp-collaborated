@@ -6,7 +6,7 @@ import Header from './Header/Header';
 import Navbar from "../manager/Navbar"
 import { Container } from 'react-bootstrap';
 
-const ContactUs = () => {
+const ContactUs2 = () => {
       const style1 =
       {
         padding: "20px",
@@ -82,4 +82,4 @@ const ContactUs = () => {
         </>
     );
 }
-export default ContactUs;
+export default ContactUs2;

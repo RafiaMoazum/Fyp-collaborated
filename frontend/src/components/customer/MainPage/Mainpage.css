@@ -81,7 +81,29 @@
     background-size: cover;
     padding: 100px;
   }
-  
+  .form-container00{
+    max-width: auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .img_styles{
+    border-radius: 50%;
+    max-width: 50%;
+  }
+  .orng_banner{
+    color: black;
+    background-color: #EEAD4B;
+    font-family: sans-serif;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+
   @media (max-width: 575px) {  /* Extra small devices (portrait phones) */
     .background-container {
       padding: 50px;  /* Adjust padding for smaller screens if needed */

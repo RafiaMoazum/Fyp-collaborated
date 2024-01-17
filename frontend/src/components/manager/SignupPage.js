@@ -1,7 +1,7 @@
 import React from 'react'
 import RegisterForm from './RegisterForm';
 import './SignupPage.css';
-import Navbar from '../customer/Navbar/Navbar';
+import Navbar from './Navbar';
 import BlueHeader from './BlueHeader';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';

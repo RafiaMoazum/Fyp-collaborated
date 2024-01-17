@@ -10,7 +10,6 @@ import RoomStatus from './components/manager/RoomStatus';
 import Hostel_AddForm from './components/manager/Hostel_AddForm';
 import Footer from './components/customer/Footer/Footer';
 import Mainpage from './components/customer/MainPage/Mainpage';
-import Lahore from './components/customer/Lahore/Lahore';
 import CityWise from './components/customer/Lahore/CityWise';
 import About from './components/customer/About/About';
 import LoginPageC from './components/customer/LoginPage/LoginPageC';
@@ -25,6 +24,7 @@ import AllHostels from './components/customer/AllHostels';
 import Reviews from './components/customer/Reviews/Reviews';
 import ReviewForm from './components/customer/Reviews/ReviewForm';
 import ContactUs from './components/customer/Contact_us/Contact_us';
+import ContactUs2 from './components/customer/Contact_us2';
 import Notification from './components/manager/Notification';
 import BookVisitForm from './components/customer/BookVisitForm';
 import PendingVisitReq from './components/manager/PendingVisitReq';
@@ -32,6 +32,7 @@ import UpdateHostel from './components/manager/UpdateHostel';
 import UpdateRoom from './components/manager/UpdateRoom';
 import { Container } from 'react-bootstrap';
 import UpdateProfile from './components/manager/updateProfile';
+import Togglebar from './components/manager/Togglebar';
 
 
  
@@ -49,8 +50,8 @@ function App() {
           <Route path="/" element={<Mainpage />} />
           <Route path="/about" element={<About/>}/> 
           <Route path="/contact_us" element={<ContactUs/>} />
-          <Route path="/hostel_ad" exact element={<Hostel_ad />} /> 
-          <Route path="/lahore" element={<Lahore />} /> 
+          <Route path="/contact_us2" element={<ContactUs2/>} />
+          <Route path="/hostel_ad" exact element={<Hostel_ad />} />  
           <Route path="/cityWise" element={<CityWise/>} /> 
           <Route path="/signupPage" exact element={<SignupPage />} />
           <Route path="/loginPage" element={<LoginPage />} />
@@ -76,6 +77,7 @@ function App() {
           <Route path='/updateHostel/:hostelId' element={<UpdateHostel/>} />
           <Route path='/updateRoom/:roomId' element={<UpdateRoom/>} />
           <Route path='/updateProfile/:managerId' element={<UpdateProfile/>} />
+          <Route path='/togglebar' element={<Togglebar/>} />          
 
           
 
