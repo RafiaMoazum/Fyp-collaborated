@@ -16,6 +16,10 @@ const BackendUrl = 'http://localhost:8000';
 
 export default function RoomDetail() {
   
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [isDivVisible, setDivVisible] = useState(false);
 
 

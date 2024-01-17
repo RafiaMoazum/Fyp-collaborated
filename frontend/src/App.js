@@ -33,18 +33,41 @@ import UpdateRoom from './components/manager/UpdateRoom';
 import { Container } from 'react-bootstrap';
 import UpdateProfile from './components/manager/updateProfile';
 import Togglebar from './components/manager/Togglebar';
+import Loader from './components/customer/Loader';
 
 
  
 function App() {
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulating an asynchronous operation (e.g., fetching data)
+    const fetchData = async () => {
+      // Your asynchronous code goes here
+
+      // Simulate a delay (remove this in a real application)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Set loading to false when the operation is complete
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     
-    <div className="App" >
+    <div className="App">
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
         <RoomProvider>
         <Routes>
           <Route path="/" element={<Mainpage />} />
@@ -83,10 +106,14 @@ function App() {
 
         </Routes>
         </RoomProvider>
+        
         <Container fluid>
         <Footer/>
         </Container>
+        </>
+      )}
     </div>
+
   );
 }
 

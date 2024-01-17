@@ -25,18 +25,12 @@ const BackendUrl = 'http://localhost:8000';
 
 const Hostel_ad = () => {
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
     const navigate=useNavigate();
 
-    const images = [
-    // '/images/242009851.jpg',
-    // '/images/242009851.jpg',
-    // '/images/242009851.jpg',
-    // '/images/242009851.jpg',
-    '/images/242009851.jpg',
-    '/roompic.jpg',
-    '/hallway.webp',
-
-  ];
+   
 
     const [isDivVisible, setDivVisible] = useState(false);
     const handleButtonClick = () => 

@@ -39,7 +39,12 @@ const filterHostelByRating = (hostel, selectedRatingFilter) => {
 };
 
 
+
 const CityWise = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
     const navigate = useNavigate();  // Use useNavigate to get the navigate function
     const location = useLocation();
     const { city, imageSrc } = location.state || {};

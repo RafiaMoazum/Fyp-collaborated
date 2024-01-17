@@ -37,6 +37,7 @@ const Popular = ({city}) => {
   };
 
   useEffect(() => {
+    console.log('Fetching popular hostels...');
     fetchPopularHostels(city);
   },[]);
 

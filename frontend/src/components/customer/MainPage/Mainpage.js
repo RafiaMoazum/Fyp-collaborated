@@ -178,47 +178,41 @@ useEffect(() => {
             </Row>
         </Container>
         <Container>
-  <div>
-    {console.log('Component is rerendering. Hostels:', hostels)}
-    {name !== '' || address !== '' ? (
-      hostels !== null ? (
-        hostels.length > 0 ? (
-            <ul>
-            {hostels.map((hostel) => (
-              <NavLink to={`/Hostel_ad/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
-                <div className="roomDisplay">
-                  <div>
-                    {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
-                      <img
-                        src={`${BackendUrl}/${hostel.hostelImages[0]}`}
-                        alt={`Image 1`}
-                        style={{ width: '60%', height: '60%' }}
-                      />
-                    ) : (
-                      <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />
-                    )}
-                    <p>Hostel Name. {hostel.name}</p>
-                    <p>Address. {hostel.address}</p>
-                    <p>Contact No: {hostel.phone}</p>
-                    {/* Additional hostel details */}
-                  </div>
-                </div>
-              </NavLink>
-            ))}
-          </ul>
-        ) : (
-          <p>No hostels found</p>
-        )
-      ) : (
-        <p>Loading...</p>
-      )
-    ) : null}
-  </div>
-</Container>
-
-
-
-
+        <div>
+            {console.log('Component is rerendering. Hostels:', hostels)}
+            {name !== '' || address !== '' ? (
+            hostels !== null ? (
+                hostels.length > 0 ? (
+                    <ul style={{flexWrap: "wrap", display:"flex"}}>
+                    {hostels.map((hostel) => (
+                    <NavLink to={`/Hostel_ad/${hostel._id}`} className='hostelNameLink' key={hostel._id}>
+                        <div className="roomDisplay" >
+                        <div >
+                            {hostel.hostelImages && hostel.hostelImages.length > 0 ? (
+                            <img
+                                src={`${BackendUrl}/${hostel.hostelImages[0]}`}
+                                alt={`Image 1`}
+                                style={{ width: '60%', height: '60%' }}
+                            />
+                            ) : (
+                            <img alt="" src='./images/242009851.jpg' width="60%" height="60%" />
+                            )}
+                            <p>Hostel Name. {hostel.name}</p>
+                            <p>Address. {hostel.address}</p>
+                        </div>
+                        </div>
+                    </NavLink>
+                    ))}
+                </ul>
+                ) : (
+                <p>No hostels found</p>
+                )
+            ) : (
+                <p>Loading...</p>
+            )
+            ) : null}
+        </div>
+        </Container>
             <Container fluid className="background-container" style={{backgroundImage: "url(./images/arch.png)"}}>
                 <Row className="justify-content-center">
                     <Col xs={10} sm={8} md={6} lg={4}>
