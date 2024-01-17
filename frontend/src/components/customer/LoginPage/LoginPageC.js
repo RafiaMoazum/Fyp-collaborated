@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import {FaCheck} from 'react-icons/fa';
 import Navbar from "../Navbar/Navbar";
 import {useEffect } from 'react';
-import BlueHeader2 from '../../manager/BlueHeader2';
+import BlueHeader from '../../manager/BlueHeader';
 
 export default function Login() {
 
@@ -46,7 +46,7 @@ export default function Login() {
   return (
     <>
     <Navbar/>
-    <BlueHeader2/>
+    <BlueHeader/>
       <div style={{ position: "relative" }}>
         <img src="./images/Website.png" alt="Logo" style={image} />
         <Col xs={3} sm={2} md={3} lg={3}>

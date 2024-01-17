@@ -177,15 +177,7 @@ const CityWise = () => {
             <br></br>
             <Container fluid>
                 <Row>
-                    <Col class="col-sm-1">
-                        
-                    </Col>
-                    <Col class="col-sm-10">
-                        <Popular city={city}/>
-                    </Col>
-                    <Col class="col-sm-1">
-
-                    </Col>
+                <Popular city={city}/>
                 </Row>
             </Container>
           </Container>

@@ -102,6 +102,20 @@
     justify-content: center;
     margin-top: 10%;
     margin-bottom: 10%;
+    box-shadow: 0 0 20px rgba(180, 141, 141, 0.8);
+  }
+  .hvr{
+    background-color: #3C6B97;
+    width: 100%;
+  }
+  .hvr:hover{
+    background-color: #5288bb;
+  }
+  .prominent{
+    transition: transform 0.3s ease-in-out;
+  }
+  .prominent:hover{
+    transform: scale(1.1);
   }
 
   @media (max-width: 575px) {  /* Extra small devices (portrait phones) */

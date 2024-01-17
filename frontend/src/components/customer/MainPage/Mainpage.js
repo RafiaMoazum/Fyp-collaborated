@@ -134,7 +134,7 @@ useEffect(() => {
                         </div>
                         </Col>
                             <Col sm={3} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <Button onClick={searchHostels} size="lg" style={{ width: "100%", backgroundColor: "#3C6B97" }}>
+                                <Button className='hvr' onClick={searchHostels} size="lg" >
                                     Find
                                 </Button>
                             </Col>
@@ -167,7 +167,7 @@ useEffect(() => {
                                 </div>
                             </Col>
                             <Col sm={3} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <Button onClick={searchHostels} size="lg" style={{ width: "100%", backgroundColor: "#3C6B97" }}>
+                                <Button className='hvr' onClick={searchHostels} size="lg" >
                                     Find
                                 </Button>
                             </Col>
@@ -230,7 +230,7 @@ useEffect(() => {
                         </p>
                         <Row>
                             <Col sm={12} className="text-center">
-                            <Button as={Link} to="/signupPage" size="lg" style={{ width: "150px", backgroundColor: "#3C6B97", color: "white", border: "1px solid black" }}>
+                            <Button as={Link} to="/signupPage" size="lg" className='hvr'>
                                 <b>Start Now!</b>
                             </Button>
                             </Col>
@@ -253,35 +253,35 @@ useEffect(() => {
                 <Row className="text-center">
             
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={3}>
-                        <div>
+                        <div className='prominent'>
                         <img className='img-city' src="./images/Minar_e_Pakistan.jpg" alt= "Logo"></img> 
                         <br></br>
                         <h3 style = {{ paddingTop: "20px"}}><b>   <div onClick={() => handleClick({ city: "Lahore", imageSrc: "./images/minare.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Lahore</div></b></h3>
                         </div>                            
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
-                        <div>
+                        <div className='prominent'>
                         <img className='img-city' src="./images/mazaarquaid.jpg" alt= "Logo"></img> 
                         <br></br>
                         <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Karachi", imageSrc: "./images/karachii.jpg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Karachi</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
-                        <div>
+                        <div className='prominent'>
                         <img className='img-city' src="./images/pakmonument.jpg" alt= "Logo"></img> 
                         <br></br>
                         <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Islamabad", imageSrc: "./images/isl.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Islamabad</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={2}>
-                        <div >
+                        <div className='prominent'>
                         <img className='img-city' src="./images/ghntaaghar.jpg" alt= "Logo"></img> 
                         <br></br>
                         <h3 style = {{paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Faislabad", imageSrc: "./images/fsl.jpg"})} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Faislabad</div></b></h3>
                         </div>
                     </Col>
                     <Col className='general' xs={12} sm={6} md={4} lg = {3} xl={3}>
-                        <div>
+                        <div className='prominent'>
                         <img className='img-city' src="./images/multan.jpg" alt= "Logo"></img> 
                         <br></br>
                         <h3 style = {{paddingLeft: "30px", paddingTop: "20px"}}><b><div onClick={() => handleClick({ city: "Multan", imageSrc: "./images/mltn.jpeg" })} style={{ textDecoration:'none', color:'black', cursor: 'pointer' }}>Multan</div></b></h3>

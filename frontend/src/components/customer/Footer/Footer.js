@@ -9,7 +9,7 @@ import {BrowserRouter as Router,Link} from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="pt-4" style={{boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)"}}>
+    <div className="pt-4" style={{ backgroundColor:"#3C6B97", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", marginTop: "10%"}}>
     
     <div className="text-center py-5" >
       <Container fluid>
@@ -17,39 +17,39 @@ const Footer = () => {
           <Col xs={12} sm={4} className="mb-4 mb-sm-0">
             <img
               alt=""
-              src="/images/H-logo2.png"
+              src="/images/logo.png"
               className="img-fluid"
               style={{ maxWidth: '100%', height: 'auto' }}
             />
           </Col>
-          <Col xs={12} sm={2} className="mb-4 mb-sm-0">
+          <Col xs={12} sm={2} className="mb-4 mb-sm-0 " style={{color: "white"}} >
             <p>
               <b>Quick Links</b>
             </p>
-            <Link style={{ textDecoration: 'none', color: 'black' }} to="/About">
+            <Link style={{ textDecoration: 'none', color: 'white' }} to="/About">
               About us
             </Link>
             <br></br>
-            <Link style={{ textDecoration: 'none', color: 'black' }} to="/About">
+            <Link style={{ textDecoration: 'none', color: 'white' }} to="/About">
               FAQ's
             </Link>
             <br></br>
-            <Link style={{ textDecoration: 'none', color: 'black' }} to="/About">
+            <Link style={{ textDecoration: 'none', color: 'white' }} to="/About">
               Privacy Policy
             </Link>
             <br></br>
-            <Link style={{ textDecoration: 'none', color: 'black' }} to="/About">
+            <Link style={{ textDecoration: 'none', color: 'white' }} to="/About">
               Terms and Conditions
             </Link>
             <br></br>
           </Col>
-          <Col xs={12} sm={3} className="mb-4 mb-sm-0">
+          <Col xs={12} sm={3} className="mb-4 mb-sm-0 text_clr" style={{color: "white"}}>
             <p>
               <b>Contact us</b>
             </p>
             <p>hostelexplorer@gmail.com</p>
           </Col>
-          <Col xs={12} sm={3}>
+          <Col xs={12} sm={3} style={{color: "white"}}>
             <p>
               <b>Follow us </b>
             </p>
@@ -65,8 +65,8 @@ const Footer = () => {
           </Col>
         </Row>
         <Row className="justify-content-center mt-4">
-          <Col xs={12} sm="auto">
-            <p className="text-muted">
+          <Col xs={12} sm="auto" >
+            <p  style={{color: "white"}}>
               All material herein © 2023 HostelExplorer.com. All rights reserved.
             </p>
           </Col>

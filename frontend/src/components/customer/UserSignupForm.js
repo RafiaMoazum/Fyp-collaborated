@@ -88,7 +88,7 @@ function UserSignupForm() {
             <input
               type="tel"
               name="phone"
-              placeholder="CNIC"
+              placeholder="Phone"
               value={UserData.phone}
               onChange={(handleInputChange)}/>
           </div>
@@ -131,7 +131,7 @@ function UserSignupForm() {
         </form>
         <br></br>
           <p style={{textAlign: "center", paddingBottom:"50px"}}>
-            Already a member? <Link to="/LoginPage">Login</Link>
+            Already a member? <Link to="/loginPageC">Login</Link>
           </p>
       </div>
     </div>
