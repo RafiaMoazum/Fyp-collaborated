@@ -216,7 +216,7 @@ const showConfirmationPopup = () => {
                 </div>
                 </Row>
                 </Row>
-                <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
+                <button  type="button" className="btn1" style={{textDecoration: "none", color: "white", textAlign: "center"}}
                           onClick={showConfirmationPopup}
                       >
                           Delete Hostel
@@ -327,7 +327,7 @@ const showConfirmationPopup = () => {
                 </div>
                 </Row>
                 </Row>
-                <button  type="button" className="btn" style={{textDecoration: "none", color: "white", textAlign: "center"}}
+                <button  type="button" className="btn1" style={{textDecoration: "none", color: "white", textAlign: "center"}}
                           onClick={showConfirmationPopup}
                       >
                           Delete Hostel

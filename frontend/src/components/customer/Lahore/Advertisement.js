@@ -57,6 +57,7 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selec
     <Container fluid style={{paddingLeft:"0px", paddingRight:"0px"}}>
     <div style={{ paddingTop: '20px' }}>
       {hostelData.map((hostel, index) => (
+        <>
         <div key={index} className='add_style'>
           <NavLink to={`/Hostel_ad/${hostel._id}`} key={hostel._id} className='hostelNameLink'>
             <Row>
@@ -70,7 +71,7 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selec
                     height='100%'
                   />
                 ) : (
-                  <img alt='' src='./images/242009851.jpg' width='100%' height='100%' />
+                  <img alt='' src='/no_img.jpg' width='100%' height='100%' />
                 )}
               </Col>
               <Col>
@@ -87,6 +88,8 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selec
             </Row>
           </NavLink>
         </div>
+        <br></br>
+        </>
       ))}
     </div>
     </Container>
