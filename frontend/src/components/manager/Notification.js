@@ -109,43 +109,27 @@ export default function Notification() {
 
   
 
-  const handleAllow = async (bookingId, userEmail,userName,roomId,roomPrice) => {
+  const handleAllow = async (bookingId, userEmail, userName, roomId, roomPrice) => {
     window.alert(`Accept clicked for bookingId: ${bookingId}`);
-    //console.log(`Accept clicked for bookingId: ${bookingId}`);
-    //console.log(`Manager's Email: ${managerData.email}`); 
-    //console.log(`User's Email: ${userEmail}`); 
-    
-    //console.log('roomId:', roomId);
-    //console.log('roomPrice:', roomPrice);
-
-   
-
-    
     try {
-       // Fetch hostel information based on room ID
-    const hostelResponse = await fetch(`/getHostelByRoomId/${roomId}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
-
-   
-    
-    if (hostelResponse.status === 200) {
-      const hostelData = await hostelResponse.json();
-      //console.log('hostelData:', hostelData);
-      //console.log('hostelData.hostel:', JSON.stringify(hostelData.hostel))
-      if (hostelData && hostelData.hostel) {
-        const { name, address, phone, email } = hostelData.hostel;
+      // Fetch hostel information based on room ID
+      const hostelResponse = await fetch(`/getHostelByRoomId/${roomId}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (hostelResponse.status === 200) {
+        const hostelData = await hostelResponse.json();
+        if (hostelData && hostelData.hostel) {
+          const { name, address, phone, email } = hostelData.hostel;
+        }
       }
-    
-    }
-      setHostelData(hostelData.hostel);
-    
-    
+        setHostelData(hostelData.hostel);
       
+  
       const res = await fetch('/acceptEmail', {
         method: 'POST',
         headers: {
@@ -155,39 +139,27 @@ export default function Notification() {
           to: userEmail,
           subject: 'Booking Accepted',
           text: `Dear ${userName},
-
-          Congratulations! We are delighted to inform you that your hostel room application has been accepted. We appreciate your choice in staying with us.
-          
-          To confirm your booking, kindly submit the required payment within the next 24 hours. Once we receive your payment, your booking will be officially confirmed, and you can look forward to a comfortable stay with us.
-          
-          Payment Details:
-          Amount: ${roomPrice}
-          Payment Method: Please submit the amount in any of the accounts mentioned below and send the receipt on
-          this email address: ${hostelData.email}
-
-          Accounts:
-          Bank Account No. ${hostelData.bankAcc}
-          EasyPaisa No. ${hostelData.easyPaisa}
-          JazzCashNo. ${hostelData.jazzCash}
-          
-          Please note that if we do not receive your payment within the specified timeframe, your application will be canceled, and the room will be made available to other applicants.
-          
-          We look forward to welcoming you to our hostel. If you have any questions or need further assistance, feel free to contact us at ${hostelData.phone} or email at
-           ${hostelData.email}.
-          
-          Thank you for choosing ${hostelData.name}.
-          
-          Best regards,
-          
-          ${managerData.name}
-          ${hostelData.name}
-          ${hostelData.address}
-          ${managerData.email}`,
+            Congratulations! We are delighted to inform you that your hostel room application has been accepted. We appreciate your choice in staying with us.
+            To confirm your booking, kindly submit the required payment within the next 24 hours. Once we receive your payment, your booking will be officially confirmed, and you can look forward to a comfortable stay with us.
+            Payment Details:
+            Amount: ${roomPrice}
+            Payment Method: Please submit the amount in any of the accounts mentioned below and send the receipt on
+            this email address: ${hostelData.email}
+            Accounts:
+            Bank Account No. ${hostelData.bankAcc}
+            EasyPaisa No. ${hostelData.easyPaisa}
+            JazzCashNo. ${hostelData.jazzCash}
+            Please note that if we do not receive your payment within the specified timeframe, your application will be canceled, and the room will be made available to other applicants.
+            We look forward to welcoming you to our hostel. If you have any questions or need further assistance, feel free to contact us at ${hostelData.phone} or email at ${hostelData.email}.
+            Thank you for choosing ${hostelData.name}.
+            Best regards,
+            ${managerData.name}
+            ${hostelData.name}
+            ${hostelData.address}
+            ${managerData.email}`,
           sender: managerData.email,
-        
         }),
       });
-    
   
       if (res.status === 200) {
         window.alert('Email sent successfully');
@@ -205,8 +177,8 @@ export default function Notification() {
       console.error(err);
       window.alert('An error occurred while sending the email');
     }
-    
   };
+  
   
   const handleReject =  async (bookingId, userEmail,userName,roomId)=> {
     window.alert(`Reject clicked for bookingId: ${bookingId}`)

@@ -154,7 +154,7 @@ fetchHostelData();
           console.log(responseData);
   
           if (response.ok) {
-              window.alert("Hostel added successfully✌");
+              window.alert("Hostel updated successfully✌");
               console.log("Hostel added successfully✌");
               navigate("/hostelsPage");
           } else {

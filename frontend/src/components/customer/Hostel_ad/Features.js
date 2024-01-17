@@ -10,7 +10,7 @@ const Features = () => {
 
   const HostelProfileData = async () => {
     try {
-      const res = await fetch(`/hostelProfileData/${hostelId}`, {
+      const res = await fetch(`/hostelDetails/${hostelId}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',

@@ -65,7 +65,7 @@ bookingDetail.users.push(...users);
 const clientId = '562995918458-jdo8on8efcbs9ns79lmpgrrdrk5b4evl.apps.googleusercontent.com';
 const clientSecret = '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';
 const redirectUri = 'https://developers.google.com/oauthplayground';
-const refresh_token = '1//04NxmWSC7D-zaCgYIARAAGAQSNwF-L9IrcKR7KSZe01zhkZ8m0g3xUt1Rv3oOBM07ocwhydHGi7Xi7RKziYiGQJuzj8BjvM_v2AY';
+const refresh_token = '1//046KGLwPormibCgYIARAAGAQSNwF-L9IrswAhwcbBNCDUIdlkAkJ2062nIfdYyYsfqQ5ds0dYcYL8RzvA2c9CicMPbSQkCiFPQJc';
 
 // Gmail API scopes
 const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];

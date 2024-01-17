@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/esm/Row';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
+import Sidebar from './Sidebar'
 
 
 function Hostel_AddForm() {
@@ -163,23 +164,8 @@ function Hostel_AddForm() {
           <Container fluid>
             <Row>
                 <Col xs={4} sm={4} md={2} lg={2}>
-                    <div>
-                        <div className='side'>
-                            <nav>
-                                <ul>
-                                    <li>{userData && <h2>{userData.name}</h2>}</li>
-                                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Profile</Link></li>
-                                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Notification</Link> </li>
-                                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Messages</Link></li>
-                                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                    <li><Link to="" style={{textDecoration: "none", color: "black"}} >Logout</Link></li>
-                                    <div style={{ border: "1px solid black", margin: "10px 0" }}></div>
-                                </ul>
-                            </nav>
-                        </div>
-                  </div>
+                <Sidebar opt1="Hostel Profile" opt2="Notifications" opt3="Customer Info" opt4="Logout" />
+
                 </Col>
                 <Col xs={8} sm={8} md={10} lg={10}>
                 <div className="form-container">

@@ -123,7 +123,9 @@ function RegisterForm() {
       }
     } else {
       // Form validation failed, you can show an error message or handle accordingly
-      window.alert('Form validation failed');
+      //window.alert('Form validation failed');
+      console.log('Form validation failed');
+
     }
   };
 
@@ -197,9 +199,7 @@ function RegisterForm() {
                 <p className="error-message">{errors.confirmPassword}</p>
               )}
           </div>
-          <div className="forget-password">
-            <p>Forget Password?</p>
-          </div>
+        
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
           <input className="form-register" type="submit" name="signin" value="Register" onClick={registerData} />
           </div>

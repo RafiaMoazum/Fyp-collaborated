@@ -62,7 +62,7 @@ const Sidebar = (props) => {
       } else {
         const errorData = await response.json();
         console.error(`Error during logout: ${errorData.error}`);
-        window.alert(`Error during logout: ${errorData.error}`);
+        //window.alert(`Error during logout: ${errorData.error}`);
 
       }
     } catch (error) {

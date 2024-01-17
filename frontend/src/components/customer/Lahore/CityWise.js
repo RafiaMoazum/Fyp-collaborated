@@ -85,7 +85,7 @@ const CityWise = () => {
         GetHostels();
       }, []);
 
-     // Function to update the selected city when it changes in Filters component
+     
     
     
     const handleGenderSelect = (gender) => {
@@ -101,14 +101,16 @@ const CityWise = () => {
         console.log('Selected Rating Filter:', ratingFilter);
         setSelectedRatingFilter(ratingFilter);
       };
-      // Filtering hostels based on selected criteria
+      
      
       const filteredHostels = hostels.filter((hostel) => {
         const genderFilter = selectedGender === '' || hostel.customersGender === selectedGender;
-        const facilitiesFilter =selectedFacilities === '' || hostel.facilities[selectedFacilities] === true;
+        const facilitiesFilter = selectedFacilities === '' || hostel.facilities[selectedFacilities] === true;
       
-        return genderFilter && facilitiesFilter;
+        return genderFilter && facilitiesFilter && filterHostelByRating(hostel, selectedRatingFilter);
       });
+      
+
       
       const itemsPerPage = 8;
       const totalItems = filteredHostels.length;

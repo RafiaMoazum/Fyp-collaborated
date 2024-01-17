@@ -20,6 +20,10 @@ export default function HostelsPage() {
   const[userData, setUserData]=useState({ name: 'Manager' });
   const [hostelData, setHostelData] = useState([]);
 
+  const [deleteResult, setDeleteResult] = useState(null);
+
+  
+
 
   const fetchManagerData = async () =>{
       
@@ -117,6 +121,7 @@ export default function HostelsPage() {
     <>
       <Navbar/>
       <BlueHeader2/>
+     
       <Container fluid>
         <Row>
           <Col xs={4} sm={4} md={2} lg={2} className="d-none d-lg-block">

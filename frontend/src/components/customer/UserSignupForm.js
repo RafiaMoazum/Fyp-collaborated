@@ -124,9 +124,7 @@ function UserSignupForm() {
               value={UserData.confirmPassword}
               onChange={(handleInputChange)}/>
           </div>
-          <div className="forget-password">
-          <Link style={{textDecoration:"none"}} to="/">Forget Password?</Link>
-          </div>
+         
           <input className="form-register" type="submit" value="Register" onClick={signUp} />
         </form>
         <br></br>

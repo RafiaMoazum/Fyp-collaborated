@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone,FaStar} from 'react-icons/fa';
 
 const BackendUrl = 'http://localhost:8000';
 
@@ -77,6 +77,12 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selec
               <Col>
                 <h2><b>{hostel.name}</b></h2>
                 <Row style={{ paddingTop: '15px' }}></Row>
+                <p style={{ textAlign: 'right' }}>
+                  
+                  <FaStar style={{ color: ' #FFD600' }}/> {hostel.averageRating}
+                                   
+                </p>
+
                 <p style={{ textAlign: 'left' }}>{truncateDescription(hostel.description, 15)}</p>
                 <p style={{ textAlign: 'left' }}>
                   <FaMapMarkerAlt /> {hostel.address}
@@ -84,6 +90,7 @@ const Advertisement = ({ city, hostels, selectedGender, selectedFacilities,selec
                 <p style={{ textAlign: 'left' }}>
                   <FaPhone /> {hostel.phone}
                 </p>
+               
               </Col>
             </Row>
           </NavLink>

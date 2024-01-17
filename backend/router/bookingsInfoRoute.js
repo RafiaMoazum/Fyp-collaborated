@@ -7,6 +7,7 @@ const User = require('../model/userSchema');
 const Room = require('../model/roomsSchema');
 
 
+
 // Display booking details
 router.get('/showBookings/:hostelId', authenticate, async (req, res) => {
   try {
@@ -54,6 +55,16 @@ bookingDetail.users.push(...users);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'An error occurred while fetching booking details' });
+  }
+});
+
+router.delete('/deleteall', async (req, res) => {
+  try {
+    await Manager.deleteMany({});
+    res.status(200).json({ success: true, message: 'All  deleted successfully.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Error deleting rooms.' });
   }
 });
 
