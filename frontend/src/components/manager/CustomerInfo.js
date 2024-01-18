@@ -128,7 +128,7 @@ export default function CustomerInfo() {
             <React.Fragment key={roomIndex}>
               <td>{room.price}</td>
               <td>{room.capacity}</td>
-              <td>{room.currentCapacity}</td>
+              <td>{room.remainingCapacity}</td>
             </React.Fragment>
           ))}
           <td>{booking.checkIn_date}</td>

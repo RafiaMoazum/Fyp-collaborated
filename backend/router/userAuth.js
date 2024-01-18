@@ -4,6 +4,7 @@ const router= express.Router();
 const bcrypt= require('bcrypt');  //bctypt.hash & bcrypt.compare
 const jwt= require('jsonwebtoken');  //jwt.sign & jwt.verify
 const authenticate = require("../middleware/authenticate");
+const customerAuthentication=require("../middleware/customerAuthentication")
 const cookieParser = require("cookie-parser");
 router.use(cookieParser());
 
@@ -108,5 +109,68 @@ router.post("/userSignin",async (req,res) =>{
         console.log(`Login Failed ${err}`);
         res.json({message:`Login Failed ${err}`})
     }
+})
+
+// Logout Route
+router.post("/signout", customerAuthentication, async (req, res) => {
+    try {
+        // Remove the user's token from the database (optional)
+        req.rootUser.tokens = req.rootUser.tokens.filter((token) => {
+            return token.token !== req.token;
+        });
+        await req.rootUser.save();
+
+        // Clear the cookie containing the JWT
+        res.clearCookie("jwtoken");
+
+        res.status(200).json({ message: "User signed out successfully" });
+    } catch (error) {
+        console.error('Error during signout:', error);
+        res.status(500).json({ error: "Unable to sign out" });
+    }
+});
+
+//Update user Info
+router.put('/updateUser/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    const { name,email,phone,cnic,city,password,confirmPassword } = req.body;
+
+    
+
+    try {
+        // Check if the manager with the given ID exists
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        
+        user.name = name;
+        user.email = email;
+        user.phone = phone;
+        user.cnic = cnic;
+        user.city = city;
+
+        // // Optionally update password if provided
+        // if (password && confirmPassword && password === confirmPassword) {
+        //     manager.password = password;
+        //     manager.confirmPassword = confirmPassword;
+        // }
+
+        // Save the updated manager information
+        await user.save();
+
+        res.status(200).json({ message: "user information updated successfully" });
+    } catch (err) {
+        console.error(`Error occurred: ${err}`);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+router.get('/userData',customerAuthentication, (req,res) =>{
+    console.log("Hello from hostels page✌");
+    console.log(req.rootUser);
+    res.json(req.rootUser);   //is used in an Express.js route handler to send a JSON response to the client.
+
 })
 module.exports= router; 

@@ -5,6 +5,8 @@ const Hostel = require('../model/hostelSchema');
 const Booking = require('../model/bookingSchema');
 const User = require('../model/userSchema');
 const Room = require('../model/roomsSchema');
+const TempBooking= require('../model/temporaryBookingSchema')
+const customerAuthentication = require('../middleware/customerAuthentication');
 
 
 
@@ -65,6 +67,81 @@ router.delete('/deleteall', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Error deleting rooms.' });
+  }
+});
+
+router.get('/userBookings/:userId', customerAuthentication, async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const bookings = await TempBooking.find({ users: userId });
+
+    // Create an array to store booking details
+    const bookingDetails = [];
+
+    // Iterate through the bookings and retrieve room and user information
+    for (const booking of bookings) {
+      const bookingDetail = {
+        _id: booking._id,
+        checkIn_date: booking.checkIn_date,
+        checkOut_date: booking.checkOut_date,
+        rooms: [],
+        users: [],
+      };
+
+      // Retrieve room information for the booking
+      const rooms = await Room.find({ _id: { $in: booking.rooms } });
+      bookingDetail.rooms.push(...rooms);
+
+      // Retrieve user information for the booking
+      const users = await User.find({ _id: { $in: booking.users } });
+      bookingDetail.users.push(...users);
+
+      bookingDetails.push(bookingDetail);
+    }
+
+    res.status(200).json(bookingDetails);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred while fetching user bookings' });
+  }
+});
+
+router.get('/showConfirmedBookings/:userId', customerAuthentication, async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Assuming you have a user ID associated with the bookings
+    const bookings = await Booking.find({ users: userId });
+
+    // Create an array to store booking details
+    const bookingDetails = [];
+
+    // Iterate through the bookings and retrieve necessary information
+    for (const booking of bookings) {
+      const bookingDetail = {
+        bookingId: booking._id,
+        checkIn_date: booking.checkIn_date,
+        checkOut_date: booking.checkOut_date,
+        rooms: [],
+        users: [],
+      };
+
+      // Retrieve room information for the booking
+      const rooms = await Room.find({ _id: { $in: booking.rooms } });
+      bookingDetail.rooms.push(...rooms);
+
+      // Retrieve customer information for the booking
+      const users = await User.find({ _id: { $in: booking.users } });
+      bookingDetail.users.push(...users);
+
+      bookingDetails.push(bookingDetail);
+    }
+
+    res.status(200).json({ bookings: bookingDetails });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred while fetching confirmed booking details' });
   }
 });
 

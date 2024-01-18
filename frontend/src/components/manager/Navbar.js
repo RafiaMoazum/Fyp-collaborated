@@ -1,11 +1,13 @@
-import React from 'react';
+import React,{ useEffect,useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-const navbar = ({ isAuthenticated, userProfilePic }) => {  {/*  pass values for isAuthenticated and userProfilePic here*/}
-  return (
+const NavbarM = ({ isAuthenticated, userProfilePic }) => {  {/*  pass values for isAuthenticated and userProfilePic here*/}
+  
+
+return (
     <div>
       <Navbar collapseOnSelect expand="lg" style = {{backgroundColor: "white"}}>
         <Container fluid>
@@ -25,8 +27,11 @@ const navbar = ({ isAuthenticated, userProfilePic }) => {  {/*  pass values for 
                 </div>
               ) : (
                 <>
+
                 <Link to="/hostelsPage" style={{textDecoration:'none', color:'black', marginRight: '20px'}}><b> Home </b></Link>
                 <Link to="/contact_us2" style={{textDecoration:'none', color:'black', marginRight: '20px'}}><b> Contact Us </b></Link>
+                <Link to="/signupPage" style={{textDecoration:'none', color:'black', marginRight: '20px'}}><b>Sign Up </b></Link>
+                <Link to="/loginPage" style={{textDecoration:'none', color:'black', marginRight: '20px'}}><b> | Login</b></Link>
                
                 </>
               )}
@@ -38,4 +43,4 @@ const navbar = ({ isAuthenticated, userProfilePic }) => {  {/*  pass values for 
   );
 };
 
-export default navbar;
+export default NavbarM;
