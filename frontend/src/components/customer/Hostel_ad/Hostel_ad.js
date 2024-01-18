@@ -14,7 +14,7 @@ import Reviews from '../Reviews/Reviews';
 import ReviewForm from '../Reviews/ReviewForm';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import {FaMapMarkerAlt,FaStar} from 'react-icons/fa';
+import {FaMapMarkerAlt,FaStar, FaMale} from 'react-icons/fa';
 import "./Hostel_ad.css";
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -149,6 +149,7 @@ const bookVisitButton = () =>
                     <Row>
                     <Col>
                         <p style = {{textAlign: "left"}}><FaMapMarkerAlt/> {hostelData.address}</p>
+                        <p style = {{textAlign: "left"}}><FaMale/>{hostelData.customersGender}</p>
                     </Col>
                     </Row>
                     <Row>

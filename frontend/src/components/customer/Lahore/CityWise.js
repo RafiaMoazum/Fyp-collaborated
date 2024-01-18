@@ -110,9 +110,9 @@ const CityWise = () => {
         return genderFilter && facilitiesFilter && filterHostelByRating(hostel, selectedRatingFilter);
       });
       
-
       
-      const itemsPerPage = 8;
+      
+      const itemsPerPage = 10;
       const totalItems = filteredHostels.length;
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
@@ -128,10 +128,10 @@ const CityWise = () => {
             <Navbar/>
             <div>
             <img src={imageSrc} width="100%" height="100%" alt="Logo" style={{objectFit: "cover"}}
-            className="d-inline-block align-text-top img-responsive"></img>  
+            className="d-inline-block img-responsive"></img>  
             </div>
             <h1 className='h_style'>
-                Best Hostels in {city || 'City'}
+                 Hostels in {city || 'City'}
             </h1 >
             <div>
                 <Container fluid >

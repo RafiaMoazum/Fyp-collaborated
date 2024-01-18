@@ -34,6 +34,7 @@ import { Container } from 'react-bootstrap';
 import UpdateProfile from './components/manager/updateProfile';
 import Togglebar from './components/manager/Togglebar';
 import Loader from './components/customer/Loader';
+import BlueHeader3 from './components/manager/BlueHeader3';
 
 
  
@@ -91,7 +92,8 @@ function App() {
           <Route path='/updateHostel/:hostelId' element={<UpdateHostel/>} />
           <Route path='/updateRoom/:roomId' element={<UpdateRoom/>} />
           <Route path='/updateProfile/:managerId' element={<UpdateProfile/>} />
-          <Route path='/togglebar' element={<Togglebar/>} />          
+          <Route path='/togglebar' element={<Togglebar/>} />
+          <Route path='/blue' element={<BlueHeader3/>} />          
 
           
 

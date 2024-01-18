@@ -3,7 +3,7 @@ import {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import './HostelsPage.css'
 import Navbar from './Navbar';
-import BlueHeader2 from './BlueHeader2';
+import BlueHeader3 from './BlueHeader3';
 import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
@@ -120,7 +120,7 @@ export default function HostelsPage() {
   return (
     <>
       <Navbar/>
-      <BlueHeader2/>
+      <BlueHeader3/>
      
       <Container fluid>
         <Row>

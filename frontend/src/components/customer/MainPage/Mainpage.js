@@ -401,7 +401,7 @@ useEffect(() => {
                                 </div>
                                 <br></br>
                                 <div class="ml-15">
-                                        <h4 class="text-18 fw-500"><b>Customer Care 24/7 </b></h4>
+                                        <h4 class="text-18 fw-500"><b>Customer Care </b></h4>
                                     </div>
                             </div>
 
