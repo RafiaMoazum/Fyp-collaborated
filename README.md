@@ -43,7 +43,7 @@ The system also allows tenants to share their user experiences with their respec
 ![room booking](https://github.com/RafiaMoazum/Fyp-collaborated/assets/99351936/b7d6ce5c-d25e-476e-987b-e803fd1171ca)
 
 
-## Hostel Add Form
+## Add Hostel Form
 ![hostelAd form 1](https://github.com/RafiaMoazum/Fyp-collaborated/assets/99351936/7b0f5172-0a88-4e44-bb0e-a81db91fd0df)
 ![hostel ad form2](https://github.com/RafiaMoazum/Fyp-collaborated/assets/99351936/39cd27ff-1431-4c9d-8280-bdb3458de01d)
 
