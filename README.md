@@ -1,5 +1,5 @@
-## Hostel Explorer
 Developed in MERN Stack (MongoDb, Express Js, React Js, Node Js)
+## Hostel Explorer
 Hostel Explorer is a web and mobile application targeting people who tend to live in hostels for educational or other purposes. The main idea behind developing this system is to cut down the hassle of finding a suitable place to stay specially in unfamiliar cities. Our system provides complete information about different hostels along with reliable user experiences. Hostel managers from across the country can add their hostel rooms to our system which can be viewed and booked by tenants looking for accommodations.   
 Hostel managers can add their hostels on our application along with their images and descriptions, locations, facilities, etc. Our hostel booking application then allows the tenant to search and book a room according to their preferences which can be filtered by different keyword such as location, gender, facilities etc. Before booking a room, the tenant can also book a visit to the selected hostel which would help them assess the suitability of accommodation.  
 The system also allows tenants to share their user experiences with their respective hostels. It would make the hostel booking system even more facile for people.  
